@@ -13,24 +13,32 @@ import argparse
 
 
 # metadata
-#Information about 
+#Information about the protocol 
 metadata = {
     'protocolName': 'Chip_coating_rotator',
     'author': 'Daniel Nakhaee-Zadeh Gutierrez',
     'description': 'Protocol used to coat the PDMS membrane of the AX6 LOC chip',
 }
 
-#Parser to store the input values from the UI
+#Parser to store the input values from the UI app
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('integers', metavar='N', type=int, nargs='+',
                    help='an integer for the accumulator')
+parser.add_argument('-w', '--well', nargs='+', default=[])
+parser.add_argument('-v', '--volume', metavar='N', type=int, nargs='+')
+parser.add_argument('-z', '--z_space', metavar='N', type=int, nargs='+')
 
-args = parser.parse_args()
+args = parser.parse_args() #this is the variable that stores the inputs from the UI
 print(args.integers)
+# args.integers[1] = number of chips to coat
+# args.integers[0] = speed configuration
+# args.integers[2] = side to coat
+# args.integers[3] = advance well mode
+
 
 
 #Connect to Robot
-robot.connect()
+robot.connect() #necesary to connect with OT-2
 robot.home() #home robot axes
 
 #set motor speed
@@ -45,30 +53,33 @@ elif speed_conf ==1:
     speed_set = medium_speed
 elif speed_conf ==2:
     speed_set = slow_speed
-    
 robot.head_speed(combined_speed=max(speed_set.values()),**speed_set)
 
 #Number of chips to coat
 #num_chips = int(input('Number of chips to coat (1,2 or 3)'))
 num_chips = int(args.integers[1])
+#this variable when change to something other that None allows the while loop to be broken.
 rotate_st = None;
 
-# labware
+# Import labware
+#ax-6 definition
 if 'ax_6' not in locals():
     ax_6 = labware.load('ax6_4','6')
+#tiprack
 if 'tiprack' not in locals():
     tiprack = labware.load('opentrons-tiprack-300ul', '1')
+#eppendorf rack
 if 'ep_rack' not in locals():
     ep_rack = labware.load('opentrons_24_tuberack_eppendorf_2ml_safelock_snapcap','4')
 
 
-# pipettes
+# Import pipette definitions
 if 'pipette_300' not in locals():
     pipette_300 = instruments.P300_Single(mount='left', tip_racks=[tiprack])
 if 'pipette_50' not in locals():
     pipette_50 = instruments.P50_Single(mount='right', tip_racks=[tiprack])
     
-#Keeping sanity on tips
+#This function stores the current tip that the robot will use and can reset the pipette wells or display the current tip.
 piwells =["A1","B1","C1","D1","E1","F1","G1","H1","A2","B2","C2","D2","E2","F2","G2","H2","A3","B3","C3","D3","E3","F3","G3","H3","A4","B4","C4","D4","E4","F4","G4","H4","A5","B5","C5","D5","E5","F5","G5","H5","A6","B6","C6","D6","E6","F6","G6","H6","A7","B7","C7","D7","E7","F7","G7","H7","A8","B8","C8","D8","E8","F8","G8","H8","A9","B9","C9","D9","E9","F9","G9","H9","A10","B10","C10","D10","E10","F10","G10","H10","A11","B11","C11","D11","E11","F11","G11","H11","A12","B12","C12","D12","E12","F12","G12","H12"]
 def usetip(val = 3,rst = 0):
     if val == 0:
@@ -85,11 +96,11 @@ def usetip(val = 3,rst = 0):
     return varwells
 
 #Check Current Pipette Tip
-print("Ensure that there is pipette tips from well", piwells[int(usetip(1))])
-print("If not reset pipette count using usetip(val,rst) function")
+#print("Ensure that there is pipette tips from well", piwells[int(usetip(1))])
+#print("If not reset pipette count using usetip(val,rst) function")
 
-#protocol
-while 1:
+
+while true:
     #side_to_coat = int(input("Coating Apical only (Enter 1), or Coating Apical and Basal side (Enter 2)"))
     side_to_coat = int(args.integers[2])
     if side_to_coat != 0 and side_to_coat != 1 and side_to_coat != 2:
@@ -97,37 +108,81 @@ while 1:
     else:
         break
 
-initial_volume = 12*6*num_chips
+#Define intial volume
+initial_volume = 13*6*num_chips
 wells = ["A1","B1","C1","D1","E1","F1","A2","B2","C2","D2","E2","F2","A3","B3","C3","D3","E3","F3"]
 
+print("Coating")
 
-#protocol
+if side_to_coat == 0 or side_to_coat == 2: #Side to coat = 1 is coating apical, side to coat = 1 will coat basal and side to coat = 2 is apical and basal
+    z_coat = -1.2
+elif side_to_coat ==1:
+    z_coat =-1
+
+### protocol
+advance_mode = args.integers[3]
+
 pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
-pipette_300.aspirate(initial_volume, ep_rack.wells('A1').bottom(3))
-for i in range(0,(6*num_chips)):
-    pipette_300.dispense(12, ax_6.wells(wells[i]).top(-1))
-    pipette_300.delay(seconds=3) 
-  
-    
-if side_to_coat == 1 or side_to_coat == 0:
-    print('Finishing run')
-    pipette_300.drop_tip()
-    robot.home()
-    
-elif side_to_coat == 2:
-    pipette_300.move_to(ep_rack.wells('A1').top(20))
-    print("Flip Chip Holder, rotating around its shorter side")
-    while rotate_st is None:
-        rotate_st = input('Press enter when chip is flipped...')
-    pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
-    pipette_300.aspirate(initial_volume, ep_rack.wells('A1').bottom(3))
-    for i in range(0 , (6*num_chips)):
-        pipette_300.dispense(12, ax_6.wells(wells[i]).top(-0.8))
-        pipette_300.delay(seconds=3)
- 
-    print('Finishing run')
-    pipette_300.drop_tip()
-    robot.home()
-    
+pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
 
+
+# Advance protocol: control over wells
+def aspirate_vol(vol_array, in_well = 0):
+    initial_volume = 0;
+    if vol_array[in_well] < 30:
+        default_pipette = 50
+        limit_vol = 50
+    else:
+        default_pipette = 300
+        limit_vol = 300
+    for d in range(in_well,len(vol_array)):
+        if initial_volume + vol_array[d] >= limit_vol or (vol_array[d] < 30 and limit_vol == 300):
+            lst_well = d
+            return initial_volume, lst_well, default_pipette
+            break
+        else:
+            initial_volume = initial_volume + vol_array[d]
+            if d == len(vol_array)-1:
+                lst_well = len(vol_array)
+                return initial_volume, lst_well, default_pipette
+                break
+
+
+if advance_mode == 1:
+    wells_to_coat = args.well;
+    volume_list = args.volume;
+    z_list = args.z_space;
+    print(wells_to_coat, volume_list, z_list)
+    index_well= 0;
+    index_last = 0;
+    while index_well < len(wells_to_coat):
+        [vol, index_well, pipette_de] = aspirate_vol(volume_list, index_well)
+        pipette_300.aspirate(vol, ep_rack.wells('A1').bottom(3))
+        for i in range (index_last, index_well)
+            if pipette
+            pipette_300.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(0+z_coat[i]))
+            pipette_300.delay(seconds=3)
+        index_last = index_well;    
+
+
+#Standard Protocol
+else:
+    pipette_300.aspirate(initial_volume+4, ep_rack.wells('A1').bottom(3))
+    for i in range(0,(6*num_chips)):
+        pipette_300.dispense(12, ax_6.wells(wells[i]).top(z_coat))
+        pipette_300.delay(seconds=3)
+    
+    if side_to_coat == 2:
+        pipette_300.move_to(ep_rack.wells('A1').top(20))
+        print("Flip Chip Holder, rotating around its shorter side")
+        while rotate_st is None:
+            rotate_st = input('Press enter when chip is flipped...')
+        pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
+        pipette_300.aspirate(initial_volume, ep_rack.wells('A1').bottom(3))
+        for i in range(0 , (6*num_chips)):
+            pipette_300.dispense(12, ax_6.wells(wells[i]).top(-0.8))
+            pipette_300.delay(seconds=3)
+ 
+print('Finishing run')
+pipette_300.drop_tip()
+robot.home()
