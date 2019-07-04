@@ -146,8 +146,8 @@ def aspirate_vol(vol_array, in_well = 0):
 
 if advance_mode == 1:
     wells_to_coat = args.well;
-    volume_list = float(args.volume);
-    z_list = float(args.z_space);
+    volume_list = [float(i) for i in args.volume];
+    z_list = [float(i) for i in args.z_space];
     if all(v < 50 for v in volume_list):
         pipette_50.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
         pipette_50.mix(5, 300, ep_rack.wells('A1').bottom(3))
