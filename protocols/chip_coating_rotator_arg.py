@@ -151,32 +151,48 @@ if advance_mode == 1:
     if all(v < 50 for v in volume_list):
         pipette_50.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
         pipette_50.mix(5, 50, ep_rack.wells('A1').bottom(3))
+        pip_state = 0
     elif all(v > 30 for v in volume_list):
         pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
         pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
+        pip_state = 1
     else:
         pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
         pipette_50.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
+        pip_state = 2
     print(wells_to_coat, volume_list, z_list)
     index_well= 0;
     index_last = 0;
     while index_well < len(wells_to_coat):
         [vol, index_well, pipette_de] = aspirate_vol(volume_list, index_well)
         if pipette_de == 300:
+            print("aspirating: ", vol, "ul")
             pipette_300.aspirate(vol, ep_rack.wells('A1').bottom(3))
         elif pipette_de ==50:
+            print("aspirating: ", vol, "ul")
             pipette_50.aspirate(vol, ep_rack.wells('A1').bottom(3))
         for i in range (index_last, index_well):
             if pipette_de == 300:
-                print("aspirating: ", vol)
                 pipette_300.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(0))
                 pipette_300.delay(seconds=3)
             elif pipette_de == 50:
-                print("aspirating: ", vol)
                 pipette_50.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(0))
                 pipette_50.delay(seconds=3)
         index_last = index_well;   
         print(index_last) 
+
+    print('Finishing run')
+    if pip_state == 0:
+        pipette_50.drop_tip()
+    elif pip_state == 1:
+        pipette_300.drop_tip()
+    else:
+        pipette_300.drop_tip()
+        pipette_50.drop_tip()    
+
+
+
+
 
 
 #Standard Protocol
@@ -199,6 +215,7 @@ else:
             pipette_300.dispense(12, ax_6.wells(wells[i]).top(-0.8))
             pipette_300.delay(seconds=3)
  
-print('Finishing run')
-pipette_300.drop_tip()
+    print('Finishing run')
+    pipette_300.drop_tip()
+
 robot.home()
