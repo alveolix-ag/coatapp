@@ -164,14 +164,17 @@ if advance_mode == 1:
         [vol, index_well, pipette_de] = aspirate_vol(volume_list, index_well)
         for i in range (index_last, index_well):
             if pipette_de == 300:
+                print("aspirating: ", vol)
                 pipette_300.aspirate(vol, ep_rack.wells('A1').bottom(3))
                 pipette_300.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(0))
                 pipette_300.delay(seconds=3)
             elif pipette_de == 50:
+                print("aspirating: ", vol)
                 pipette_50.aspirate(vol, ep_rack.wells('A1').bottom(3))
                 pipette_50.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(0))
                 pipette_50.delay(seconds=3)
-        index_last = index_well;    
+        index_last = index_well;   
+        print(index_last) 
 
 
 #Standard Protocol
