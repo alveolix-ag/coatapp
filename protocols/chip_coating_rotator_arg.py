@@ -100,7 +100,7 @@ def usetip(val = 3,rst = 0):
 #print("If not reset pipette count using usetip(val,rst) function")
 
 
-while true:
+while True:
     #side_to_coat = int(input("Coating Apical only (Enter 1), or Coating Apical and Basal side (Enter 2)"))
     side_to_coat = int(args.integers[2])
     if side_to_coat != 0 and side_to_coat != 1 and side_to_coat != 2:
