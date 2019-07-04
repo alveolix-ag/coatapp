@@ -160,7 +160,7 @@ if advance_mode == 1:
         pipette_300.aspirate(vol, ep_rack.wells('A1').bottom(3))
         for i in range (index_last, index_well)
             if pipette
-            pipette_300.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(z_coat+z_coat[i]))
+            pipette_300.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(0+z_coat[i]))
             pipette_300.delay(seconds=3)
         index_last = index_well;    
 
@@ -183,6 +183,6 @@ else:
             pipette_300.dispense(12, ax_6.wells(wells[i]).top(-0.8))
             pipette_300.delay(seconds=3)
  
-    print('Finishing run')
-    pipette_300.drop_tip()
-    robot.home()
+print('Finishing run')
+pipette_300.drop_tip()
+robot.home()
