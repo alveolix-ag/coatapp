@@ -150,7 +150,7 @@ if advance_mode == 1:
     z_list = [float(i) for i in args.z_space];
     if all(v < 50 for v in volume_list):
         pipette_50.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-        pipette_50.mix(5, 300, ep_rack.wells('A1').bottom(3))
+        pipette_50.mix(5, 50, ep_rack.wells('A1').bottom(3))
     elif all(v > 30 for v in volume_list):
         pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
         pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
