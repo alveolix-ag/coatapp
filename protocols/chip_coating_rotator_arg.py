@@ -162,9 +162,9 @@ if advance_mode == 1:
     index_last = 0;
     while index_well < len(wells_to_coat):
         [vol, index_well, pipette_de] = aspirate_vol(volume_list, index_well)
-        if pipette_de == 300
+        if pipette_de == 300:
             pipette_300.aspirate(vol, ep_rack.wells('A1').bottom(3))
-        elif pipette_de ==50
+        elif pipette_de ==50:
             pipette_50.aspirate(vol, ep_rack.wells('A1').bottom(3))
         for i in range (index_last, index_well):
             if pipette_de == 300:
