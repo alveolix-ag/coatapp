@@ -190,11 +190,6 @@ if advance_mode == 1:
         pipette_300.drop_tip()
         pipette_50.drop_tip()    
 
-
-
-
-
-
 #Standard Protocol
 else:
     pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))

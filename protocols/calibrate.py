@@ -59,3 +59,7 @@ while True:
 
 with open('z_calibration', 'wb') as f:
 	pickle.dump(z_initial, f);
+
+pipette_300.return_tip()
+print("Finishing")
+robot.home()
