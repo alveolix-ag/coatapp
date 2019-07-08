@@ -29,9 +29,9 @@ def usetip(val = 3,rst = 1):
     with open('tipw', 'wb') as f:
         pickle.dump(varwells, f);    
     return c_well
-    
-print(args.well)
 
-rst_to = piwells.index(args.well)
+print(args.well[0])
+
+rst_to = piwells.index(args.well[0])
 
 print(usetip(0,rst_to))
