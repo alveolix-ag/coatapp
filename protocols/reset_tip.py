@@ -34,4 +34,4 @@ print("reset tip on tiprack to ", args.well[0])
 
 rst_to = piwells.index(args.well[0])
 
-#print(usetip(0,rst_to))
+usetip(0,rst_to)
