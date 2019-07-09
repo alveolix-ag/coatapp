@@ -33,7 +33,7 @@ with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
 HOST = cu_ip    # The remote host
-PORT = 50005    # The same port as used by the server
+PORT = 50004   # The same port as used by the server
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
     cu_tip_encode = str.encode(cu_tip)
