@@ -17,6 +17,8 @@ metadata = {
 #tiprack
 if 'tiprack' not in locals():
     tiprack = labware.load('opentrons-tiprack-300ul', '1')
+if 'ax_6' not in locals():
+    ax_6 = labware.load('ax6_4','6')
 
 if 'pipette_300' not in locals():
 	pipette_300 = instruments.P300_Single(mount='left', tip_racks=[tiprack])
