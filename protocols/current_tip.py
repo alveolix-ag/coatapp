@@ -26,6 +26,15 @@ def usetip(val = 3,rst = 1):
         pickle.dump(varwells, f);    
     return c_well
 
-cu_tip = usetip(1)
+cu_tip = piwells[usetip(1)]
 
+with open('host_ip', 'rb') as f:
+    cu_ip = pickle.load(f);
 
+HOST = cu_ip    # The remote host
+PORT = 50007    # The same port as used by the server
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    s.send(cu_tip)
+    data = s.recv(1024)
+print('Received', repr(data))
