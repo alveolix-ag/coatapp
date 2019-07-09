@@ -11,4 +11,6 @@ ip_received = args.ip_address[0];
 with open('host_ip', 'wb') as f:
     pickle.dump(ip_received, f);
 
-
+with open('host_ip', 'rb') as f:
+    cu_ip = pickle.load(f);
+print(cu_ip)
