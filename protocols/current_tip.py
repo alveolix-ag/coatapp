@@ -27,7 +27,7 @@ def usetip(val = 3,rst = 1):
         pickle.dump(varwells, f);    
     return c_well
 
-cu_tip = piwells[usetip(1)]
+cu_tip = piwells[int(usetip(1))]
 
 with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
