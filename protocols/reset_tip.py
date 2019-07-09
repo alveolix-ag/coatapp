@@ -30,8 +30,8 @@ def usetip(val = 3,rst = 1):
         pickle.dump(varwells, f);    
     return c_well
 
-print(args.well[0])
+print("reset tip on tiprack to ", args.well[0])
 
 rst_to = piwells.index(args.well[0])
 
-print(usetip(0,rst_to))
+#print(usetip(0,rst_to))
