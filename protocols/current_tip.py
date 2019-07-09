@@ -36,6 +36,7 @@ HOST = cu_ip    # The remote host
 PORT = 50005    # The same port as used by the server
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
-    s.send(cu_tip)
+    cu_tip_encode = str.encode(cu_tip)
+    s.send(cu_tip_encode)
     data = s.recv(1024)
 print('Received', repr(data))
