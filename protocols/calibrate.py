@@ -52,10 +52,10 @@ pipette_300.move_to(ax_6.wells("A1").top(z_initial))
 while True:
     z_dir = int(input("Up or Down"))
 	if z_dir == 0:
-	   break
+        break
 	else:
-	   pipette_300.move_to(ax_6.wells("A1").top(z_initial+z_dir))
-	   z_initial = z_initial + z_dir
+        pipette_300.move_to(ax_6.wells("A1").top(z_initial+z_dir))
+        z_initial = z_initial + z_dir
 
 
 
