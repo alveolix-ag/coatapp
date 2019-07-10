@@ -60,6 +60,8 @@ robot.head_speed(combined_speed=max(speed_set.values()),**speed_set)
 num_chips = int(args.integers[1])
 #this variable when change to something other that None allows the while loop to be broken.
 rotate_st = None;
+with open('z_calibration', 'rb') as f:
+    z_distance = pickle.load(f);
 
 # Import labware
 #ax-6 definition
@@ -119,10 +121,10 @@ wells = ["A1","B1","C1","D1","E1","F1","A2","B2","C2","D2","E2","F2","A3","B3","
 
 print("Coating")
 
-if side_to_coat == 0 or side_to_coat == 2: #Side to coat = 1 is coating apical, side to coat = 1 will coat basal and side to coat = 2 is apical and basal
-    z_coat = -1.2
-elif side_to_coat ==1:
-    z_coat =-1
+#if side_to_coat == 0 or side_to_coat == 2: #Side to coat = 1 is coating apical, side to coat = 1 will coat basal and side to coat = 2 is apical and basal
+#    z_coat = -1.2
+#elif side_to_coat ==1:
+#    z_coat =-1
 
 ### protocol
 advance_mode = args.integers[3]
@@ -201,7 +203,7 @@ else:
     pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
     pipette_300.aspirate(initial_volume+4, ep_rack.wells('A1').bottom(3))
     for i in range(0,(6*num_chips)):
-        pipette_300.dispense(12, ax_6.wells(wells[i]).top(z_coat))
+        pipette_300.dispense(12, ax_6.wells(wells[i]).top(z_distance))
         pipette_300.delay(seconds=3)
     
     if side_to_coat == 2:
@@ -212,7 +214,7 @@ else:
         pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
         pipette_300.aspirate(initial_volume, ep_rack.wells('A1').bottom(3))
         for i in range(0 , (6*num_chips)):
-            pipette_300.dispense(12, ax_6.wells(wells[i]).top(-0.8))
+            pipette_300.dispense(12, ax_6.wells(wells[i]).top(z_distance))
             pipette_300.delay(seconds=3)
  
     print('Finishing run')
