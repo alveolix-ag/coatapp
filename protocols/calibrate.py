@@ -59,7 +59,7 @@ robot.home()
 pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
 pipette_300.move_to(ax_6.wells("A1").top(z_initial))
 while True:
-    z_dir = int(input("Up or Down"))
+    z_dir = float(input("Up or Down"))
     if z_dir == 0:
         break
     else:
