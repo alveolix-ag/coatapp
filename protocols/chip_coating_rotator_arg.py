@@ -220,7 +220,7 @@ else:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((HOST, PORT))
             rotate_st = str.encode("rotate")
-            s.send(rotate_state)
+            s.send(rotate_st)
             data = s.recv(1024)
             print('Received', repr(data))
         while rotate_st is None:
