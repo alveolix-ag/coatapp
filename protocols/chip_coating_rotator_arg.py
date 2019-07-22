@@ -126,6 +126,13 @@ print("Coating")
 #elif side_to_coat ==1:
 #    z_coat =-1
 
+#Socket server settings
+with open('host_ip', 'rb') as f:
+    cu_ip = pickle.load(f);
+
+HOST = cu_ip    # The remote host
+PORT = 50004   # The same port as used by the server
+
 ### protocol
 advance_mode = args.integers[3]
 
@@ -209,8 +216,15 @@ else:
     if side_to_coat == 2:
         pipette_300.move_to(ep_rack.wells('A1').top(20))
         print("Flip Chip Holder, rotating around its shorter side")
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.connect((HOST, PORT))
+            rotate_st = str.encode("rotate")
+            s.send(rotate_state)
+            data = s.recv(1024)
+            print('Received', repr(data))
         while rotate_st is None:
             rotate_st = input('Press enter when chip is flipped...')
+        pipette_300.delay(seconds = 3)     
         pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
         pipette_300.aspirate(initial_volume, ep_rack.wells('A1').bottom(3))
         for i in range(0 , (6*num_chips)):
