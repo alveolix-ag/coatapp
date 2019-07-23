@@ -118,83 +118,20 @@ while True:
 ### protocol
 
 advance_mode = args.integers[4]
-# Advance protocol: control over wells
-def aspirate_vol(vol_array, in_well = 0):
-    initial_volume = 0;
-    if vol_array[in_well] < 30:
-        default_pipette = 50
-        limit_vol = 50
-    else:
-        default_pipette = 300
-        limit_vol = 300
-    for d in range(in_well,len(vol_array)):
-        if initial_volume + vol_array[d] >= limit_vol or (vol_array[d] < 30 and limit_vol == 300):
-            lst_well = d
-            return initial_volume, lst_well, default_pipette
-            break
-        else:
-            initial_volume = initial_volume + vol_array[d]
-            if d == len(vol_array)-1:
-                lst_well = len(vol_array)
-                return initial_volume, lst_well, default_pipette
-                break
-
-
+# Advance protocol: control over individual wells
 if advance_mode == 1:
-    wells_to_coat = args.well;
-    volume_list = [float(i) for i in args.volume];
-    z_list = [float(i) for i in args.z_space];
-
-    if all(v < 50 for v in volume_list):
-        pipette_50.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-        pipette_50.mix(5, 50, ep_rack.wells('A1').bottom(3))
-        pip_state = 0
-    elif all(v > 30 for v in volume_list):
-        pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-        pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
-        pip_state = 1
-    else:
-        pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-        pipette_50.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-        pip_state = 2
-    print(wells_to_coat, volume_list, z_list)
-    index_well= 0;
-    index_last = 0;
-    while index_well < len(wells_to_coat):
-        [vol, index_well, pipette_de] = aspirate_vol(volume_list, index_well)
-        if pipette_de == 300:
-            print("aspirating: ", vol, "ul")
-            pipette_300.aspirate(vol, ep_rack.wells('A1').bottom(3))
-        elif pipette_de ==50:
-            print("aspirating: ", vol, "ul")
-            pipette_50.aspirate(vol, ep_rack.wells('A1').bottom(3))
-        for i in range (index_last, index_well):
-            if pipette_de == 300:
-                pipette_300.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(0))
-                pipette_300.delay(seconds=3)
-            elif pipette_de == 50:
-                pipette_50.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(0))
-                pipette_50.delay(seconds=3)
-        index_last = index_well;   
-        print(index_last) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    pipette_300.set_flow_rate(aspirate=400)
+    pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
+        for u in range(3):
+            for i in range(6*num_chips):
+                pipette_300.aspirate(20, ax_6.wells(wells[i]).top(-1.6))
+                if i == 11:
+                    pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
+                    pipette_300.blow_out()
+                    pipette_300.touch_tip(-2)     
+            pipette_300.dispense(ep_rack.wells('A3').top(-1))
+            pipette_300.blow_out()
+            pipette_300.touch_tip(-2) 
 
 
 #aspirating

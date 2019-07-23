@@ -137,8 +137,8 @@ PORT = 50004   # The same port as used by the server
 ### protocol
 advance_mode = args.integers[3]
 
-# Advance protocol: control over wells
-def aspirate_vol(vol_array, in_well = 0):
+# Advance protocol: control over individual wells
+def aspirate_vol(vol_array, in_well = 0): #this function controls the volume and pippette used to aspirate the volume
     initial_volume = 0;
     if vol_array[in_well] < 30:
         default_pipette = 50
@@ -174,6 +174,10 @@ if advance_mode == 1:
     else:
         pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
         pipette_50.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
+        if (volume_list[0] > 30):
+            pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
+        else:
+            pipette_50.mix(5, 50, ep_rack.wells('A1').bottom(3))
         pip_state = 2
     print(wells_to_coat, volume_list, z_list)
     index_well= 0;
@@ -188,10 +192,10 @@ if advance_mode == 1:
             pipette_50.aspirate(vol, ep_rack.wells('A1').bottom(3))
         for i in range (index_last, index_well):
             if pipette_de == 300:
-                pipette_300.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(0))
+                pipette_300.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
                 pipette_300.delay(seconds=3)
             elif pipette_de == 50:
-                pipette_50.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(0))
+                pipette_50.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
                 pipette_50.delay(seconds=3)
         index_last = index_well;   
         print(index_last) 
