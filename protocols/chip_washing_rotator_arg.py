@@ -10,7 +10,8 @@ import sys
 import math
 import pickle
 import argparse
- 
+from operator import add
+from functools import reduce
 
 
 # metadata
@@ -131,6 +132,8 @@ if advance_mode == 1:
     flow_rate = [float(i) for i in args.flow_rate];
     num_asp = [float(i) for i in args.num_aspiration];
     vol_in = 0;
+    vol_mat = reduce(add ,[[a]*b for a, b in zip(volume_list, num_asp)])
+    d=0;
 
     #removing remaining coating
     pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
@@ -138,18 +141,18 @@ if advance_mode == 1:
         for u in range(num_asp[i]):
             pipette_300.aspirate(volume_list[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
             pipette_300.delay(seconds=3)
-            vol_in = volume_list[i] + vol_in;3
-            if i == len(wells_to_coat)-1:
-                if u == num_asp[i]-1 or vol_in >= 300:
-                    pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
-                    pipette_300.blow_out()
-                    pipette_300.touch_tip(-2) 
-                    vol_in = 0
-            elif vol_in + volume_list[i+1] >= 300:
+            vol_in = vol_mat[d] + vol_in;
+            if d == len(vol_mat)-1:
+                pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
+                pipette_300.blow_out()
+                pipette_300.touch_tip(-2) 
+                vol_in = 0
+            elif vol_in + vol_mat[d+1] >= 300:
                 pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
                 pipette_300.blow_out()
                 pipette_300.touch_tip(-2)
                 vol_in = 0;
+            d = d+1    
 
 
 #aspirating
