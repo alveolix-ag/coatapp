@@ -15,7 +15,7 @@ import argparse
 metadata = {
     'protocolName': 'Calibrate',
     'author': 'Daniel Nakhaee-Zadeh Gutierrez',
-    'description': 'Protocol calibrates the Z-',
+    'description': 'Protocol calibrates the Z',
 }
 
 #tiprack

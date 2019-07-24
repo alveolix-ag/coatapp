@@ -27,6 +27,8 @@ parser.add_argument('integers', metavar='N', type=int, nargs='+',
 parser.add_argument('-w', '--well', nargs='+', default=[])
 parser.add_argument('-v', '--volume', metavar='N', type=int, nargs='+')
 parser.add_argument('-z', '--z_space', metavar='N', type=int, nargs='+')
+parser.add_argument('-f', '--flow_rate', metavar='N', type=int, nargs='+')
+parser.add_argument('-na', '--num_aspiration', metavar='N', type=int, nargs='+')
 
 args = parser.parse_args()
 print(args.integers)
@@ -59,7 +61,10 @@ robot.head_speed(combined_speed=max(speed_set.values()),**speed_set)
 num_chips = int(args.integers[1])
 num_wash = int(args.integers[3])
 print("number of wash: ", num_wash)
-rotate_st = None;
+rotate_st = None;#
+with open('z_calibration', 'rb') as f:
+    z_distance = pickle.load(f);
+
 #num_chips = int(input('Number of chips to coat (1,2 or 3)'))
 
 
@@ -120,18 +125,31 @@ while True:
 advance_mode = args.integers[4]
 # Advance protocol: control over individual wells
 if advance_mode == 1:
-    pipette_300.set_flow_rate(aspirate=400)
+    wells_to_coat = args.well;
+    volume_list = [float(i) for i in args.volume];
+    z_list = [float(i) for i in args.z_space];
+    flow_rate = [float(i) for i in args.flow_rate];
+    num_asp = [float(i) for i in args.num_aspiration];
+    vol_in = 0;
+
+    #removing remaining coating
     pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-        for u in range(3):
-            for i in range(6*num_chips):
-                pipette_300.aspirate(20, ax_6.wells(wells[i]).top(-1.6))
-                if i == 11:
+    for i in range(len(wells_to_coat)):
+        for u in range(num_asp[i]):
+            pipette_300.aspirate(volume_list[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
+            pipette_300.delay(seconds=3)
+            vol_in = volume_list[i] + vol_in;3
+            if i == len(wells_to_coat)-1:
+                if u == num_asp[i]-1 or vol_in >= 300:
                     pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
                     pipette_300.blow_out()
-                    pipette_300.touch_tip(-2)     
-            pipette_300.dispense(ep_rack.wells('A3').top(-1))
-            pipette_300.blow_out()
-            pipette_300.touch_tip(-2) 
+                    pipette_300.touch_tip(-2) 
+                    vol_in = 0
+            elif vol_in + volume_list[i+1] >= 300:
+                pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
+                pipette_300.blow_out()
+                pipette_300.touch_tip(-2)
+                vol_in = 0;
 
 
 #aspirating
