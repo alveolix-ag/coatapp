@@ -130,7 +130,7 @@ if advance_mode == 1:
     volume_list = [float(i) for i in args.volume];
     z_list = [float(i) for i in args.z_space];
     flow_rate = [float(i) for i in args.flow_rate];
-    num_asp = int(args.num_aspiration);
+    num_asp = [int(i) for i in args.num_aspiration];
     vol_in = 0;
     vol_mat = reduce(add ,[[a]*b for a, b in zip(volume_list, num_asp)])
     d=0;
