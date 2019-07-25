@@ -210,7 +210,8 @@ if advance_mode == 1:
                 if cu_vol >= 300:
                     pipette_300.dispense(ep_rack.wells('A3').top(-1))
                     pipette_300.blow_out()
-                    pipette_300.touch_tip(v_offset=-2) 
+                    pipette_300.touch_tip(v_offset=-2)
+                    cu_vol = vol_wash[i] 
                 pipette_300.aspirate(vol_wash[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
                 pipette_300.touch_tip()
                 pipette_300.move_to(ax_6.wells(wells_to_coat[i]).top(4))
