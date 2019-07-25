@@ -170,6 +170,7 @@ if advance_mode == 1:
     for i in range(len(wells_to_coat)):
         for u in range(num_asp[i]):
             pipette_300.aspirate(vol_asp[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
+            pipette_300.move_to(ax_6.wells(wells_to_coat[i]).top(4))
             pipette_300.delay(seconds=3)
             vol_in = vol_asp_mat[d] + vol_in;
             if d == len(vol_asp_mat)-1:
@@ -211,6 +212,8 @@ if advance_mode == 1:
                     pipette_300.blow_out()
                     pipette_300.touch_tip(-2) 
                 pipette_300.aspirate(vol_wash[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
+                pipette_300.move_to(ax_6.wells(wells_to_coat[i]).top(4))
+                pipette_300.delay(seconds=3)
         pipette_300.dispense(ep_rack.wells('A3').top(-1))
         pipette_300.blow_out()
         pipette_300.touch_tip(-2)
