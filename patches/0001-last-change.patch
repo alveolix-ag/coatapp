@@ -1,0 +1,25 @@
+From 9d8f03234381530abc842fae8d5c1edc4454c8c2 Mon Sep 17 00:00:00 2001
+From: danielnzg85 <daniel.nakhaee-zadeh.gutierrez@epfl.ch>
+Date: Thu, 25 Jul 2019 10:22:11 +0200
+Subject: [PATCH] last change!
+
+---
+ protocols/chip_washing_rotator_arg.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/protocols/chip_washing_rotator_arg.py b/protocols/chip_washing_rotator_arg.py
+index b48b8c9..8883c19 100644
+--- a/protocols/chip_washing_rotator_arg.py
++++ b/protocols/chip_washing_rotator_arg.py
+@@ -36,7 +36,7 @@ parser.add_argument('-nm', '--num_mix', metavar='N', type=int, nargs='+')
+ parser.add_argument('-nd', '--num_dry', metavar='N', type=int, nargs='+')
+ #this added changes
+ #added this line to test git am
+-#dev added change
++#dev added change !!!!!!!
+ 
+ args = parser.parse_args()
+ print(args.integers)
+-- 
+2.22.0.windows.1
+
