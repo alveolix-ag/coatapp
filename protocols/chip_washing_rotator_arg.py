@@ -34,6 +34,7 @@ parser.add_argument('-vw', '--volume_wash', metavar='N', type=int, nargs='+')
 parser.add_argument('-nw', '--num_wash', metavar='N', type=int, nargs='+')
 parser.add_argument('-nm', '--num_mix', metavar='N', type=int, nargs='+')
 parser.add_argument('-nd', '--num_dry', metavar='N', type=int, nargs='+')
+#this added changes
 
 args = parser.parse_args()
 print(args.integers)
