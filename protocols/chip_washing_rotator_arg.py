@@ -26,10 +26,14 @@ parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('integers', metavar='N', type=int, nargs='+',
                    help='an integer for the accumulator')
 parser.add_argument('-w', '--well', nargs='+', default=[])
-parser.add_argument('-v', '--volume', metavar='N', type=int, nargs='+')
+parser.add_argument('-va', '--volume_asp', metavar='N', type=int, nargs='+')
 parser.add_argument('-z', '--z_space', metavar='N', type=int, nargs='+')
 parser.add_argument('-f', '--flow_rate', metavar='N', type=int, nargs='+')
 parser.add_argument('-na', '--num_aspiration', metavar='N', type=int, nargs='+')
+parser.add_argument('-vw', '--volume_wash', metavar='N', type=int, nargs='+')
+parser.add_argument('-nw', '--num_wash', metavar='N', type=int, nargs='+')
+parser.add_argument('-nm', '--num_mix', metavar='N', type=int, nargs='+')
+parser.add_argument('-nd', '--num_dry', metavar='N', type=int, nargs='+')
 
 args = parser.parse_args()
 print(args.integers)
@@ -120,6 +124,24 @@ while True:
 #Check Current Pipette Tip
 #print("Ensure that there is pipette tips from well", piwells[int(usetip(1))])
 #print("If not reset pipette count using usetip(val,rst) function")
+def aspirate_vol_wash(vol_array, in_well = 0): #this function controls the volume and pippette used to aspirate the volume
+    initial_volume = 0;
+    limit_vol = 300
+    if in_well < len(vol_array):
+        for d in range(in_well,len(vol_array)):
+            if initial_volume + vol_array[d] >= limit_vol:
+                lst_well = d
+                return initial_volume, lst_well
+                break
+            else:
+                initial_volume = initial_volume + vol_array[d]
+                if d == len(vol_array)-1:
+                    lst_well = len(vol_array)
+                    return initial_volume, lst_well
+                    break
+    else:
+        return 0, 0
+
 
 ### protocol
 
@@ -127,32 +149,86 @@ advance_mode = args.integers[4]
 # Advance protocol: control over individual wells
 if advance_mode == 1:
     wells_to_coat = args.well;
-    volume_list = [float(i) for i in args.volume];
+    vol_asp = [float(i) for i in args.volume_asp];
     z_list = [float(i) for i in args.z_space];
     flow_rate = [float(i) for i in args.flow_rate];
     num_asp = [int(i) for i in args.num_aspiration];
+    vol_wash = [float(i) for i in args.volume_wash];
+    num_wash = [int(i) for i in args.num_wash];
+    num_mix = [int(i) for i in args.num_mix];
+    num_dry = [int(i) for i in args.num_dry];
     vol_in = 0;
-    vol_mat = reduce(add ,[[a]*b for a, b in zip(volume_list, num_asp)])
+    vol_asp_mat = reduce(add ,[[a]*b for a, b in zip(vol_asp, num_asp)])
+    vol_wash_mat = [float(i) for i in args.volume_wash];
+
     d=0;
 
     #removing remaining coating
     pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
     for i in range(len(wells_to_coat)):
         for u in range(num_asp[i]):
-            pipette_300.aspirate(volume_list[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
+            pipette_300.aspirate(vol_asp[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
             pipette_300.delay(seconds=3)
-            vol_in = vol_mat[d] + vol_in;
-            if d == len(vol_mat)-1:
+            vol_in = vol_asp_mat[d] + vol_in;
+            if d == len(vol_asp_mat)-1:
                 pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
                 pipette_300.blow_out()
                 pipette_300.touch_tip(-2) 
                 vol_in = 0
-            elif vol_in + vol_mat[d+1] >= 300:
+            elif vol_in + vol_asp_mat[d+1] >= 300:
                 pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
                 pipette_300.blow_out()
                 pipette_300.touch_tip(-2)
                 vol_in = 0;
-            d = d+1    
+            d = d+1
+    pipette_300.drop_tip()
+
+    pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
+    for h in range(max(num_wash)):
+        #washing
+        wash_ind = 0
+        (vol_wash_in, wash_ind) = aspirate_vol_wash(vol_wash_mat, wash_ind)
+        pipette_300.aspirate(vol_wash_in, ep_rack.wells('A2').bottom(3))
+        vol_left = vol_wash_in
+        for i in range(len(wells_to_coat)):
+                vol_left = vol_left - vol_wash[i]
+                if vol_left < 0:
+                    (vol_wash_in, wash_ind) = aspirate_vol_wash(vol_wash_mat, wash_ind)
+                    vol_left = vol_wash_in - vol_wash[i];
+                pipette_300.dispense(vol_wash[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
+                pipette_300.mix(num_mix[i], 20, ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
+
+
+        #drying
+        cu_vol = 0
+        for i in range(len(wells_to_coat)):
+            for r in range(num_dry[i]):
+                cu_vol = cu_vol + vol_wash[i]
+                if cu_vol >= 300:
+                    pipette_300.dispense(ep_rack.wells('A3').top(-1))
+                    pipette_300.blow_out()
+                    pipette_300.touch_tip(-2) 
+                pipette_300.aspirate(vol_wash[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
+        pipette_300.dispense(ep_rack.wells('A3').top(-1))
+        pipette_300.blow_out()
+        pipette_300.touch_tip(-2)
+
+        num_wash[:] = [x- 1 for x in num_wash];
+        indexes = []
+        for i in range(len(num_wash)):
+            if num_wash[i] <= 0:
+                indexes.append(i)
+        num_wash = [i for j, i in enumerate(num_wash) if j not in indexes]
+        vol_wash = [i for j, i in enumerate(vol_wash) if j not in indexes]
+        wells_to_coat = [i for j, i in enumerate(wells_to_coat) if j not in indexes]
+        z_list = [i for j, i in enumerate(z_list) if j not in indexes]
+        num_mix = [i for j, i in enumerate(num_mix) if j not in indexes]
+  
+    pipette_300.drop_tip()
+    print('finishing run')
+    robot.home() 
+
+
 
 else:
     #aspirating
