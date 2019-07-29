@@ -20,6 +20,7 @@ metadata = {
     'author': 'Daniel Nakhaee-Zadeh Gutierrez',
     'description': 'Protocol used to wash the chip coatings from the AX6 chip',
 }
+#this message is to test git patch solution
 
 
 parser = argparse.ArgumentParser(description='Process some integers.')
