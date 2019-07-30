@@ -20,7 +20,8 @@ metadata = {
     'author': 'Daniel Nakhaee-Zadeh Gutierrez',
     'description': 'Protocol used to wash the chip coatings from the AX6 chip',
 }
-#this message is to test git patch solution
+#this message is to test git patch solutionv 
+
 
 
 parser = argparse.ArgumentParser(description='Process some integers.')
@@ -28,7 +29,7 @@ parser.add_argument('integers', metavar='N', type=int, nargs='+',
                    help='an integer for the accumulator')
 parser.add_argument('-w', '--well', nargs='+', default=[])
 parser.add_argument('-va', '--volume_asp', metavar='N', type=int, nargs='+')
-parser.add_argument('-z', '--z_space', metavar='N', type=int, nargs='+')
+parser.add_argument('-z', '--z_space', metavar='N', type=float, nargs='+')
 parser.add_argument('-f', '--flow_rate', metavar='N', type=int, nargs='+')
 parser.add_argument('-na', '--num_aspiration', metavar='N', type=int, nargs='+')
 parser.add_argument('-vw', '--volume_wash', metavar='N', type=int, nargs='+')

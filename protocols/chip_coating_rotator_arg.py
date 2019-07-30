@@ -27,7 +27,7 @@ parser.add_argument('integers', metavar='N', type=int, nargs='+',
                    help='an integer for the accumulator')
 parser.add_argument('-w', '--well', nargs='+', default=[])
 parser.add_argument('-v', '--volume', metavar='N', type=int, nargs='+')
-parser.add_argument('-z', '--z_space', metavar='N', type=int, nargs='+')
+parser.add_argument('-z', '--z_space', metavar='N', type=float, nargs='+')
 
 args = parser.parse_args() #this is the variable that stores the inputs from the UI
 print(args.integers)
