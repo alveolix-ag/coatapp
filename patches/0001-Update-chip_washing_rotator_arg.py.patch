@@ -1,24 +1,27 @@
-From 8e868b39b25dbd75128e041b7126ac4ecb512a91 Mon Sep 17 00:00:00 2001
+From 328714d6233284fdd10f3ab7de6dbadb69c36c96 Mon Sep 17 00:00:00 2001
 From: danielnzg85 <daniel.nakhaee-zadeh.gutierrez@epfl.ch>
-Date: Mon, 29 Jul 2019 18:07:55 +0200
+Date: Tue, 30 Jul 2019 16:16:49 +0200
 Subject: [PATCH 1/1] Update chip_washing_rotator_arg.py
 
 ---
- protocols/chip_washing_rotator_arg.py | 1 +
- 1 file changed, 1 insertion(+)
+ protocols/chip_washing_rotator_arg.py | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/protocols/chip_washing_rotator_arg.py b/protocols/chip_washing_rotator_arg.py
-index 454baac..981ee25 100644
+index 780ec52..3be3884 100644
 --- a/protocols/chip_washing_rotator_arg.py
 +++ b/protocols/chip_washing_rotator_arg.py
-@@ -20,6 +20,7 @@ metadata = {
+@@ -20,9 +20,7 @@ metadata = {
      'author': 'Daniel Nakhaee-Zadeh Gutierrez',
      'description': 'Protocol used to wash the chip coatings from the AX6 chip',
  }
-+#this message is to test git patch solution
- 
+-#this message is to test git patch solutionv 
+-
+-
++ 
  
  parser = argparse.ArgumentParser(description='Process some integers.')
+ parser.add_argument('integers', metavar='N', type=int, nargs='+',
 -- 
 2.22.0.windows.1
 
