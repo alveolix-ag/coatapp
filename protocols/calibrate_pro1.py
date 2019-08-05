@@ -97,7 +97,7 @@ def update_offset(labware_name, rd, x_val=0.0, y_val=0.0, z_val=0.0):
 offset = update_offset("ax6_5",True)
 
 
-#robot.connect()
+robot.connect()
 robot.home()
 
 #Protocol
