@@ -66,26 +66,41 @@ def usetip(val = 3,rst = 1):
 def update_offset(labware_name, rd, x_val=0.0, y_val=0.0, z_val=0.0):
     path = '/data/packages/usr/local/lib/python3.6/site-packages/opentrons/shared_data/labware/definitions/2/'
     with open (path + labware_name + '/1.json', 'rt') as myfile:  # Open lorem.txt for reading text
+        num_lines = sum(1 for line in myfile))
         contents = myfile.read()
-        text = re.search('"cornerOffsetFromSlot": {((.*\n){4})', contents)
-        #if text != None:
-        index_str = re.search('"cornerOffsetFromSlot": {((.*\n){4})', contents).start()
-        index_str_end = re.search('"cornerOffsetFromSlot": {((.*\n){4})', contents).end()
-    if rd == True:
-        offset_txt = text.group(1).splitlines()
-        offset_txt = list(filter(None, offset_txt))
-        offset = [];
-        for line in range (len(offset_txt)):
-            offset.append(float(re.findall("-?\d+\.\d+", offset_txt[line])[0]))
-        myfile.close()
-        return offset
-    
-    elif rd == False:
-        string = '\"cornerOffsetFromSlot\": {\n\t\"x\": ' + str(x_val)+',\n\t\"y\": ' + str(y_val)+',\n\t\"z\": ' + str(z_val)
-        new_json="".join((contents[:index_str], string ,contents[index_str_end-1:]))
-        with open(path + labware_name + '/1.json', 'w') as myfile:
-            myfile.write(new_json)
+        for i, l in enumerate(myfile):
+            fileline = i;
+        if fileline > 1:
+            text = re.search('"cornerOffsetFromSlot": {((.*\n){4})', contents)
+            index_str = re.search('"cornerOffsetFromSlot": {((.*\n){4})', contents).start()
+            index_str_end = re.search('"cornerOffsetFromSlot": {((.*\n){4})', contents).end()
+            offset_txt = text.group(1).splitlines()
+            offset_txt = list(filter(None, offset_txt))
+            offset = [];
+            for line in range (len(offset_txt)):
+                offset.append(float(re.findall("-?\d+\.\d+", offset_txt[line])[0]))
+            string = '\"cornerOffsetFromSlot\": {\n\t\"x\": ' + str(x_val)+',\n\t\"y\": ' + str(y_val)+',\n\t\"z\": ' + str(z_val)
+
+        else:
+            text = re.search('"cornerOffsetFromSlot":{(.+?)}', contents)
+            #if text != None:
+            index_str = re.search('"cornerOffsetFromSlot":{(.+?)}', contents).start()
+            index_str_end = re.search('"cornerOffsetFromSlot":{(.+?)}', contents).end()
+            offset_txt = text[1].split(',')
+            offset = [];
+            for line in range (len(offset_txt)):
+                offset.append(float(re.search(':(.+?)', offset_txt[line])[1]))
+            string = '\"cornerOffsetFromSlot\": {\"x\": ' + str(x_val)+',\"y\": ' + str(y_val)+',\"z\": ' + str(z_val)
+                
+        if rd == True:       
             myfile.close()
+            return offset
+
+        elif rd == False:
+            new_json="".join((contents[:index_str], string ,contents[index_str_end-1:]))
+            with open(path + labware_name + '/1.json', 'w') as myfile:
+                myfile.write(new_json)
+                myfile.close()
 
 
 #try:
