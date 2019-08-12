@@ -128,10 +128,10 @@ robot.home()
 pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
 print(usetip(1))
 if cal_offset == 1:
-    pipette_300.move_to(ax_6.wells("A1").top(offset[2]+10))
+    pipette_300.move_to(ax_6.wells("A1").top(10))
     print("with offset")
 else:
-    pipette_300.move_to(ax_6.wells("A1").top(offset[2]))
+    pipette_300.move_to(ax_6.wells("A1").top())
 while True:
     mov_dir = input("Select movement direction and step size: ")
     mov_dir = mov_dir.split()
