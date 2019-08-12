@@ -60,6 +60,7 @@ def usetip(val = 3,rst = 1):
             varwells = 0
         else:
             varwells = varwells-1
+        c_well = varwells
     else:
         with open('tipw', 'rb') as f:
             varwells = pickle.load(f);
