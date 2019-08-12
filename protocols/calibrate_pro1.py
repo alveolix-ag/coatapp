@@ -129,6 +129,7 @@ pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
 print(usetip(1))
 if cal_offset == 1:
     pipette_300.move_to(ax_6.wells("A1").top(offset[2]+10))
+    print("with offset")
 else:
     pipette_300.move_to(ax_6.wells("A1").top(offset[2]))
 while True:
@@ -151,6 +152,7 @@ while True:
 print(offset)
 if cal_offset == 1:
     update_offset("ax6_5",False, offset[0], offset[1], offset[2]+10)
+    print("with offset")
 else:
     update_offset("ax6_5",False, offset[0], offset[1], offset[2])
 
