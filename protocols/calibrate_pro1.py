@@ -28,7 +28,7 @@ metadata = {
 }
 
 parser = argparse.ArgumentParser(description='Process some integers.')
-parser.add_argument('-o', '--offset', metavar='N', type=int, nargs='+')
+parser.add_argument('-o', '--offset', type=int)
 args = parser.parse_args() #this is the variable that stores the inputs from the UI
 cal_offset =int(args.offset)
 
