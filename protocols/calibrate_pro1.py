@@ -66,7 +66,6 @@ def usetip(val = 3,rst = 1):
 def update_offset(labware_name, rd, x_val=0.0, y_val=0.0, z_val=0.0):
     path = '/data/packages/usr/local/lib/python3.6/site-packages/opentrons/shared_data/labware/definitions/2/'
     with open (path + labware_name + '/1.json', 'rt') as myfile:  # Open lorem.txt for reading text
-        num_lines = sum(1 for line in myfile))
         contents = myfile.read()
         for i, l in enumerate(myfile):
             fileline = i;
