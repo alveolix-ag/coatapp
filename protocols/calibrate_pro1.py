@@ -3,6 +3,7 @@
 
 # In[ ]:
 
+
 from opentrons import labware, instruments, robot, containers #Libraries from Opentron API
 import signal
 import sys 
@@ -65,6 +66,10 @@ def usetip(val = 3,rst = 1):
 
 def update_offset(labware_name, rd, x_val=0.0, y_val=0.0, z_val=0.0):
     path = '/data/packages/usr/local/lib/python3.6/site-packages/opentrons/shared_data/labware/definitions/2/'
+    with open (path + labware_name + '/1.json', 'rt') as myfilelines:
+        for i, l in enumerate(myfilelines):
+            fileline = i+1;
+        myfilelines.close()
     with open (path + labware_name + '/1.json', 'rt') as myfile:  # Open lorem.txt for reading text
         contents = myfile.read()
         for i, l in enumerate(myfile):
@@ -82,14 +87,13 @@ def update_offset(labware_name, rd, x_val=0.0, y_val=0.0, z_val=0.0):
 
         else:
             text = re.search('"cornerOffsetFromSlot":{(.+?)}', contents)
-            #if text != None:
             index_str = re.search('"cornerOffsetFromSlot":{(.+?)}', contents).start()
             index_str_end = re.search('"cornerOffsetFromSlot":{(.+?)}', contents).end()
             offset_txt = text[1].split(',')
             offset = [];
             for line in range (len(offset_txt)):
-                offset.append(float(re.search(':(.+?)', offset_txt[line])[1]))
-            string = '\"cornerOffsetFromSlot\": {\"x\": ' + str(x_val)+',\"y\": ' + str(y_val)+',\"z\": ' + str(z_val)
+                offset.append(float(re.search(':(.+?.*)', offset_txt[line])[1]))
+            string = '\"cornerOffsetFromSlot\":{\"x\":' + str(x_val)+',\"y\":' + str(y_val)+',\"z\":' + str(z_val)
                 
         if rd == True:       
             myfile.close()
@@ -109,6 +113,7 @@ def update_offset(labware_name, rd, x_val=0.0, y_val=0.0, z_val=0.0):
 #    pickle.dump(offset, open("ax_offset.pickle", "wb"))
 
 offset = update_offset("ax6_5",True)
+print(offset)
 
 
 robot.connect()
