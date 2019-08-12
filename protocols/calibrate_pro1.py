@@ -53,13 +53,13 @@ def usetip(val = 3,rst = 1):
             varwells = pickle.load(f);
             c_well = varwells;
         return piwells[c_well]
-    elif val == 2: #return tip fumnction on
+    elif val == 2: #return tip function on
         with open('tipw','rb') as f:
             varwells = pickle.load(f)
         if varwells == 0:
-            c_well = varwells
+            varwells = 0
         else:
-            c_well = varwells-1
+            varwells = varwells-1
     else:
         with open('tipw', 'rb') as f:
             varwells = pickle.load(f);
