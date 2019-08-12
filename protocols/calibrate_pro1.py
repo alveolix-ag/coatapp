@@ -150,12 +150,15 @@ while True:
         elif step_dir == "z":
             offset[2] = offset[2] + step_size
             
-print(offset)
-if cal_offset == 1:
-    update_offset("ax6_5",False, offset[0], offset[1], offset[2]+10)
-    print("with offset")
+
+if int(mov_dir[2]) > 1:
+    if cal_offset == 1:
+        update_offset("ax6_5",False, offset[0], offset[1], offset[2]+10)
+        print("with offset")
+    else:
+        update_offset("ax6_5",False, offset[0], offset[1], offset[2])
 else:
-    update_offset("ax6_5",False, offset[0], offset[1], offset[2])
+    print("Not saving Calibration")
 
 #with open('ax_offset.pickle', 'wb') as f:
 #    pickle.dump(offset, f);
