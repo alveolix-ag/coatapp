@@ -153,6 +153,7 @@ while True:
 
 if int(mov_dir[2]) > 1:
     print("Not saving Calibration")
+    print("newline")
 else:
     if cal_offset == 1:
         update_offset("ax6_5",False, offset[0], offset[1], offset[2]+10)
