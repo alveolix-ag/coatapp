@@ -36,7 +36,7 @@ cal_offset =int(args.offset)
 if 'tiprack' not in locals():
     tiprack = labware.load('opentrons-tiprack-300ul', '1')
 if 'ax_6' not in locals():
-    ax_6 = labware.load('ax6_5','3')
+    ax_6 = labware.load('ax6_5','6')
 
 
 if 'pipette_300' not in locals():
