@@ -27,6 +27,12 @@ metadata = {
     'description': 'Protocol calibrates the Z',
 }
 
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('-o', '--offset', nargs='+', default=[])
+
+args = parser.parse_args() #this is the variable that stores the inputs from the UI
+cal_offset =int(args.offset)
+
 #tiprack
 if 'tiprack' not in locals():
     tiprack = labware.load('opentrons-tiprack-300ul', '1')
@@ -122,7 +128,10 @@ robot.home()
 #Protocol
 pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
 print(usetip(1))
-pipette_300.move_to(ax_6.wells("A1").top(offset[2]))
+if cal_offset == 1:
+    pipette_300.move_to(ax_6.wells("A1").top(offset[2]+10))
+else:
+    pipette_300.move_to(ax_6.wells("A1").top(offset[2]))
 while True:
     mov_dir = input("Select movement direction and step size: ")
     mov_dir = mov_dir.split()
@@ -141,7 +150,10 @@ while True:
             offset[2] = offset[2] + step_size
             
 print(offset)
-update_offset("ax6_5",False, offset[0], offset[1], offset[2])
+if cal_offset == 1:
+    update_offset("ax6_5",False, offset[0], offset[1], offset[2]-10)
+else:
+    update_offset("ax6_5",False, offset[0], offset[1], offset[2])
 
 #with open('ax_offset.pickle', 'wb') as f:
 #    pickle.dump(offset, f);
