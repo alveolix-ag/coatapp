@@ -29,7 +29,6 @@ metadata = {
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('-o', '--offset', nargs='+', default=[])
-
 args = parser.parse_args() #this is the variable that stores the inputs from the UI
 cal_offset =int(args.offset)
 
@@ -151,7 +150,7 @@ while True:
             
 print(offset)
 if cal_offset == 1:
-    update_offset("ax6_5",False, offset[0], offset[1], offset[2]-10)
+    update_offset("ax6_5",False, offset[0], offset[1], offset[2]+10)
 else:
     update_offset("ax6_5",False, offset[0], offset[1], offset[2])
 
