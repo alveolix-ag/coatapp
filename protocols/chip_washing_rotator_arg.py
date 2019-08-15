@@ -147,7 +147,7 @@ def aspirate_vol_wash(vol_array, in_well = 0): #this function controls the volum
 
 def aspirate_from_well(well, z_distance, volume, z_change = 0):
     positions=[[0.5,"x"],[-0.5,"x"],[0.5,"y"],[-0.5,"y"]];
-    volume=volume/5
+    volume=truncate(volume/5)
     for it in range (5):
         if it == 0:
             pipette_300.aspirate(volume, ax_6.wells(well).top(z_distance+z_change))
@@ -157,6 +157,7 @@ def aspirate_from_well(well, z_distance, volume, z_change = 0):
             calibration_functions.jog_instrument(instrument=pipette_300,distance=positions[it-1][0],axis=positions[it-1][1],robot=robot)
             pipette_300.aspirate(vol_asp[i])
             pipette_300.delay(seconds=1)
+
 
 ### protocol
 
