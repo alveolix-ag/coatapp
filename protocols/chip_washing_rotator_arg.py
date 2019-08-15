@@ -77,7 +77,7 @@ with open('z_calibration', 'rb') as f:
 
 # labware
 if 'ax_6' not in locals():
-    ax_6 = labware.load('ax6_4','6')
+    ax_6 = labware.load('ax6_5','6')
 if 'tiprack' not in locals():
     tiprack = labware.load('opentrons-tiprack-300ul', '1')
 if 'ep_rack' not in locals():
