@@ -12,6 +12,7 @@ import pickle
 import argparse
 from operator import add
 from functools import reduce
+from opentrons.util import calibration_functions
 
 
 # metadata
@@ -150,9 +151,9 @@ def aspirate_from_well(well, z_distance, volume, z_change = 0):
     for it in range (5):
         if it == 0:
             pipette_300.aspirate(volume, ax_6.wells(well).top(z_distance+z_change))
-
+            pipette_300.delay(seconds=1)
         else:
-            pipette_300.move_to(ax_6.wells(well).top(z_distance+z_change))
+            pipette_300.move_to(ax_6.wells(well).top(2))
             calibration_functions.jog_instrument(instrument=pipette_300,distance=positions[it-1][0],axis=positions[it-1][1],robot=robot)
             pipette_300.aspirate(vol_asp[i])
             pipette_300.delay(seconds=1)
@@ -184,7 +185,6 @@ if advance_mode == 1:
         for u in range(num_asp[i]):
             aspirate_from_well(wells_to_coat[i], z_distance, vol_asp[i], z_list[i])
             #pipette_300.aspirate(vol_asp[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
-            pipette_300.move_to(ax_6.wells(wells_to_coat[i]).top(4))
             pipette_300.delay(seconds=2)
             vol_in = vol_asp_mat[d] + vol_in;
             if (d == len(vol_asp_mat)-1) or (vol_in + vol_asp_mat[d+1] >= 300):
