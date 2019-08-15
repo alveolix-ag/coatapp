@@ -144,12 +144,22 @@ def aspirate_vol_wash(vol_array, in_well = 0): #this function controls the volum
     else:
         return 0, 0
 
+def aspirate_from_well(well, z_distance, z_change = 0, volume):
+    positions=[[0.5,"x"],[-0.5,"x"],[0.5,"y"],[-0.5,"y"]]
+    for it in range 5:
+        if it = 0:
+            pipette_300.aspirate(vol_asp[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_change))
+        else:
+            pipette_300.move_to(ax_6.wells(wells_to_coat[i]))
+            calibration_functions.jog_instrument(instrument=pipette_300,distance=positions[it,0],axis=positions[it,1],robot=robot)
+            pipette_300.aspirate(vol_asp[i])
 
 ### protocol
 
 advance_mode = args.integers[4]
 # Advance protocol: control over individual wells
 if advance_mode == 1:
+    #All parameters are first extracted form the parser.
     wells_to_coat = args.well;
     vol_asp = [float(i) for i in args.volume_asp];
     z_list = [float(i) for i in args.z_space];
@@ -171,7 +181,7 @@ if advance_mode == 1:
         for u in range(num_asp[i]):
             pipette_300.aspirate(vol_asp[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
             pipette_300.move_to(ax_6.wells(wells_to_coat[i]).top(4))
-            pipette_300.delay(seconds=3)
+            pipette_300.delay(seconds=2)
             vol_in = vol_asp_mat[d] + vol_in;
             if d == len(vol_asp_mat)-1:
                 pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
@@ -236,7 +246,7 @@ if advance_mode == 1:
     robot.home() 
 
 
-
+#Standard Protocol
 else:
     #aspirating
     pipette_300.set_flow_rate(aspirate=400)

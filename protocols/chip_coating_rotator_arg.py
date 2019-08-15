@@ -21,13 +21,15 @@ metadata = {
     'description': 'Protocol used to coat the PDMS membrane of the AX6 LOC chip',
 }
 
-#Parser to store the input values from the UI app
+#Parser to store the input values from the UI OT-APP
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('integers', metavar='N', type=int, nargs='+',
                    help='an integer for the accumulator')
 parser.add_argument('-w', '--well', nargs='+', default=[])
 parser.add_argument('-v', '--volume', metavar='N', type=int, nargs='+')
 parser.add_argument('-z', '--z_space', metavar='N', type=float, nargs='+')
+#To add a new argument you can use the <parser>.add_argument('-<initial>', '--<argument name>', type = <type of variable>)
+#when calling the protcol from the command line you can add your argument by adding the (-<initial>, EX: -v) followed by the value (EX: 25.0). EX: python3 chip_coating.py -v 25.0
 
 args = parser.parse_args() #this is the variable that stores the inputs from the UI
 print(args.integers)
@@ -138,7 +140,7 @@ PORT = 50004   # The same port as used by the server
 advance_mode = args.integers[3]
 
 # Advance protocol: control over individual wells
-def aspirate_vol(vol_array, in_well = 0): #this function controls the volume and pippette used to aspirate the volume
+def aspirate_vol(vol_array, in_well = 0): #this function controls the volume and pippette used to aspirate the the input volume
     initial_volume = 0;
     if vol_array[in_well] < 30:
         default_pipette = 50
@@ -221,12 +223,15 @@ else:
     if side_to_coat == 2:
         pipette_300.move_to(ep_rack.wells('A1').top(20))
         print("Flip Chip Holder, rotating around its shorter side")
+        #This connects to the OT-APP and send a command to rotate the chip holder rotator
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((HOST, PORT))
             rotate_st = str.encode("rotate")
             s.send(rotate_st)
+            #Data is received when the chip is correctly flipped.
             data = s.recv(1024)
             print('Received', repr(data))
+        #Manually continue the protocol once the chip rotator is flipped.
         while rotate_st is None:
             rotate_st = input('Press enter when chip is flipped...')
         pipette_300.delay(seconds = 3)     
