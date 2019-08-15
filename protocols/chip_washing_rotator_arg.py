@@ -151,13 +151,16 @@ def aspirate_from_well(well, volume, z_change = 0):
     for it in range (5):
         if it == 0:
             pipette_300.aspirate(volume, ax_6.wells(well).top(z_change))
-            pipette_300.delay(seconds=4)
+            pipette_300.delay(seconds=2)
+            speed_set = {'x': 100, 'y': 100, 'z': 20, 'a': 20, 'b': 10, 'c': 10}
+            robot.head_speed(combined_speed=max(speed_set.values()),**speed_set)
         else:
             pipette_300.move_to(ax_6.wells(well).top(z_change))
             calibration_functions.jog_instrument(instrument=pipette_300,distance=positions[it-1][0],axis=positions[it-1][1],robot=robot)
             pipette_300.aspirate(vol_asp[i])
             pipette_300.delay(seconds=1)
-
+    speed_set = {'x': 300, 'y': 200, 'z': 75, 'a': 75, 'b': 25, 'c': 25}
+    robot.head_speed(combined_speed=max(speed_set.values()),**speed_set)
 
 ### protocol
 
