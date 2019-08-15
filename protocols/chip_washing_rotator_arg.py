@@ -144,15 +144,18 @@ def aspirate_vol_wash(vol_array, in_well = 0): #this function controls the volum
     else:
         return 0, 0
 
-def aspirate_from_well(well, z_distance, z_change = 0, volume):
-    positions=[[0.5,"x"],[-0.5,"x"],[0.5,"y"],[-0.5,"y"]]
-    for it in range 5:
-        if it = 0:
-            pipette_300.aspirate(vol_asp[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_change))
+def aspirate_from_well(well, z_distance, volume, z_change = 0):
+    positions=[[0.5,"x"],[-0.5,"x"],[0.5,"y"],[-0.5,"y"]];
+    volume=volume/5
+    for it in range (5):
+        if it == 0:
+            pipette_300.aspirate(volume, ax_6.wells(well).top(z_distance+z_change))
+
         else:
-            pipette_300.move_to(ax_6.wells(wells_to_coat[i]))
-            calibration_functions.jog_instrument(instrument=pipette_300,distance=positions[it,0],axis=positions[it,1],robot=robot)
+            pipette_300.move_to(ax_6.wells(well).top(z_distance+z_change))
+            calibration_functions.jog_instrument(instrument=pipette_300,distance=positions[it-1][0],axis=positions[it-1][1],robot=robot)
             pipette_300.aspirate(vol_asp[i])
+            pipette_300.delay(seconds=1)
 
 ### protocol
 
@@ -179,20 +182,16 @@ if advance_mode == 1:
     pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
     for i in range(len(wells_to_coat)):
         for u in range(num_asp[i]):
-            pipette_300.aspirate(vol_asp[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
+            aspirate_from_well(wells_to_coat[i], z_distance, vol_asp[i], z_list[i])
+            #pipette_300.aspirate(vol_asp[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
             pipette_300.move_to(ax_6.wells(wells_to_coat[i]).top(4))
             pipette_300.delay(seconds=2)
             vol_in = vol_asp_mat[d] + vol_in;
-            if d == len(vol_asp_mat)-1:
+            if (d == len(vol_asp_mat)-1) or (vol_in + vol_asp_mat[d+1] >= 300):
                 pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
                 pipette_300.blow_out()
                 pipette_300.touch_tip(v_offset=-2) 
                 vol_in = 0
-            elif vol_in + vol_asp_mat[d+1] >= 300:
-                pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
-                pipette_300.blow_out()
-                pipette_300.touch_tip(v_offset=-2)
-                vol_in = 0;
             d = d+1
     pipette_300.drop_tip()
 
