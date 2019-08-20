@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OT-APP", "OT-APP1\OT-APP.csproj", "{A450085D-5D24-46FC-B771-6750A9928819}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupOtAPP", "SetupOtAPP\SetupOtAPP.vdproj", "{06DEEB0D-C445-43D9-821F-6FC234F7CD3E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A450085D-5D24-46FC-B771-6750A9928819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A450085D-5D24-46FC-B771-6750A9928819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A450085D-5D24-46FC-B771-6750A9928819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A450085D-5D24-46FC-B771-6750A9928819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06DEEB0D-C445-43D9-821F-6FC234F7CD3E}.Debug|Any CPU.ActiveCfg = Debug
+		{06DEEB0D-C445-43D9-821F-6FC234F7CD3E}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5DDE3C88-3441-4174-9FD5-82AD85947606}
+	EndGlobalSection
+EndGlobal

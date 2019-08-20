@@ -1,0 +1,183 @@
+{
+    "ordering": [
+        [
+            "A1",
+            "B1",
+            "C1",
+            "D1",
+            "E1"
+        ],
+        [
+            "A2",
+            "B2",
+            "C2",
+            "D2",
+            "E2"
+        ],
+        [
+            "A3",
+            "B3",
+            "C3",
+            "D3",
+            "E3"
+        ]
+    ],
+    "brand": {
+        "brand": "dsdc",
+        "brandId": "dsdfdf",
+        "links": "None"
+    },
+    "metadata": {
+        "displayName": "sdcdcd",
+        "displayCategory": "wellPlate",
+        "displayVolumeUnits": "\\u00b5L",
+        "tags": "None"
+    },
+    "dimensions": {
+        "xDimension": 120.0,
+        "yDimension": 56.0,
+        "zDimension": 56.0
+    },
+    "cornerOffsetFromSlot": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+    },
+    "wells": {
+        "A1": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 63.0,
+            "y": 5.0,
+            "z": 3.0
+        },
+        "B1": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 63.0,
+            "y": 15.0,
+            "z": 3.0
+        },
+        "C1": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 63.0,
+            "y": 25.0,
+            "z": 3.0
+        },
+        "D1": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 63.0,
+            "y": 35.0,
+            "z": 3.0
+        },
+        "E1": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 63.0,
+            "y": 45.0,
+            "z": 3.0
+        },
+        "A2": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 51.0,
+            "y": 5.0,
+            "z": 3.0
+        },
+        "B2": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 51.0,
+            "y": 15.0,
+            "z": 3.0
+        },
+        "C2": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 51.0,
+            "y": 25.0,
+            "z": 3.0
+        },
+        "D2": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 51.0,
+            "y": 35.0,
+            "z": 3.0
+        },
+        "E2": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 51.0,
+            "y": 45.0,
+            "z": 3.0
+        },
+        "A3": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 39.0,
+            "y": 5.0,
+            "z": 3.0
+        },
+        "B3": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 39.0,
+            "y": 15.0,
+            "z": 3.0
+        },
+        "C3": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 39.0,
+            "y": 25.0,
+            "z": 3.0
+        },
+        "D3": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 39.0,
+            "y": 35.0,
+            "z": 3.0
+        },
+        "E3": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 34.0,
+            "x": 39.0,
+            "y": 45.0,
+            "z": 3.0
+        }
+    }
+}
