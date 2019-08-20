@@ -1,0 +1,4 @@
+#!/bin/bash
+cd /data/coatapp
+git fetch coatapp
+git checkout coatapp/master -- protocols
