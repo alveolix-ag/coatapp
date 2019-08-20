@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="OT_APP1.exe.manifest" size="10256">
+    <dependentAssembly dependencyType="install" codebase="OT_APP1.exe.manifest" size="8976">
       <assemblyIdentity name="OT_APP1.exe" version="1.0.0.5" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>1DQ08xrkU52L3QLzaOT2qYuvuxbW9IU/C6vCe0NaHWw=</dsig:DigestValue>
+        <dsig:DigestValue>NkUxaTpvEPsrReKcHwSy9ZfwVb4G9WqFmWol2cO0njA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

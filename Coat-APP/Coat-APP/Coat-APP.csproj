@@ -340,6 +340,7 @@
     <Content Include="Protocols\socket_host.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Panel.png" />
     <Content Include="Resources\UI_Glyph_08-15-512.png" />
   </ItemGroup>
   <ItemGroup />

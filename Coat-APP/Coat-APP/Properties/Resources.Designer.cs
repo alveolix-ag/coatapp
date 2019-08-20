@@ -72,9 +72,9 @@ namespace OT_APP1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap UI_Glyph_08_15_512 {
+        internal static System.Drawing.Bitmap Panel {
             get {
-                object obj = ResourceManager.GetObject("UI_Glyph_08-15-512", resourceCulture);
+                object obj = ResourceManager.GetObject("Panel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
