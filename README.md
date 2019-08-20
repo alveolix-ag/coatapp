@@ -1,4 +1,4 @@
-# ot_app
+# Coat APP
 
 The ot_app is a .NET application build for windows that enables communication to other devices using SHH and SFTP protocols. The software was designed to be used to control the Opentrons OT-2 pipetting robot and interact with other electronical components (arduino, labware ...).
 The application can be
