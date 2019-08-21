@@ -16,6 +16,12 @@ namespace OT_APP1
             get { return Import; }
             set { Import = value; }
         }
+        private bool delete;
+        public bool Delete
+        {
+            get { return delete; }
+            set { delete = value; }
+        }
         public string brand;
         public string Brand
         {
@@ -204,7 +210,7 @@ namespace OT_APP1
                 string finalpath = (sourceDir + labwaretoView + "\\1.json");
                 var labware_def = File.ReadAllText(finalpath);
                 JToken token = JObject.Parse(labware_def);
-                Console.WriteLine(token.ToString());
+
                 //Brand fields
                 object brandList = (object)token.SelectToken("brand");
                 JToken brandobject = JObject.Parse(brandList.ToString());
@@ -250,6 +256,7 @@ namespace OT_APP1
                 int cols = arr.Length;
 
                 import = true;
+                Delete = false;
                 Brand = brand;
                 BrandId = brandId.ToString();
                 DisplayName = displayName;
@@ -279,7 +286,14 @@ namespace OT_APP1
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             import = false;
+            Delete = false;
             this.Close();
+        }
+
+        private void BtnDeleteFromDeck_Click(object sender, EventArgs e)
+        {
+            import = false;
+            Delete = true;
         }
     }
 }

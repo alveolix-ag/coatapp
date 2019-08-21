@@ -34,6 +34,7 @@
             this.btnView = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnDeleteFromDeck = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // treeLabware
@@ -95,11 +96,23 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // btnDeleteFromDeck
+            // 
+            this.btnDeleteFromDeck.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnDeleteFromDeck.Location = new System.Drawing.Point(486, 433);
+            this.btnDeleteFromDeck.Name = "btnDeleteFromDeck";
+            this.btnDeleteFromDeck.Size = new System.Drawing.Size(86, 35);
+            this.btnDeleteFromDeck.TabIndex = 6;
+            this.btnDeleteFromDeck.Text = "Delete";
+            this.btnDeleteFromDeck.UseVisualStyleBackColor = true;
+            this.btnDeleteFromDeck.Click += new System.EventHandler(this.BtnDeleteFromDeck_Click);
+            // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 490);
+            this.Controls.Add(this.btnDeleteFromDeck);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.btnView);
@@ -122,5 +135,6 @@
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnDeleteFromDeck;
     }
 }

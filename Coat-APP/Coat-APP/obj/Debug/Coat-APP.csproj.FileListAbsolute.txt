@@ -154,3 +154,14 @@ C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\OT_APP1.
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\Coat-APP.csproj.CopyComplete
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\OT_APP1.exe
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\OT_APP1.pdb
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot1N.png
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot2N.png
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot3N.png
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot4N.png
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot5N.png
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot6N.png
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot7N.png
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot8N.png
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot9N.png
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot10N.png
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot11N.png
