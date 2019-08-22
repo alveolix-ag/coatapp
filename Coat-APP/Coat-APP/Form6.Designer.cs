@@ -41,6 +41,8 @@
             this.picSlot10 = new System.Windows.Forms.PictureBox();
             this.picSlot11 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picSlot1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSlot2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSlot3)).BeginInit();
@@ -58,7 +60,7 @@
             // picSlot1
             // 
             this.picSlot1.Image = ((System.Drawing.Image)(resources.GetObject("picSlot1.Image")));
-            this.picSlot1.Location = new System.Drawing.Point(320, 328);
+            this.picSlot1.Location = new System.Drawing.Point(151, 333);
             this.picSlot1.Name = "picSlot1";
             this.picSlot1.Size = new System.Drawing.Size(130, 81);
             this.picSlot1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -69,7 +71,7 @@
             // picSlot2
             // 
             this.picSlot2.Image = ((System.Drawing.Image)(resources.GetObject("picSlot2.Image")));
-            this.picSlot2.Location = new System.Drawing.Point(456, 328);
+            this.picSlot2.Location = new System.Drawing.Point(287, 333);
             this.picSlot2.Name = "picSlot2";
             this.picSlot2.Size = new System.Drawing.Size(130, 81);
             this.picSlot2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -80,7 +82,7 @@
             // picSlot3
             // 
             this.picSlot3.Image = ((System.Drawing.Image)(resources.GetObject("picSlot3.Image")));
-            this.picSlot3.Location = new System.Drawing.Point(592, 328);
+            this.picSlot3.Location = new System.Drawing.Point(423, 333);
             this.picSlot3.Name = "picSlot3";
             this.picSlot3.Size = new System.Drawing.Size(130, 81);
             this.picSlot3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -91,7 +93,7 @@
             // picSlot4
             // 
             this.picSlot4.Image = ((System.Drawing.Image)(resources.GetObject("picSlot4.Image")));
-            this.picSlot4.Location = new System.Drawing.Point(320, 246);
+            this.picSlot4.Location = new System.Drawing.Point(151, 251);
             this.picSlot4.Name = "picSlot4";
             this.picSlot4.Size = new System.Drawing.Size(130, 81);
             this.picSlot4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -102,7 +104,7 @@
             // picSlot5
             // 
             this.picSlot5.Image = ((System.Drawing.Image)(resources.GetObject("picSlot5.Image")));
-            this.picSlot5.Location = new System.Drawing.Point(456, 246);
+            this.picSlot5.Location = new System.Drawing.Point(287, 251);
             this.picSlot5.Name = "picSlot5";
             this.picSlot5.Size = new System.Drawing.Size(130, 81);
             this.picSlot5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -113,7 +115,7 @@
             // picSlot6
             // 
             this.picSlot6.Image = ((System.Drawing.Image)(resources.GetObject("picSlot6.Image")));
-            this.picSlot6.Location = new System.Drawing.Point(592, 246);
+            this.picSlot6.Location = new System.Drawing.Point(423, 251);
             this.picSlot6.Name = "picSlot6";
             this.picSlot6.Size = new System.Drawing.Size(130, 81);
             this.picSlot6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -124,7 +126,7 @@
             // picSlot7
             // 
             this.picSlot7.Image = ((System.Drawing.Image)(resources.GetObject("picSlot7.Image")));
-            this.picSlot7.Location = new System.Drawing.Point(320, 164);
+            this.picSlot7.Location = new System.Drawing.Point(151, 169);
             this.picSlot7.Name = "picSlot7";
             this.picSlot7.Size = new System.Drawing.Size(130, 81);
             this.picSlot7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -135,7 +137,7 @@
             // picSlot8
             // 
             this.picSlot8.Image = ((System.Drawing.Image)(resources.GetObject("picSlot8.Image")));
-            this.picSlot8.Location = new System.Drawing.Point(456, 164);
+            this.picSlot8.Location = new System.Drawing.Point(287, 169);
             this.picSlot8.Name = "picSlot8";
             this.picSlot8.Size = new System.Drawing.Size(130, 81);
             this.picSlot8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -146,7 +148,7 @@
             // picSlot9
             // 
             this.picSlot9.Image = ((System.Drawing.Image)(resources.GetObject("picSlot9.Image")));
-            this.picSlot9.Location = new System.Drawing.Point(592, 164);
+            this.picSlot9.Location = new System.Drawing.Point(423, 169);
             this.picSlot9.Name = "picSlot9";
             this.picSlot9.Size = new System.Drawing.Size(130, 81);
             this.picSlot9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -157,7 +159,7 @@
             // picSlot10
             // 
             this.picSlot10.Image = ((System.Drawing.Image)(resources.GetObject("picSlot10.Image")));
-            this.picSlot10.Location = new System.Drawing.Point(320, 82);
+            this.picSlot10.Location = new System.Drawing.Point(151, 87);
             this.picSlot10.Name = "picSlot10";
             this.picSlot10.Size = new System.Drawing.Size(130, 81);
             this.picSlot10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -168,7 +170,7 @@
             // picSlot11
             // 
             this.picSlot11.Image = ((System.Drawing.Image)(resources.GetObject("picSlot11.Image")));
-            this.picSlot11.Location = new System.Drawing.Point(456, 82);
+            this.picSlot11.Location = new System.Drawing.Point(287, 87);
             this.picSlot11.Name = "picSlot11";
             this.picSlot11.Size = new System.Drawing.Size(130, 81);
             this.picSlot11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -179,18 +181,42 @@
             // pictureBox12
             // 
             this.pictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox12.Image")));
-            this.pictureBox12.Location = new System.Drawing.Point(589, 45);
+            this.pictureBox12.Location = new System.Drawing.Point(420, 50);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(155, 116);
             this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox12.TabIndex = 6;
             this.pictureBox12.TabStop = false;
             // 
+            // btnSave
+            // 
+            this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnSave.Location = new System.Drawing.Point(365, 432);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(85, 37);
+            this.btnSave.TabIndex = 7;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(255, 432);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(85, 37);
+            this.btnCancel.TabIndex = 8;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
             // Form6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 481);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.pictureBox12);
             this.Controls.Add(this.picSlot6);
             this.Controls.Add(this.picSlot11);
@@ -237,5 +263,7 @@
         private System.Windows.Forms.PictureBox picSlot10;
         private System.Windows.Forms.PictureBox picSlot11;
         private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

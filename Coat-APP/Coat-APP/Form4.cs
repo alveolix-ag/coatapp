@@ -56,21 +56,22 @@ namespace OT_APP1
             try
             {
                 string[] picList = Directory.GetFileSystemEntries(sourceDir, "*", SearchOption.AllDirectories);
-                string[] txtList = Directory.GetFiles(sourceDir, "*.txt");
+                //string[] txtList = Directory.GetFiles(sourceDir, "*.txt");
                 List<string> labwareDir = new List<string>();
                 List<string> folderlabware = new List<string>();
                 List<string> finalpath = new List<string>();
-
+                string directPath = null;
                 foreach (string value in picList)
-                {
-                    if (value.Contains("1.json"))
+                { 
+                    if (value.Contains("flag"))
                     {
-                        string directPath = Path.GetDirectoryName(value);
+                        directPath = Path.GetDirectoryName(value);
                         string foldername = new DirectoryInfo(directPath).Name;
                         folderlabware.Add(foldername.ToString());
                         labwareDir.Add(directPath.ToString());
-                        finalpath.Add(value);
-
+                        string filedir = (directPath + @"/1.json");
+                        finalpath.Add(filedir);
+                        File.Delete(value);
                     }
                 }
                 this.dirName = folderlabware;

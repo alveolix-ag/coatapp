@@ -1,0 +1,123 @@
+{
+    "ordering": [
+        [
+            "A1",
+            "B1",
+            "C1"
+        ],
+        [
+            "A2",
+            "B2",
+            "C2"
+        ],
+        [
+            "A3",
+            "B3",
+            "C3"
+        ]
+    ],
+    "brand": {
+        "brand": "www",
+        "brandId": "wwww",
+        "links": "None"
+    },
+    "metadata": {
+        "displayName": "ax567",
+        "displayCategory": "wellPlate",
+        "displayVolumeUnits": "\\u00b5L",
+        "tags": "None"
+    },
+    "dimensions": {
+        "xDimension": 120.0,
+        "yDimension": 56.0,
+        "zDimension": 56.0
+    },
+    "cornerOffsetFromSlot": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+    },
+    "wells": {
+        "A1": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 0.0,
+            "x": 5.0,
+            "y": 39.0,
+            "z": 3.0
+        },
+        "B1": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 0.0,
+            "x": 5.0,
+            "y": 27.0,
+            "z": 3.0
+        },
+        "C1": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 0.0,
+            "x": 5.0,
+            "y": 15.0,
+            "z": 3.0
+        },
+        "A2": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 0.0,
+            "x": 15.0,
+            "y": 39.0,
+            "z": 3.0
+        },
+        "B2": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 0.0,
+            "x": 15.0,
+            "y": 27.0,
+            "z": 3.0
+        },
+        "C2": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 0.0,
+            "x": 15.0,
+            "y": 15.0,
+            "z": 3.0
+        },
+        "A3": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 0.0,
+            "x": 25.0,
+            "y": 39.0,
+            "z": 3.0
+        },
+        "B3": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 0.0,
+            "x": 25.0,
+            "y": 27.0,
+            "z": 3.0
+        },
+        "C3": {
+            "depth": 53.0,
+            "shape": "Circular",
+            "diameter": 4.0,
+            "totalLiquidVolume": 0.0,
+            "x": 25.0,
+            "y": 15.0,
+            "z": 3.0
+        }
+    }
+}

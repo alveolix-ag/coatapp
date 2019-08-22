@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
@@ -959,11 +960,16 @@ namespace OT_APP1
             }
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void btnLabwareSetup_Click(object sender, EventArgs e)
         {
             Form6 f6 = new Form6();
+            if (OT2IP != null)
+            {
+                f6.IPAdress = OT2IP.ToString();
+            }
             f6.ShowDialog();
         }
+
     }
 }
 

@@ -76,11 +76,14 @@
             this.grpHolder = new System.Windows.Forms.GroupBox();
             this.numRotateSt = new System.Windows.Forms.NumericUpDown();
             this.grpLabwareSet = new System.Windows.Forms.GroupBox();
+            this.btnLabwareSetup = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForOT2IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdateGit = new System.Windows.Forms.ToolStripMenuItem();
             this.getOT2IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
             this.grpHeader.SuspendLayout();
             this.grpSSHDemo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numChips)).BeginInit();
@@ -122,9 +125,9 @@
             this.btnTest2.Location = new System.Drawing.Point(5, 29);
             this.btnTest2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTest2.Name = "btnTest2";
-            this.btnTest2.Size = new System.Drawing.Size(121, 30);
+            this.btnTest2.Size = new System.Drawing.Size(164, 30);
             this.btnTest2.TabIndex = 29;
-            this.btnTest2.Text = "Labware Builder";
+            this.btnTest2.Text = "Create New Labware";
             this.btnTest2.UseVisualStyleBackColor = true;
             this.btnTest2.Click += new System.EventHandler(this.BtnTest2_Click);
             // 
@@ -670,7 +673,7 @@
             // 
             // grpLabwareSet
             // 
-            this.grpLabwareSet.Controls.Add(this.button1);
+            this.grpLabwareSet.Controls.Add(this.btnLabwareSetup);
             this.grpLabwareSet.Controls.Add(this.btnTest2);
             this.grpLabwareSet.Controls.Add(this.textBox1);
             this.grpLabwareSet.Location = new System.Drawing.Point(20, 99);
@@ -682,15 +685,50 @@
             this.grpLabwareSet.TabStop = false;
             this.grpLabwareSet.Text = "Labware Setup";
             // 
+            // btnLabwareSetup
+            // 
+            this.btnLabwareSetup.Location = new System.Drawing.Point(5, 68);
+            this.btnLabwareSetup.Name = "btnLabwareSetup";
+            this.btnLabwareSetup.Size = new System.Drawing.Size(164, 27);
+            this.btnLabwareSetup.TabIndex = 30;
+            this.btnLabwareSetup.Text = "Labware Setup";
+            this.btnLabwareSetup.UseVisualStyleBackColor = true;
+            this.btnLabwareSetup.Click += new System.EventHandler(this.btnLabwareSetup_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
             this.menuStrip1.Size = new System.Drawing.Size(986, 28);
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gitToolStripMenuItem,
+            this.searchForOT2IPToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // gitToolStripMenuItem
+            // 
+            this.gitToolStripMenuItem.Name = "gitToolStripMenuItem";
+            this.gitToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
+            this.gitToolStripMenuItem.Text = "UpdateGit";
+            this.gitToolStripMenuItem.Click += new System.EventHandler(this.UpdateGit_Click);
+            // 
+            // searchForOT2IPToolStripMenuItem
+            // 
+            this.searchForOT2IPToolStripMenuItem.Name = "searchForOT2IPToolStripMenuItem";
+            this.searchForOT2IPToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
+            this.searchForOT2IPToolStripMenuItem.Text = "Search for OT-2 IP";
+            this.searchForOT2IPToolStripMenuItem.Click += new System.EventHandler(this.GetOT2IPToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -711,16 +749,6 @@
             this.getOT2IPToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.getOT2IPToolStripMenuItem.Text = "Get OT2 IP";
             this.getOT2IPToolStripMenuItem.Click += new System.EventHandler(this.GetOT2IPToolStripMenuItem_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(5, 68);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(121, 27);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "Labware Setup";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // Form1
             // 
@@ -814,7 +842,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.CheckBox boxCalOffset;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnLabwareSetup;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForOT2IPToolStripMenuItem;
     }
 }
 

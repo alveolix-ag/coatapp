@@ -334,6 +334,9 @@
     <Content Include="Labware\LabwareDesigner.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Labware\setup">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Protocols\close_host.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

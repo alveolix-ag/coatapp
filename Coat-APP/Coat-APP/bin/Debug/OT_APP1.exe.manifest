@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="451080">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="453640">
       <assemblyIdentity name="OT_APP1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>mjThWhyLZ1pshnbs1Tg1J5JOFSDs069OuvmXb1+JEOM=</dsig:DigestValue>
+        <dsig:DigestValue>stBhomZ2hySj5T9w71yb/g9VhJWzYEnpNaVwYkWwfcI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -123,22 +123,22 @@
       <dsig:DigestValue>m+u0gM/oQ1LnapgB1A3troS5Ifa2hlKc+ehYT9qoJ0o=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Labware\LabwareDesigner.py" size="2597">
+  <file name="Labware\LabwareDesigner.py" size="2863">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>I23Z1iwcrH9JwwTjr5fKHjrRuKkLmlZXDVi+NZEJS2U=</dsig:DigestValue>
+      <dsig:DigestValue>wMHu2kJxXPepKI6OV+/sMkyXPiffpL42BpyuZQDzH5s=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="OT_APP1.exe.config" size="2527">
+  <file name="OT_APP1.exe.config" size="2742">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>AsLxzb7Hj4UUzdsIR9JA2U5l2ngFmKN/LKd3WpG7cNI=</dsig:DigestValue>
+      <dsig:DigestValue>WSlHFlJ9APHMFJKl8Wb0GioIMFOuBRh7jDJ1naIi9ow=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Protocols\close_host.py" size="118">

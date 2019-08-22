@@ -58,7 +58,8 @@ for (i,row) in enumerate(ordering):
     wellstotal.update(welltext)
 
 
-data ={'ordering':ordering,'brand':{'brand':dict["brand"],'brandId':dict["brandId"],'links':dict["link"]},'metadata':{'displayName':dict["displayName"],'displayCategory':dict["displayCategory"],'displayVolumeUnits':dict["displayVolumeUnits"],'tags':dict["tags"]},'dimensions':{'xDimension':dict["xDimension"],'yDimension':dict["yDimension"],'zDimension':dict["zDimension"]},'cornerOffsetFromSlot':{'x':0,'y':0,'z':0},'wells':wellstotal}    
+parameters = {"format":"96Standard","isTiprack":false,"isMagneticModuleCompatible":false,"loadName":dict["displayName"]}
+data ={'ordering':ordering,'brand':{'brand':dict["brand"],'brandId':dict["brandId"],'links':dict["link"]},'metadata':{'displayName':dict["displayName"],'displayCategory':dict["displayCategory"],'displayVolumeUnits':dict["displayVolumeUnits"],'tags':dict["tags"]},'dimensions':{'xDimension':dict["xDimension"],'yDimension':dict["yDimension"],'zDimension':dict["zDimension"]},'cornerOffsetFromSlot':{'x':0,'y':0,'z':0},'wells':wellstotal,"parameters":parameters,"namespace":"opentrons","version":1,"schemaVersion":2}    
 jstr = json.dumps(data, indent=4)
 
 
@@ -68,3 +69,5 @@ if not os.path.exists(end_path):
     os.mkdir(end_path)
 with open(end_path+'/1.json', 'w') as json_file:
     json.dump(data, json_file, indent=4)
+with open(end_path +'/flag', 'wb') as f:
+	pickle.dump(True, f);

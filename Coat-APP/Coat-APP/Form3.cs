@@ -13,7 +13,7 @@ namespace OT_APP1
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            System.Collections.Specialized.StringCollection fileLinesCoat = Properties.Settings.Default.CoatSettings;
+             System.Collections.Specialized.StringCollection fileLinesCoat = Properties.Settings.Default.CoatSettings;
             if (fileLinesCoat.Count > 0)
             {
 

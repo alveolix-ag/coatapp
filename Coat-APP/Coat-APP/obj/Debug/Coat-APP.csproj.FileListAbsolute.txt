@@ -165,3 +165,4 @@ C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resource
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot9N.png
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot10N.png
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot11N.png
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Labware\setup

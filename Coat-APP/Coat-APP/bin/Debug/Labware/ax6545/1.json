@@ -1,0 +1,123 @@
+{
+    "ordering": [
+        [
+            "A1",
+            "B1",
+            "C1"
+        ],
+        [
+            "A2",
+            "B2",
+            "C2"
+        ],
+        [
+            "A3",
+            "B3",
+            "C3"
+        ]
+    ],
+    "brand": {
+        "brand": "rrrRr1",
+        "brandId": "rrr",
+        "links": "None"
+    },
+    "metadata": {
+        "displayName": "ax6545",
+        "displayCategory": "wellPlate",
+        "displayVolumeUnits": "\\u00b5L",
+        "tags": "None"
+    },
+    "dimensions": {
+        "xDimension": 120.0,
+        "yDimension": 56.0,
+        "zDimension": 56.0
+    },
+    "cornerOffsetFromSlot": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+    },
+    "wells": {
+        "A1": {
+            "depth": 51.0,
+            "shape": "Square",
+            "diameter": 4.0,
+            "totalLiquidVolume": 3.0,
+            "x": 5.0,
+            "y": 255.0,
+            "z": 5.0
+        },
+        "B1": {
+            "depth": 51.0,
+            "shape": "Square",
+            "diameter": 4.0,
+            "totalLiquidVolume": 3.0,
+            "x": 5.0,
+            "y": 243.0,
+            "z": 5.0
+        },
+        "C1": {
+            "depth": 51.0,
+            "shape": "Square",
+            "diameter": 4.0,
+            "totalLiquidVolume": 3.0,
+            "x": 5.0,
+            "y": 231.0,
+            "z": 5.0
+        },
+        "A2": {
+            "depth": 51.0,
+            "shape": "Square",
+            "diameter": 4.0,
+            "totalLiquidVolume": 3.0,
+            "x": 15.0,
+            "y": 255.0,
+            "z": 5.0
+        },
+        "B2": {
+            "depth": 51.0,
+            "shape": "Square",
+            "diameter": 4.0,
+            "totalLiquidVolume": 3.0,
+            "x": 15.0,
+            "y": 243.0,
+            "z": 5.0
+        },
+        "C2": {
+            "depth": 51.0,
+            "shape": "Square",
+            "diameter": 4.0,
+            "totalLiquidVolume": 3.0,
+            "x": 15.0,
+            "y": 231.0,
+            "z": 5.0
+        },
+        "A3": {
+            "depth": 51.0,
+            "shape": "Square",
+            "diameter": 4.0,
+            "totalLiquidVolume": 3.0,
+            "x": 25.0,
+            "y": 255.0,
+            "z": 5.0
+        },
+        "B3": {
+            "depth": 51.0,
+            "shape": "Square",
+            "diameter": 4.0,
+            "totalLiquidVolume": 3.0,
+            "x": 25.0,
+            "y": 243.0,
+            "z": 5.0
+        },
+        "C3": {
+            "depth": 51.0,
+            "shape": "Square",
+            "diameter": 4.0,
+            "totalLiquidVolume": 3.0,
+            "x": 25.0,
+            "y": 231.0,
+            "z": 5.0
+        }
+    }
+}
