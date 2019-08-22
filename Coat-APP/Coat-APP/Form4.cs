@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 
@@ -14,6 +15,7 @@ namespace OT_APP1
         public string IPAdress { get; set; }
         public List<string> dirName = null;
         public List<string> Labdir = null;
+        public bool labwaredesignerexited = new bool();
         public Form4()
         {
             InitializeComponent();
@@ -21,7 +23,7 @@ namespace OT_APP1
 
         private void BtnOK_Click(object sender, EventArgs e)
         {
-            var configVals = new List<string> { numRows.Value.ToString(), numCol.Value.ToString(), boxWellShape.SelectedItem.ToString(), txtBrand.Text.ToString(), txtBrandId.Text.ToString(), "None", txtLabwareName.Text.ToString(), "wellPlate", "\\u00b5L", "None", numPlateLength.Value.ToString(), numPlateWidth.Value.ToString(), numPlateHeight.Value.ToString(), numColOffset.Value.ToString(), numRowOffset.Value.ToString(), numColSpace.Value.ToString(), numRowSpace.Value.ToString(), numWellDim.Value.ToString(), numWellHeight.Value.ToString(), numTotalWellVol.Value.ToString() };
+            var configVals = new List<string> { numRows.Value.ToString(), numCol.Value.ToString(), boxWellShape.SelectedItem.ToString(), txtBrand.Text.ToString(), txtBrandId.Text.ToString(), "None", txtLabwareName.Text.ToString(), "wellPlate", "\\u00b5L", "None", numPlateLength.Value.ToString(), numPlateWidth.Value.ToString(), numPlateHeight.Value.ToString(), numColOffset.Value.ToString(), numRowOffset.Value.ToString(), numColSpace.Value.ToString(), numRowSpace.Value.ToString(), numWellDim.Value.ToString(), numWellHeight.Value.ToString(), numTotalWellVol.Value.ToString(), txtLoadName.Text.ToString() };
             string docPath = Path.Combine(Directory.GetCurrentDirectory(), "Labware");
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "labware_val.csv")))
             {
@@ -32,22 +34,42 @@ namespace OT_APP1
             }
             Console.WriteLine(docPath);
             CreateLabware();
+            while (this.labwaredesignerexited == false)
+            {
+                Thread.Sleep(1000);
+            }
+            Console.WriteLine(this.labwaredesignerexited);
             UploadLabware();
             this.Close();
         }
         private void CreateLabware()
         {
-            string myPythonApp = Path.Combine(Directory.GetCurrentDirectory(), "Labware\\LabwareDesigner.py");
-            string configfilePath = Path.Combine(Directory.GetCurrentDirectory(), "Labware\\");
-            ProcessStartInfo pythonProcess = new ProcessStartInfo();
-            pythonProcess.UseShellExecute = false;
-            pythonProcess.RedirectStandardOutput = true;
-            pythonProcess.RedirectStandardError = true;
-            pythonProcess.CreateNoWindow = true;
-            pythonProcess.FileName = "C:\\ProgramData\\Anaconda3\\python.exe";
-            pythonProcess.Arguments = myPythonApp + " -p " + configfilePath.ToString();
-            Console.WriteLine(myPythonApp + " -p " + configfilePath.ToString());
-            Process.Start(pythonProcess);
+            try
+            {
+                string myPythonApp = Path.Combine(Directory.GetCurrentDirectory(), "Labware\\LabwareDesigner.py");
+                string configfilePath = Path.Combine(Directory.GetCurrentDirectory(), "Labware\\");
+                ProcessStartInfo pythonProcess = new ProcessStartInfo();
+                pythonProcess.UseShellExecute = false;
+                pythonProcess.RedirectStandardOutput = true;
+                pythonProcess.RedirectStandardError = true;
+                pythonProcess.CreateNoWindow = true;
+                pythonProcess.FileName = "C:\\ProgramData\\Anaconda3\\python.exe";
+                pythonProcess.Arguments = myPythonApp + " -p " + configfilePath.ToString();
+                //var thread = new Thread(() =>
+                //{
+                using (Process labwareDesigner = Process.Start(pythonProcess))
+                {
+                    labwareDesigner.Start();
+                    labwareDesigner.EnableRaisingEvents = true;
+                    labwareDesigner.Exited += (sender, e) => { this.labwaredesignerexited = true; };
+                }
+                //});
+            }
+            catch (Exception CreateLabwareEx)
+            {
+                throw new Exception("Problem WITH cREATE lABWARE");
+            }
+
         }
 
         private void UploadLabware()
@@ -62,14 +84,14 @@ namespace OT_APP1
                 List<string> finalpath = new List<string>();
                 string directPath = null;
                 foreach (string value in picList)
-                { 
+                {
                     if (value.Contains("flag"))
                     {
                         directPath = Path.GetDirectoryName(value);
                         string foldername = new DirectoryInfo(directPath).Name;
                         folderlabware.Add(foldername.ToString());
                         labwareDir.Add(directPath.ToString());
-                        string filedir = (directPath + @"/1.json");
+                        string filedir = (directPath + @"//1.json");
                         finalpath.Add(filedir);
                         File.Delete(value);
                     }
@@ -92,7 +114,7 @@ namespace OT_APP1
             }
             catch
             {
-
+                throw new Exception("Problem WITH UPLOADLABWARE1");
             }
             ConnectionInfo connectionInfo = new PasswordConnectionInfo(this.IPAdress, "root", "");
 
@@ -157,8 +179,9 @@ namespace OT_APP1
                     numColOffset.Value = Convert.ToDecimal(f5.ColOffset);
                     numColSpace.Value = Convert.ToDecimal(f5.ColSpace);
                     numRowSpace.Value = Convert.ToDecimal(f5.RowSpace);
-                    numCol.Value  = f5.Cols;
+                    numCol.Value = f5.Cols;
                     numRows.Value = f5.Rows;
+                    txtLoadName.Text = f5.LoadName;
                     if (f5.Shape == "circular")
                     {
                         boxWellShape.SelectedIndex = 0;
@@ -167,7 +190,7 @@ namespace OT_APP1
                     {
                         boxWellShape.SelectedIndex = 1;
                     }
-                    
+
                 }
             }
 

@@ -17,12 +17,12 @@
         ]
     ],
     "brand": {
-        "brand": "dgdgd",
-        "brandId": "fgfg",
+        "brand": "gfsgf",
+        "brandId": "ggf",
         "links": "None"
     },
     "metadata": {
-        "displayName": "hello",
+        "displayName": "gfgfhello",
         "displayCategory": "wellPlate",
         "displayVolumeUnits": "\\u00b5L",
         "tags": "None"
@@ -39,85 +39,94 @@
     },
     "wells": {
         "A1": {
-            "depth": 0.0,
+            "depth": 56.0,
             "shape": "Circular",
             "diameter": 0.0,
-            "totalLiquidVolume": 0.0,
+            "totalLiquidVolume": 3.0,
             "x": 0.0,
-            "y": 0.0,
-            "z": 56.0
+            "y": 36.0,
+            "z": 0.0
         },
         "B1": {
-            "depth": 0.0,
+            "depth": 56.0,
             "shape": "Circular",
             "diameter": 0.0,
-            "totalLiquidVolume": 0.0,
+            "totalLiquidVolume": 3.0,
             "x": 0.0,
-            "y": 10.0,
-            "z": 56.0
+            "y": 24.0,
+            "z": 0.0
         },
         "C1": {
-            "depth": 0.0,
+            "depth": 56.0,
             "shape": "Circular",
             "diameter": 0.0,
-            "totalLiquidVolume": 0.0,
+            "totalLiquidVolume": 3.0,
             "x": 0.0,
-            "y": 20.0,
-            "z": 56.0
+            "y": 12.0,
+            "z": 0.0
         },
         "A2": {
-            "depth": 0.0,
+            "depth": 56.0,
             "shape": "Circular",
             "diameter": 0.0,
-            "totalLiquidVolume": 0.0,
-            "x": 12.0,
-            "y": 0.0,
-            "z": 56.0
+            "totalLiquidVolume": 3.0,
+            "x": 10.0,
+            "y": 36.0,
+            "z": 0.0
         },
         "B2": {
-            "depth": 0.0,
+            "depth": 56.0,
             "shape": "Circular",
             "diameter": 0.0,
-            "totalLiquidVolume": 0.0,
-            "x": 12.0,
-            "y": 10.0,
-            "z": 56.0
+            "totalLiquidVolume": 3.0,
+            "x": 10.0,
+            "y": 24.0,
+            "z": 0.0
         },
         "C2": {
-            "depth": 0.0,
+            "depth": 56.0,
             "shape": "Circular",
             "diameter": 0.0,
-            "totalLiquidVolume": 0.0,
-            "x": 12.0,
-            "y": 20.0,
-            "z": 56.0
+            "totalLiquidVolume": 3.0,
+            "x": 10.0,
+            "y": 12.0,
+            "z": 0.0
         },
         "A3": {
-            "depth": 0.0,
+            "depth": 56.0,
             "shape": "Circular",
             "diameter": 0.0,
-            "totalLiquidVolume": 0.0,
-            "x": 24.0,
-            "y": 0.0,
-            "z": 56.0
+            "totalLiquidVolume": 3.0,
+            "x": 20.0,
+            "y": 36.0,
+            "z": 0.0
         },
         "B3": {
-            "depth": 0.0,
+            "depth": 56.0,
             "shape": "Circular",
             "diameter": 0.0,
-            "totalLiquidVolume": 0.0,
-            "x": 24.0,
-            "y": 10.0,
-            "z": 56.0
+            "totalLiquidVolume": 3.0,
+            "x": 20.0,
+            "y": 24.0,
+            "z": 0.0
         },
         "C3": {
-            "depth": 0.0,
+            "depth": 56.0,
             "shape": "Circular",
             "diameter": 0.0,
-            "totalLiquidVolume": 0.0,
-            "x": 24.0,
-            "y": 20.0,
-            "z": 56.0
+            "totalLiquidVolume": 3.0,
+            "x": 20.0,
+            "y": 12.0,
+            "z": 0.0
         }
-    }
+    },
+    "parameters": {
+        "format": "96Standard",
+        "isTiprack": false,
+        "isMagneticModuleCompatible": false,
+        "loadName": "WWWW"
+    },
+    "namespace": "opentrons",
+    "version": 1,
+    "schemaVersion": 2
 }

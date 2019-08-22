@@ -73,6 +73,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.txtBrandId = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.txtLoadName = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numRows)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCol)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPlateLength)).BeginInit();
@@ -678,6 +680,26 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
+            // txtLoadName
+            // 
+            this.txtLoadName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoadName.Location = new System.Drawing.Point(674, 378);
+            this.txtLoadName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtLoadName.Name = "txtLoadName";
+            this.txtLoadName.Size = new System.Drawing.Size(363, 24);
+            this.txtLoadName.TabIndex = 0;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(674, 354);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(89, 18);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Load Name:";
+            // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -725,6 +747,8 @@
             this.Controls.Add(this.numTotalWellVol);
             this.Controls.Add(this.numCol);
             this.Controls.Add(this.numRows);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.txtLoadName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtLabwareName);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -804,5 +828,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtBrandId;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtLoadName;
+        private System.Windows.Forms.Label label17;
     }
 }

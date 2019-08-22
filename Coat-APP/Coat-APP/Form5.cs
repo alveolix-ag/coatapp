@@ -119,7 +119,12 @@ namespace OT_APP1
             get { return cols; }
             set { cols = value; }
         }
-
+        private string loadName;
+        public string LoadName
+        {
+            get { return loadName; }
+            set { loadName = value; }
+        }
 
 
         public Form5()
@@ -255,6 +260,11 @@ namespace OT_APP1
                 int rows = neworder.Length;
                 int cols = arr.Length;
 
+                //Parameters
+                object parameters = (object)token.SelectToken("parameters");
+                JToken parametersObject = JObject.Parse(parameters.ToString());
+                string loadName = (string)parametersObject.SelectToken("loadName");
+
                 import = true;
                 Delete = false;
                 Brand = brand;
@@ -273,6 +283,7 @@ namespace OT_APP1
                 RowSpace = rowSpace;
                 Rows = rows;
                 Cols = cols;
+                LoadName = loadName;
 
                 this.Close();
 

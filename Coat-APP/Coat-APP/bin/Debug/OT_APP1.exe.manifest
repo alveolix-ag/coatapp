@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="453640">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="454664">
       <assemblyIdentity name="OT_APP1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>stBhomZ2hySj5T9w71yb/g9VhJWzYEnpNaVwYkWwfcI=</dsig:DigestValue>
+        <dsig:DigestValue>LXRFPlnww+Y2PpMD7aweCI6PCUk3/+Jxy2mf1LcoeLE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -123,13 +123,13 @@
       <dsig:DigestValue>m+u0gM/oQ1LnapgB1A3troS5Ifa2hlKc+ehYT9qoJ0o=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Labware\LabwareDesigner.py" size="2863">
+  <file name="Labware\LabwareDesigner.py" size="3018">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>wMHu2kJxXPepKI6OV+/sMkyXPiffpL42BpyuZQDzH5s=</dsig:DigestValue>
+      <dsig:DigestValue>T0xwxPNT0/YsBvf2vsKVUECeWF1oRq60RD8bx1zLd48=</dsig:DigestValue>
     </hash>
   </file>
   <file name="OT_APP1.exe.config" size="2742">

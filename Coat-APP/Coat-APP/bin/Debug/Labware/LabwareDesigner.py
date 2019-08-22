@@ -23,13 +23,16 @@ parser.add_argument('-p', '--path', type=dir_path)
 args = parser.parse_args() #this is the variable that stores the inputs from the UI
 path =(args.path)
 
-if os.path.isfile(path +'config') == False:
-    dict =  {'rows': 0, 'cols': 0, 'shape': 0, 'brand': 0, 'brandId': 0, 'link': 0, 'displayName': 0, 'displayCategory': 0, 'displayVolumeUnits': 0, 'tags': 0, 'xDimension': 0, 'yDimension': 0, 'zDimension': 0, 'coloffset': 0, 'rowoffset': 0, 'colspace': 0,'rowspace': 0, 'diameter': 0, 'depth': 0, 'totalLiquidVolume': 0}
-    with open('config', 'wb') as f:
+addelementtopath = True;
+
+if (os.path.isfile(path +'config') == False) or (addelementtopath == True):
+    dict =  {'rows': 0, 'cols': 0, 'shape': 0, 'brand': 0, 'brandId': 0, 'link': 0, 'displayName': 0, 'displayCategory': 0, 'displayVolumeUnits': 0, 'tags': 0, 'xDimension': 0, 'yDimension': 0, 'zDimension': 0, 'coloffset': 0, 'rowoffset': 0, 'colspace': 0,'rowspace': 0, 'diameter': 0, 'depth': 0, 'totalLiquidVolume': 0, 'loadName':0}
+    with open(path + 'config', 'wb') as f:
         pickle.dump(dict, f);
 else:
     with open(path +'config', 'rb') as f:
         dict = pickle.load(f);
+        f.close();
     
 import itertools
 line = open(path + "labware_val.csv").read().split("\n")
@@ -39,7 +42,7 @@ for a, b in zip(dict, line):
         dict[a] =float(b)
     else:
         dict[a]=b
-
+        
 rows = int(dict["rows"])
 cols = int(dict["cols"])
 
@@ -58,16 +61,20 @@ for (i,row) in enumerate(ordering):
     wellstotal.update(welltext)
 
 
-parameters = {"format":"96Standard","isTiprack":false,"isMagneticModuleCompatible":false,"loadName":dict["displayName"]}
+parameters = {"format":"96Standard","isTiprack":False,"isMagneticModuleCompatible":False,"loadName":dict["loadName"]}
 data ={'ordering':ordering,'brand':{'brand':dict["brand"],'brandId':dict["brandId"],'links':dict["link"]},'metadata':{'displayName':dict["displayName"],'displayCategory':dict["displayCategory"],'displayVolumeUnits':dict["displayVolumeUnits"],'tags':dict["tags"]},'dimensions':{'xDimension':dict["xDimension"],'yDimension':dict["yDimension"],'zDimension':dict["zDimension"]},'cornerOffsetFromSlot':{'x':0,'y':0,'z':0},'wells':wellstotal,"parameters":parameters,"namespace":"opentrons","version":1,"schemaVersion":2}    
 jstr = json.dumps(data, indent=4)
 
 
 
-end_path = (path + dict["displayName"])
+end_path = (path + dict["loadName"])
 if not os.path.exists(end_path): 
     os.mkdir(end_path)
 with open(end_path+'/1.json', 'w') as json_file:
     json.dump(data, json_file, indent=4)
+    json_file.close()
 with open(end_path +'/flag', 'wb') as f:
-	pickle.dump(True, f);
+    pickle.dump(True, f);
+    f.close();
+
+exit()
