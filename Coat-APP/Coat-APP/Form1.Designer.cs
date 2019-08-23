@@ -700,6 +700,8 @@
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -759,6 +761,7 @@
             this.chkLight.TabIndex = 34;
             this.chkLight.Text = "Lights";
             this.chkLight.UseVisualStyleBackColor = true;
+            this.chkLight.CheckedChanged += new System.EventHandler(this.ChkLight_CheckedChanged);
             // 
             // Form1
             // 

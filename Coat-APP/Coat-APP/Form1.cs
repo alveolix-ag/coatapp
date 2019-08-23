@@ -970,6 +970,25 @@ namespace OT_APP1
             f6.ShowDialog();
         }
 
+        private void ChkLight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkLight.Checked == true)
+            {
+                try
+                {
+                    this.shellStreamSSH.Write("cd /data/coatapp/protocols \n");
+                    this.shellStreamSSH.Write("python3 switch_lights.py -o True \n");
+                    this.shellStreamSSH.Flush();
+
+                    txtCommand.Text = "";
+                    txtCommand.Focus();
+                }
+                catch
+                {
+
+                }
+            }
+        }
     }
 }
 

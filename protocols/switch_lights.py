@@ -9,5 +9,5 @@ state = args.on
 if state == True:
 	robot._driver.turn_on_rail_lights()
 	
-else state == False:
+elif state == False:
 	robot._driver.turn_off_rail_lights()
