@@ -77,7 +77,7 @@
             // btnConfirm
             // 
             this.btnConfirm.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnConfirm.Location = new System.Drawing.Point(381, 433);
+            this.btnConfirm.Location = new System.Drawing.Point(324, 432);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(86, 35);
             this.btnConfirm.TabIndex = 4;
@@ -88,7 +88,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnCancel.Location = new System.Drawing.Point(276, 433);
+            this.btnCancel.Location = new System.Drawing.Point(219, 432);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(86, 35);
             this.btnCancel.TabIndex = 5;
@@ -99,7 +99,7 @@
             // btnDeleteFromDeck
             // 
             this.btnDeleteFromDeck.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnDeleteFromDeck.Location = new System.Drawing.Point(486, 433);
+            this.btnDeleteFromDeck.Location = new System.Drawing.Point(429, 432);
             this.btnDeleteFromDeck.Name = "btnDeleteFromDeck";
             this.btnDeleteFromDeck.Size = new System.Drawing.Size(86, 35);
             this.btnDeleteFromDeck.TabIndex = 6;

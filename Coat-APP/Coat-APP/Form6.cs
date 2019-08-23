@@ -190,7 +190,7 @@ namespace OT_APP1
                 ImportState = f5.import;
                 if (ImportState == true)
                 {
-                    this.selectedLabware = f5.DisplayName;
+                    this.selectedLabware = f5.LoadName;
 
                 }
             }
@@ -220,7 +220,7 @@ namespace OT_APP1
                 ImportState = f5.import;
                 if (ImportState == true)
                 {
-                    this.selectedLabware = f5.DisplayName;
+                    this.selectedLabware = f5.LoadName;
 
                 }
             }
@@ -250,7 +250,7 @@ namespace OT_APP1
                 ImportState = f5.import;
                 if (ImportState == true)
                 {
-                    this.selectedLabware = f5.DisplayName;
+                    this.selectedLabware = f5.LoadName;
 
                 }
             }
@@ -279,7 +279,7 @@ namespace OT_APP1
                 ImportState = f5.import;
                 if (ImportState == true)
                 {
-                    this.selectedLabware = f5.DisplayName;
+                    this.selectedLabware = f5.LoadName;
 
                 }
             }
@@ -308,7 +308,7 @@ namespace OT_APP1
                 ImportState = f5.import;
                 if (ImportState == true)
                 {
-                    this.selectedLabware = f5.DisplayName;
+                    this.selectedLabware = f5.LoadName;
 
                 }
             }
@@ -337,7 +337,7 @@ namespace OT_APP1
                 ImportState = f5.import;
                 if (ImportState == true)
                 {
-                    this.selectedLabware = f5.DisplayName;
+                    this.selectedLabware = f5.LoadName;
 
                 }
             }
@@ -366,7 +366,7 @@ namespace OT_APP1
                 ImportState = f5.import;
                 if (ImportState == true)
                 {
-                    this.selectedLabware = f5.DisplayName;
+                    this.selectedLabware = f5.LoadName;
 
                 }
             }
@@ -395,7 +395,7 @@ namespace OT_APP1
                 ImportState = f5.import;
                 if (ImportState == true)
                 {
-                    this.selectedLabware = f5.DisplayName;
+                    this.selectedLabware = f5.LoadName;
 
                 }
             }
@@ -424,7 +424,7 @@ namespace OT_APP1
                 ImportState = f5.import;
                 if (ImportState == true)
                 {
-                    this.selectedLabware = f5.DisplayName;
+                    this.selectedLabware = f5.LoadName;
 
                 }
             }
@@ -453,7 +453,7 @@ namespace OT_APP1
                 ImportState = f5.import;
                 if (ImportState == true)
                 {
-                    this.selectedLabware = f5.DisplayName;
+                    this.selectedLabware = f5.LoadName;
 
                 }
             }
@@ -482,7 +482,7 @@ namespace OT_APP1
                 ImportState = f5.import;
                 if (ImportState == true)
                 {
-                    this.selectedLabware = f5.DisplayName;
+                    this.selectedLabware = f5.LoadName;
 
                 }
             }

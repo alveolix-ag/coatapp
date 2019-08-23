@@ -84,6 +84,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdateGit = new System.Windows.Forms.ToolStripMenuItem();
             this.getOT2IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chkLight = new System.Windows.Forms.CheckBox();
             this.grpHeader.SuspendLayout();
             this.grpSSHDemo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numChips)).BeginInit();
@@ -637,6 +638,7 @@
             // 
             // grpHolder
             // 
+            this.grpHolder.Controls.Add(this.chkLight);
             this.grpHolder.Controls.Add(this.numRotateSt);
             this.grpHolder.Controls.Add(this.btnRotate);
             this.grpHolder.Location = new System.Drawing.Point(263, 221);
@@ -646,11 +648,11 @@
             this.grpHolder.Size = new System.Drawing.Size(273, 76);
             this.grpHolder.TabIndex = 24;
             this.grpHolder.TabStop = false;
-            this.grpHolder.Text = "Chip Holder";
+            this.grpHolder.Text = "Control Hardware";
             // 
             // numRotateSt
             // 
-            this.numRotateSt.Location = new System.Drawing.Point(115, 32);
+            this.numRotateSt.Location = new System.Drawing.Point(115, 34);
             this.numRotateSt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numRotateSt.Maximum = new decimal(new int[] {
             2,
@@ -698,8 +700,6 @@
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -750,6 +750,16 @@
             this.getOT2IPToolStripMenuItem.Text = "Get OT2 IP";
             this.getOT2IPToolStripMenuItem.Click += new System.EventHandler(this.GetOT2IPToolStripMenuItem_Click);
             // 
+            // chkLight
+            // 
+            this.chkLight.AutoSize = true;
+            this.chkLight.Location = new System.Drawing.Point(186, 35);
+            this.chkLight.Name = "chkLight";
+            this.chkLight.Size = new System.Drawing.Size(68, 21);
+            this.chkLight.TabIndex = 34;
+            this.chkLight.Text = "Lights";
+            this.chkLight.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -779,6 +789,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.grpHolder.ResumeLayout(false);
+            this.grpHolder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRotateSt)).EndInit();
             this.grpLabwareSet.ResumeLayout(false);
             this.grpLabwareSet.PerformLayout();
@@ -846,6 +857,7 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchForOT2IPToolStripMenuItem;
+        private System.Windows.Forms.CheckBox chkLight;
     }
 }
 
