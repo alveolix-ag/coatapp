@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
@@ -936,9 +935,9 @@ namespace OT_APP1
             string newString = this.ServerOutput;
             string oldString = this.ServerOutput;
             while (oldString == newString)
-                {
-                    newString = this.ServerOutput;
-                }
+            {
+                newString = this.ServerOutput;
+            }
             // Do work
             Console.WriteLine("YAY");
             lblCurrentTip.Text = ("Current Tip: " + newString);
@@ -978,6 +977,23 @@ namespace OT_APP1
                 {
                     this.shellStreamSSH.Write("cd /data/coatapp/protocols \n");
                     this.shellStreamSSH.Write("python3 switch_lights.py -o True \n");
+                    this.shellStreamSSH.Flush();
+
+                    txtCommand.Text = "";
+                    txtCommand.Focus();
+                }
+                catch
+                {
+
+                }
+            }
+            else
+            {
+
+                try
+                {
+                    this.shellStreamSSH.Write("cd /data/coatapp/protocols \n");
+                    this.shellStreamSSH.Write("python3 switch_lights.py -o False \n");
                     this.shellStreamSSH.Flush();
 
                     txtCommand.Text = "";
