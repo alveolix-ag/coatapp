@@ -514,14 +514,14 @@ namespace OT_APP1
 
         private void BtnCalibrate_Click(object sender, EventArgs e)
         {
-            this.sshClient = new SshClient(this.IPAdress, "root");
-            this.sshClient.ConnectionInfo.Timeout = TimeSpan.FromSeconds(120);
-            this.sshClient.Connect();
+            //this.sshClient = new SshClient(this.IPAdress, "root");
+            //this.sshClient.ConnectionInfo.Timeout = TimeSpan.FromSeconds(120);
+            //this.sshClient.Connect();
 
-            this.shellStreamSSH = this.sshClient.CreateShellStream("vt100", 80, 60, 800, 600, 65536);
-            this.lbStatus.Text = "Status: Connected.";
-            btnConnect.BackColor = Color.Green;
-            grpControl.Visible = true;
+            //this.shellStreamSSH = this.sshClient.CreateShellStream("vt100", 80, 60, 800, 600, 65536);
+            //this.lbStatus.Text = "Status: Connected.";
+            //btnConnect.BackColor = Color.Green;
+            //grpControl.Visible = true;
         }
     }
 

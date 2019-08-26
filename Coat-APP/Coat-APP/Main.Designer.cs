@@ -47,13 +47,13 @@
             this.numWash = new System.Windows.Forms.NumericUpDown();
             this.lblCurrentTip = new System.Windows.Forms.Label();
             this.btnTipSet = new System.Windows.Forms.Button();
-            this.btnDrop50 = new System.Windows.Forms.Button();
-            this.btnDrop300 = new System.Windows.Forms.Button();
-            this.btnHome = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.SideSel = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SpeedSel = new System.Windows.Forms.ComboBox();
+            this.btnDrop50 = new System.Windows.Forms.Button();
+            this.btnDrop300 = new System.Windows.Forms.Button();
+            this.btnHome = new System.Windows.Forms.Button();
             this.btnCalibrate = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.boxCalOffset = new System.Windows.Forms.CheckBox();
@@ -313,10 +313,10 @@
             // lblCurrentTip
             // 
             this.lblCurrentTip.AutoSize = true;
-            this.lblCurrentTip.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblCurrentTip.BackColor = System.Drawing.Color.Transparent;
             this.lblCurrentTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurrentTip.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblCurrentTip.Location = new System.Drawing.Point(129, 147);
+            this.lblCurrentTip.Location = new System.Drawing.Point(116, 155);
             this.lblCurrentTip.Name = "lblCurrentTip";
             this.lblCurrentTip.Size = new System.Drawing.Size(101, 18);
             this.lblCurrentTip.TabIndex = 23;
@@ -333,39 +333,6 @@
             this.btnTipSet.Text = "Tip Setup";
             this.btnTipSet.UseVisualStyleBackColor = true;
             this.btnTipSet.Click += new System.EventHandler(this.BtnTipSet_Click);
-            // 
-            // btnDrop50
-            // 
-            this.btnDrop50.Location = new System.Drawing.Point(301, 28);
-            this.btnDrop50.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDrop50.Name = "btnDrop50";
-            this.btnDrop50.Size = new System.Drawing.Size(164, 29);
-            this.btnDrop50.TabIndex = 20;
-            this.btnDrop50.Text = "Drop Pipette Tip 50 ul";
-            this.btnDrop50.UseVisualStyleBackColor = true;
-            this.btnDrop50.Click += new System.EventHandler(this.BtnDrop50_Click);
-            // 
-            // btnDrop300
-            // 
-            this.btnDrop300.Location = new System.Drawing.Point(119, 29);
-            this.btnDrop300.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDrop300.Name = "btnDrop300";
-            this.btnDrop300.Size = new System.Drawing.Size(164, 29);
-            this.btnDrop300.TabIndex = 19;
-            this.btnDrop300.Text = "Drop Pipette Tip 300 ul";
-            this.btnDrop300.UseVisualStyleBackColor = true;
-            this.btnDrop300.Click += new System.EventHandler(this.BtnDrop300_Click);
-            // 
-            // btnHome
-            // 
-            this.btnHome.Location = new System.Drawing.Point(21, 29);
-            this.btnHome.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(67, 29);
-            this.btnHome.TabIndex = 18;
-            this.btnHome.Text = "Home";
-            this.btnHome.UseVisualStyleBackColor = true;
-            this.btnHome.Click += new System.EventHandler(this.BtnHome_Click);
             // 
             // btnStop
             // 
@@ -414,6 +381,39 @@
             this.SpeedSel.Name = "SpeedSel";
             this.SpeedSel.Size = new System.Drawing.Size(108, 24);
             this.SpeedSel.TabIndex = 14;
+            // 
+            // btnDrop50
+            // 
+            this.btnDrop50.Location = new System.Drawing.Point(301, 28);
+            this.btnDrop50.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDrop50.Name = "btnDrop50";
+            this.btnDrop50.Size = new System.Drawing.Size(164, 29);
+            this.btnDrop50.TabIndex = 20;
+            this.btnDrop50.Text = "Drop Pipette Tip 50 ul";
+            this.btnDrop50.UseVisualStyleBackColor = true;
+            this.btnDrop50.Click += new System.EventHandler(this.BtnDrop50_Click);
+            // 
+            // btnDrop300
+            // 
+            this.btnDrop300.Location = new System.Drawing.Point(119, 29);
+            this.btnDrop300.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDrop300.Name = "btnDrop300";
+            this.btnDrop300.Size = new System.Drawing.Size(164, 29);
+            this.btnDrop300.TabIndex = 19;
+            this.btnDrop300.Text = "Drop Pipette Tip 300 ul";
+            this.btnDrop300.UseVisualStyleBackColor = true;
+            this.btnDrop300.Click += new System.EventHandler(this.BtnDrop300_Click);
+            // 
+            // btnHome
+            // 
+            this.btnHome.Location = new System.Drawing.Point(21, 29);
+            this.btnHome.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(67, 29);
+            this.btnHome.TabIndex = 18;
+            this.btnHome.Text = "Home";
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.BtnHome_Click);
             // 
             // btnCalibrate
             // 
