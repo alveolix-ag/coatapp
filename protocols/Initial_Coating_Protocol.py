@@ -140,7 +140,7 @@ with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
 HOST = cu_ip    # The remote host
-PORT = 50004   # The same port as used by the server
+PORT = 50005   # The same port as used by the server
 
 #Standard Protocol
 pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
