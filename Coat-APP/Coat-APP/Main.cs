@@ -66,7 +66,7 @@ namespace OT_APP1
             }
             try
             {
-                this.shellStreamSSH.Write("cd /data/ot_app/protocols" + ";\n");
+                this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 ip_connection.py -ip " + GetLocalIPAddress() + " \r");
                 this.shellStreamSSH.Flush();
 
@@ -79,7 +79,7 @@ namespace OT_APP1
             }
             try
             {
-                this.shellStreamSSH.Write("cd /data/ot_app/protocols" + ";\n");
+                this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
                 WaitforHost();
@@ -210,7 +210,7 @@ namespace OT_APP1
                     string varvolumeS = string.Join(" ", varvolume.ToArray());
                     string varZS = string.Join(" ", varZ.ToArray());
 
-                    this.shellStreamSSH.Write("cd /data/ot_app/protocols" + "\n");
+                    this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
                     this.shellStreamSSH.Write("python3 chip_coating_rotator_arg.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " 1 " + " -w " + varwellS.ToString() + " -v " + varvolumeS.ToString() + " -z " + varZS.ToString() + "\n");
                     this.shellStreamSSH.Flush();
                 }
@@ -227,7 +227,7 @@ namespace OT_APP1
                         HostServer();
                         RotateCon("2");
                     }
-                    this.shellStreamSSH.Write("cd /data/ot_app/protocols" + "\n");
+                    this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
                     this.shellStreamSSH.Write("python3 chip_coating_rotator_arg.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " 0 " + "\n");
                     this.shellStreamSSH.Flush();
 
@@ -246,7 +246,7 @@ namespace OT_APP1
             }
             try
             {
-                this.shellStreamSSH.Write("cd /data/ot_app/protocols" + ";\n");
+                this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
                 WaitforHost();
@@ -311,13 +311,13 @@ namespace OT_APP1
                     string varMixS = string.Join(" ", varMix.ToArray());
                     string varDryS = string.Join(" ", varDry.ToArray());
 
-                    this.shellStreamSSH.Write("cd /data/ot_app/protocols" + "\n");
+                    this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
                     this.shellStreamSSH.Write("python3 chip_washing_rotator_arg.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " " + numWash.Value + " 1 " + " -w " + varwellS.ToString() + " -va " + varvolumeS.ToString() + " -z " + varZS.ToString() + " -f " + varFlowS.ToString() + " -na " + varAspS.ToString() + " -nw " + varWashS.ToString() + " -vw " + varVolWashS.ToString() + " -nm " + varMixS.ToString() + " -nd " + varDryS.ToString() + "\n");
                     this.shellStreamSSH.Flush();
                 }
                 else
                 {
-                    this.shellStreamSSH.Write("cd /data/ot_app/protocols" + ";\n");
+                    this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                     this.shellStreamSSH.Write("python3 chip_washing_rotator_arg.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " " + numWash.Value + " 0 " + ";\n");
                     this.shellStreamSSH.Flush();
                 }
@@ -331,7 +331,7 @@ namespace OT_APP1
             }
             try
             {
-                this.shellStreamSSH.Write("cd /data/ot_app/protocols" + ";\n");
+                this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
                 HostServer();
@@ -416,7 +416,7 @@ namespace OT_APP1
         {
             try
             {
-                this.shellStreamSSH.Write("cd /data/ot_app/protocols" + "\n");
+                this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
                 if (boxCalOffset.Checked == true)
                 {
                     this.shellStreamSSH.Write("python3 calibrate_pro1.py -o 1" + "\r");
@@ -599,7 +599,7 @@ namespace OT_APP1
             {
                 if (Properties.Settings.Default.ResetState == true)
                 {
-                    this.shellStreamSSH.Write("cd /data/ot_app/protocols" + ";\n");
+                    this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                     this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                     this.shellStreamSSH.Flush();
                     WaitforHost();
@@ -693,7 +693,7 @@ namespace OT_APP1
 
         private void UpdateGit_Click(object sender, EventArgs e)
         {
-            string gitRootDir = "C:\\Users\\DanielNZG85\\Documents\\AlveoliX\\ot_app\\ot_app";
+            string gitRootDir = "C:\\Users\\DanielNZG85\\Documents\\AlveoliX\\coatapp\\coatapp";
             ProcessStartInfo myProcessStartInfo = new ProcessStartInfo();
             myProcessStartInfo.UseShellExecute = false;
             myProcessStartInfo.RedirectStandardOutput = true;
@@ -1028,11 +1028,11 @@ namespace OT_APP1
             }
             catch (Exception exp)
             {
-
+                Console.WriteLine("An exception has been caught " + exp.ToString());
             }
             try
             {
-                this.shellStreamSSH.Write("cd /data/ot_app/protocols" + ";\n");
+                this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
                 WaitforHost();
@@ -1040,7 +1040,7 @@ namespace OT_APP1
             }
             catch (Exception exp)
             {
-
+                Console.WriteLine("An exception has been caught " + exp.ToString());
             }
         }
     }

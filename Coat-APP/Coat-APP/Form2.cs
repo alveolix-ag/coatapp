@@ -51,7 +51,7 @@ namespace OT_APP1
             {
                 if (txtCuWell.Text != "")
                 {
-                    this.shell1.Write("cd /data/ot_app/protocols/" + "\n");
+                    this.shell1.Write("cd /data/coatapp/protocols/" + "\n");
                     this.shell1.Write("python3 reset_tip.py -w " + txtCuWell.Text + " \n");
                     this.shell1.Flush();
                     Properties.Settings.Default.ResetState = true;

@@ -147,7 +147,7 @@ pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
 pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
 pipette_300.aspirate(initial_volume+4, ep_rack.wells('A1').bottom(3))
 for i in range(0,(6*num_chips)):
-    pipette_300.dispense(12, ax_6.wells(wells[i]).top(z_distance))
+    pipette_300.dispense(12, ax_6.wells(wells[i]).top())
     pipette_300.delay(seconds=3)
 
 if side_to_coat == 2:
@@ -168,7 +168,7 @@ if side_to_coat == 2:
     pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
     pipette_300.aspirate(initial_volume, ep_rack.wells('A1').bottom(3))
     for i in range(0 , (6*num_chips)):
-        pipette_300.dispense(12, ax_6.wells(wells[i]).top(z_distance))
+        pipette_300.dispense(12, ax_6.wells(wells[i]).top())
         pipette_300.delay(seconds=3)
 
 print('Finishing run')
