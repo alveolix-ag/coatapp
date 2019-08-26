@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="456712">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="457736">
       <assemblyIdentity name="OT_APP1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>4q5tSmZTSuCPqk2K2yFgeeuh1JdGw9VqTa/loo/fdT8=</dsig:DigestValue>
+        <dsig:DigestValue>DvKpw//FLesPjCUoZBnKOMUlETRQFLvW1fZgsRMzEoI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

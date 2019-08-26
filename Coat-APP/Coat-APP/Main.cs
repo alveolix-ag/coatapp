@@ -998,6 +998,51 @@ namespace OT_APP1
                 }
             }
         }
+
+        private void BtnCoat1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Rotate("1");
+                if (SideSel.SelectedIndex == 1)
+                {
+                    Rotate("2");
+                }
+                if (SideSel.SelectedIndex == 2)
+                {
+                    HostServer();
+                    RotateCon("2");
+                }
+                this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
+                this.shellStreamSSH.Write("python3 Initial_Coating_Protocol.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " 0 " + "\n");
+                this.shellStreamSSH.Flush();
+
+                if (this.ServerOutput != null)
+                {
+                    Console.WriteLine(this.ServerOutput);
+                }
+
+                txtCommand.Text = "";
+                txtCommand.Focus();
+
+            }
+            catch (Exception exp)
+            {
+
+            }
+            try
+            {
+                this.shellStreamSSH.Write("cd /data/ot_app/protocols" + ";\n");
+                this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
+                this.shellStreamSSH.Flush();
+                WaitforHost();
+
+            }
+            catch (Exception exp)
+            {
+
+            }
+        }
     }
 }
 

@@ -36,7 +36,7 @@
             this.lbStatus = new System.Windows.Forms.Label();
             this.txtCommand = new System.Windows.Forms.TextBox();
             this.txtSSHConsole = new System.Windows.Forms.TextBox();
-            this.btnCoat = new System.Windows.Forms.Button();
+            this.btnCoat2 = new System.Windows.Forms.Button();
             this.numChips = new System.Windows.Forms.NumericUpDown();
             this.nChips = new System.Windows.Forms.Label();
             this.lblSpeed = new System.Windows.Forms.Label();
@@ -85,6 +85,7 @@
             this.UpdateGit = new System.Windows.Forms.ToolStripMenuItem();
             this.getOT2IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnCoat1 = new System.Windows.Forms.Button();
             this.grpHeader.SuspendLayout();
             this.grpSSHDemo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numChips)).BeginInit();
@@ -178,16 +179,16 @@
             this.txtSSHConsole.Size = new System.Drawing.Size(1080, 93);
             this.txtSSHConsole.TabIndex = 0;
             // 
-            // btnCoat
+            // btnCoat2
             // 
-            this.btnCoat.Location = new System.Drawing.Point(173, 90);
-            this.btnCoat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCoat.Name = "btnCoat";
-            this.btnCoat.Size = new System.Drawing.Size(93, 30);
-            this.btnCoat.TabIndex = 5;
-            this.btnCoat.Text = "Coat";
-            this.btnCoat.UseVisualStyleBackColor = true;
-            this.btnCoat.Click += new System.EventHandler(this.BtnCoat_Click);
+            this.btnCoat2.Location = new System.Drawing.Point(246, 90);
+            this.btnCoat2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCoat2.Name = "btnCoat2";
+            this.btnCoat2.Size = new System.Drawing.Size(152, 30);
+            this.btnCoat2.TabIndex = 5;
+            this.btnCoat2.Text = "2. Wash and Coat";
+            this.btnCoat2.UseVisualStyleBackColor = true;
+            this.btnCoat2.Click += new System.EventHandler(this.BtnCoat_Click);
             // 
             // numChips
             // 
@@ -232,12 +233,12 @@
             // 
             // btnWash
             // 
-            this.btnWash.Location = new System.Drawing.Point(301, 90);
+            this.btnWash.Location = new System.Drawing.Point(404, 90);
             this.btnWash.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnWash.Name = "btnWash";
-            this.btnWash.Size = new System.Drawing.Size(93, 30);
+            this.btnWash.Size = new System.Drawing.Size(135, 30);
             this.btnWash.TabIndex = 12;
-            this.btnWash.Text = "Wash";
+            this.btnWash.Text = "3. Final wash";
             this.btnWash.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.btnWash.UseVisualStyleBackColor = true;
             this.btnWash.Click += new System.EventHandler(this.BtnWash_Click);
@@ -255,7 +256,8 @@
             this.grpControl.Controls.Add(this.SpeedSel);
             this.grpControl.Controls.Add(this.lblSpeed);
             this.grpControl.Controls.Add(this.btnWash);
-            this.grpControl.Controls.Add(this.btnCoat);
+            this.grpControl.Controls.Add(this.btnCoat1);
+            this.grpControl.Controls.Add(this.btnCoat2);
             this.grpControl.Controls.Add(this.numChips);
             this.grpControl.Controls.Add(this.nChips);
             this.grpControl.Location = new System.Drawing.Point(542, 29);
@@ -384,7 +386,7 @@
             // 
             // btnDrop50
             // 
-            this.btnDrop50.Location = new System.Drawing.Point(301, 28);
+            this.btnDrop50.Location = new System.Drawing.Point(364, 29);
             this.btnDrop50.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDrop50.Name = "btnDrop50";
             this.btnDrop50.Size = new System.Drawing.Size(164, 29);
@@ -395,7 +397,7 @@
             // 
             // btnDrop300
             // 
-            this.btnDrop300.Location = new System.Drawing.Point(119, 29);
+            this.btnDrop300.Location = new System.Drawing.Point(148, 29);
             this.btnDrop300.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDrop300.Name = "btnDrop300";
             this.btnDrop300.Size = new System.Drawing.Size(164, 29);
@@ -767,6 +769,17 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Robot";
             // 
+            // btnCoat1
+            // 
+            this.btnCoat1.Location = new System.Drawing.Point(108, 90);
+            this.btnCoat1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCoat1.Name = "btnCoat1";
+            this.btnCoat1.Size = new System.Drawing.Size(132, 30);
+            this.btnCoat1.TabIndex = 5;
+            this.btnCoat1.Text = "1.Initial Coating";
+            this.btnCoat1.UseVisualStyleBackColor = true;
+            this.btnCoat1.Click += new System.EventHandler(this.BtnCoat1_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -816,7 +829,7 @@
         private System.Windows.Forms.TextBox txtCommand;
         private System.Windows.Forms.TextBox txtSSHConsole;
         private System.Windows.Forms.Label lbStatus;
-        private System.Windows.Forms.Button btnCoat;
+        private System.Windows.Forms.Button btnCoat2;
         private System.Windows.Forms.NumericUpDown numChips;
         private System.Windows.Forms.Label nChips;
         private System.Windows.Forms.Button btnWash;
@@ -866,6 +879,7 @@
         private System.Windows.Forms.ToolStripMenuItem searchForOT2IPToolStripMenuItem;
         private System.Windows.Forms.CheckBox chkLight;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnCoat1;
     }
 }
 
