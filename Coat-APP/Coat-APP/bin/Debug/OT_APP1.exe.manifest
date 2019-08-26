@@ -74,7 +74,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Q31s3TBbNGs5OD5CqSeOCD2U3awlaxcxXqkZz4u4oCw=</dsig:DigestValue>
+        <dsig:DigestValue>JWqKSakmCTbt8Dt7Nj7XQpG9hj8HRke4zo5XjKfkxcg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -150,13 +150,13 @@
       <dsig:DigestValue>1D17SbVNt48sbP1Xg9fFP4mQrPf96gNYnJvMoHeZqCw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Protocols\socket_host.py" size="671">
+  <file name="Protocols\socket_host.py" size="930">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Ra9SAFri4/cTu6VRCuLFsFNAVQEDj/hlNi+Vgx4bHDk=</dsig:DigestValue>
+      <dsig:DigestValue>9HYR7m6k0V50D3xHcQpwFO5NqqhRrtjvCJl4S4QpLZI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\UI_Glyph_08-15-512.png" size="18584">

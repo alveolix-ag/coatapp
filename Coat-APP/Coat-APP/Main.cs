@@ -25,7 +25,8 @@ namespace OT_APP1
         private String result = null;
         public Form2 f2 = null;
         public string OT2IP = null;
-        public string ProtcolPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\socket_host.py");
+        public string ProtocolPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\socket_host.py");
+        public string ProtocolPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\socket_host_rotate.py");
         private string oldString = string.Empty;
 
         public Main()
@@ -82,7 +83,7 @@ namespace OT_APP1
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
-                WaitforHost();
+                WaitforHost("5");
                 //String new_cu_tip = this.ServerOutput.ToString();
                 //lblCurrentTip.Text = ("Current Tip: " + new_cu_tip);
 
@@ -224,7 +225,7 @@ namespace OT_APP1
                     }
                     if (SideSel.SelectedIndex == 2)
                     {
-                        HostServer();
+                        HostServer("5");
                         RotateCon("2");
                     }
                     this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
@@ -249,7 +250,7 @@ namespace OT_APP1
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
-                WaitforHost();
+                WaitforHost("5");
 
             }
             catch (Exception exp)
@@ -334,7 +335,7 @@ namespace OT_APP1
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
-                HostServer();
+                HostServer("5");
                 String new_cu_tip = this.ServerOutput.ToString();
                 lblCurrentTip.Text = ("Current Tip: " + new_cu_tip);
 
@@ -602,7 +603,7 @@ namespace OT_APP1
                     this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                     this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                     this.shellStreamSSH.Flush();
-                    WaitforHost();
+                    WaitforHost("5");
                     //String new_cu_tip = this.ServerOutput.ToString();
                     //lblCurrentTip.Text = ("Current Tip: " + new_cu_tip);
                 }
@@ -614,12 +615,12 @@ namespace OT_APP1
                 throw new Exception("Not working!");
             }
         }
-        private void HostServer()
+        private void HostServer(string timeout)
         {
             this.ServerOutput = null;
             //full path of python interpreter  
             // python app to call  
-            string myPythonApp = this.ProtcolPath;
+            string myPythonApp = (this.ProtocolPath + " " +timeout);
 
             // dummy parameters to send Python script  
             // Create new process start info 
@@ -645,10 +646,45 @@ namespace OT_APP1
             { IsBackground = true };
             thread.Start();
         }
+
+
+        private void HostServerRotate(string timeout)
+        {
+            this.ServerOutput = null;
+            //full path of python interpreter  
+            // python app to call  
+            string myPythonApp = (this.ProtocolPath + " " + timeout);
+
+            // dummy parameters to send Python script  
+            // Create new process start info 
+            ProcessStartInfo myProcessStartInfo = new ProcessStartInfo();
+
+            // make sure we can read the output from stdout 
+            myProcessStartInfo.UseShellExecute = false;
+            myProcessStartInfo.RedirectStandardOutput = true;
+            myProcessStartInfo.CreateNoWindow = true;
+            myProcessStartInfo.FileName = "C:\\ProgramData\\Anaconda3\\python.exe";
+            myProcessStartInfo.Arguments = myPythonApp;
+            var thread = new Thread(() =>
+            {
+                using (this.myProcess = Process.Start(myProcessStartInfo))
+                {
+                    using (StreamReader reader = this.myProcess.StandardOutput)
+                    {
+                        this.ServerOutput = this.myProcess.StandardOutput.ReadToEnd();
+                    }
+                }
+                //this.myProcess.PriorityClass = ProcessPriorityClass.Idle;
+            })
+            { IsBackground = true };
+            thread.Start();
+        }
+
         private void RotateCon(String RotateSt)
         {
             var thread1 = new Thread(() =>
             {
+                HostServerRotate("400");
                 while (this.ServerOutput == null)
                 {
 
@@ -657,7 +693,7 @@ namespace OT_APP1
                 {
                     SerialPort myport = new SerialPort();
                     myport.BaudRate = 9600;
-                    myport.PortName = "COM5";
+                    myport.PortName = "COM3";
                     if (!myport.IsOpen == true)
                     {
                         myport.Open();
@@ -922,9 +958,9 @@ namespace OT_APP1
             }
         }
 
-        private async void WaitforHost()
+        private async void WaitforHost(string timeout)
         {
-            HostServer();
+            HostServer(timeout);
             string newString = this.ServerOutput;
             string oldString = this.ServerOutput;
             while (oldString == newString)
@@ -1010,7 +1046,6 @@ namespace OT_APP1
                 }
                 if (SideSel.SelectedIndex == 2)
                 {
-                    HostServer();
                     RotateCon("2");
                 }
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
@@ -1035,7 +1070,7 @@ namespace OT_APP1
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
-                WaitforHost();
+                WaitforHost("5");
 
             }
             catch (Exception exp)

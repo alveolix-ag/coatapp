@@ -61,8 +61,6 @@ robot.head_speed(combined_speed=max(speed_set.values()),**speed_set)
 num_chips = int(args.integers[1])
 #this variable when change to something other that None allows the while loop to be broken.
 rotate_st = None;
-with open('z_calibration', 'rb') as f:
-    z_distance = pickle.load(f);
 
 # Import labware
 #ax-6 definition
@@ -140,7 +138,7 @@ with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
 HOST = cu_ip    # The remote host
-PORT = 50005   # The same port as used by the server
+PORT = 50006   # The same port as used by the server
 
 #Standard Protocol
 pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
@@ -161,9 +159,6 @@ if side_to_coat == 2:
         #Data is received when the chip is correctly flipped.
         data = s.recv(1024)
         print('Received', repr(data))
-    #Manually continue the protocol once the chip rotator is flipped.
-    while rotate_st is None:
-        rotate_st = input('Press enter when chip is flipped...')
     pipette_300.delay(seconds = 3)     
     pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
     pipette_300.aspirate(initial_volume, ep_rack.wells('A1').bottom(3))

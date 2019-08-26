@@ -51,6 +51,7 @@
             this.SideSel = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SpeedSel = new System.Windows.Forms.ComboBox();
+            this.btnCoat1 = new System.Windows.Forms.Button();
             this.btnDrop50 = new System.Windows.Forms.Button();
             this.btnDrop300 = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
@@ -85,7 +86,6 @@
             this.UpdateGit = new System.Windows.Forms.ToolStripMenuItem();
             this.getOT2IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnCoat1 = new System.Windows.Forms.Button();
             this.grpHeader.SuspendLayout();
             this.grpSSHDemo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numChips)).BeginInit();
@@ -109,7 +109,7 @@
             this.grpHeader.Size = new System.Drawing.Size(174, 66);
             this.grpHeader.TabIndex = 0;
             this.grpHeader.TabStop = false;
-            this.grpHeader.Text = "SSH  Connection Info";
+            this.grpHeader.Text = "Connection";
             // 
             // btnConnect
             // 
@@ -383,6 +383,17 @@
             this.SpeedSel.Name = "SpeedSel";
             this.SpeedSel.Size = new System.Drawing.Size(108, 24);
             this.SpeedSel.TabIndex = 14;
+            // 
+            // btnCoat1
+            // 
+            this.btnCoat1.Location = new System.Drawing.Point(108, 90);
+            this.btnCoat1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCoat1.Name = "btnCoat1";
+            this.btnCoat1.Size = new System.Drawing.Size(132, 30);
+            this.btnCoat1.TabIndex = 5;
+            this.btnCoat1.Text = "1.Initial Coating";
+            this.btnCoat1.UseVisualStyleBackColor = true;
+            this.btnCoat1.Click += new System.EventHandler(this.BtnCoat1_Click);
             // 
             // btnDrop50
             // 
@@ -768,17 +779,6 @@
             this.groupBox2.TabIndex = 35;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Robot";
-            // 
-            // btnCoat1
-            // 
-            this.btnCoat1.Location = new System.Drawing.Point(108, 90);
-            this.btnCoat1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCoat1.Name = "btnCoat1";
-            this.btnCoat1.Size = new System.Drawing.Size(132, 30);
-            this.btnCoat1.TabIndex = 5;
-            this.btnCoat1.Text = "1.Initial Coating";
-            this.btnCoat1.UseVisualStyleBackColor = true;
-            this.btnCoat1.Click += new System.EventHandler(this.BtnCoat1_Click);
             // 
             // Main
             // 

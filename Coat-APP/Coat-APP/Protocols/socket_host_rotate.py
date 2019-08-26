@@ -13,7 +13,7 @@ args = parser.parse_args() #this is the variable that stores the inputs from the
 timeout = int(args.timeout)
 
 HOST = ''                 # Symbolic name meaning all available interfaces
-PORT = 50005             # Arbitrary non-privileged port
+PORT = 50006             # Arbitrary non-privileged port
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen(1)
@@ -23,7 +23,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         #print('Connected by', addr)
         while True:
             data = conn.recv(1024)
-            data1 = conn.send(b'Welcome')
+            data1 = conn.send(b'Rotate State')
             print(data.decode("utf-8"))
             if not data: 
                break
