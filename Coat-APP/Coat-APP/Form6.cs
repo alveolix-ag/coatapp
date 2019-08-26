@@ -25,6 +25,7 @@ namespace OT_APP1
             set { labwareSetupChange = value; }
         }
 
+        private SshClient sshClient = null;
 
         public Form6()
         {
@@ -142,7 +143,6 @@ namespace OT_APP1
         private void uploadSetup()
         {
             ConnectionInfo connectionInfo = new PasswordConnectionInfo(this.IPAdress, "root", "");
-            string remoteDirectory = @"/data/coatapp_config/";
             using (SftpClient sftp = new SftpClient(connectionInfo))
             {
                 try
@@ -185,6 +185,7 @@ namespace OT_APP1
             Form5 f5 = new Form5();
             bool ImportState = new bool();
             bool deleteState = new bool();
+            Properties.Settings.Default.Form5Appearance = true;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;
@@ -215,6 +216,7 @@ namespace OT_APP1
             Form5 f5 = new Form5();
             bool ImportState = new bool();
             bool deleteState = new bool();
+            Properties.Settings.Default.Form5Appearance = true;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;
@@ -245,6 +247,7 @@ namespace OT_APP1
             Form5 f5 = new Form5();
             bool ImportState = new bool();
             bool deleteState = new bool();
+            Properties.Settings.Default.Form5Appearance = true;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;
@@ -274,6 +277,7 @@ namespace OT_APP1
             Form5 f5 = new Form5();
             bool ImportState = new bool();
             bool deleteState = new bool();
+            Properties.Settings.Default.Form5Appearance = true;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;
@@ -303,6 +307,7 @@ namespace OT_APP1
             Form5 f5 = new Form5();
             bool ImportState = new bool();
             bool deleteState = new bool();
+            Properties.Settings.Default.Form5Appearance = true;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;
@@ -332,6 +337,7 @@ namespace OT_APP1
             Form5 f5 = new Form5();
             bool ImportState = new bool();
             bool deleteState = new bool();
+            Properties.Settings.Default.Form5Appearance = true;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;
@@ -361,6 +367,7 @@ namespace OT_APP1
             Form5 f5 = new Form5();
             bool ImportState = new bool();
             bool deleteState = new bool();
+            Properties.Settings.Default.Form5Appearance = true;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;
@@ -390,6 +397,7 @@ namespace OT_APP1
             Form5 f5 = new Form5();
             bool ImportState = new bool();
             bool deleteState = new bool();
+            Properties.Settings.Default.Form5Appearance = true;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;
@@ -419,6 +427,7 @@ namespace OT_APP1
             Form5 f5 = new Form5();
             bool ImportState = new bool();
             bool deleteState = new bool();
+            Properties.Settings.Default.Form5Appearance = true;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;
@@ -448,6 +457,7 @@ namespace OT_APP1
             Form5 f5 = new Form5();
             bool ImportState = new bool();
             bool deleteState = new bool();
+            Properties.Settings.Default.Form5Appearance = true;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;
@@ -477,6 +487,7 @@ namespace OT_APP1
             Form5 f5 = new Form5();
             bool ImportState = new bool();
             bool deleteState = new bool();
+            Properties.Settings.Default.Form5Appearance = true;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;
@@ -501,6 +512,17 @@ namespace OT_APP1
             }
         }
 
+        private void BtnCalibrate_Click(object sender, EventArgs e)
+        {
+            this.sshClient = new SshClient(this.IPAdress, "root");
+            this.sshClient.ConnectionInfo.Timeout = TimeSpan.FromSeconds(120);
+            this.sshClient.Connect();
+
+            this.shellStreamSSH = this.sshClient.CreateShellStream("vt100", 80, 60, 800, 600, 65536);
+            this.lbStatus.Text = "Status: Connected.";
+            btnConnect.BackColor = Color.Green;
+            grpControl.Visible = true;
+        }
     }
 
 }

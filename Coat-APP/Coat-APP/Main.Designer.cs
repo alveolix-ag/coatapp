@@ -1,6 +1,6 @@
 ﻿namespace OT_APP1
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.grpHeader = new System.Windows.Forms.GroupBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.btnTest2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.grpSSHDemo = new System.Windows.Forms.GroupBox();
             this.lbStatus = new System.Windows.Forms.Label();
             this.txtCommand = new System.Windows.Forms.TextBox();
@@ -74,6 +73,7 @@
             this.btnDown = new System.Windows.Forms.Button();
             this.btnRotate = new System.Windows.Forms.Button();
             this.grpHolder = new System.Windows.Forms.GroupBox();
+            this.chkLight = new System.Windows.Forms.CheckBox();
             this.numRotateSt = new System.Windows.Forms.NumericUpDown();
             this.grpLabwareSet = new System.Windows.Forms.GroupBox();
             this.btnLabwareSetup = new System.Windows.Forms.Button();
@@ -84,7 +84,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdateGit = new System.Windows.Forms.ToolStripMenuItem();
             this.getOT2IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkLight = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.grpHeader.SuspendLayout();
             this.grpSSHDemo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numChips)).BeginInit();
@@ -95,6 +95,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numRotateSt)).BeginInit();
             this.grpLabwareSet.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpHeader
@@ -104,7 +105,7 @@
             this.grpHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpHeader.Name = "grpHeader";
             this.grpHeader.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpHeader.Size = new System.Drawing.Size(237, 66);
+            this.grpHeader.Size = new System.Drawing.Size(174, 66);
             this.grpHeader.TabIndex = 0;
             this.grpHeader.TabStop = false;
             this.grpHeader.Text = "SSH  Connection Info";
@@ -112,7 +113,7 @@
             // btnConnect
             // 
             this.btnConnect.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnConnect.Location = new System.Drawing.Point(10, 26);
+            this.btnConnect.Location = new System.Drawing.Point(37, 24);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(98, 31);
@@ -123,24 +124,14 @@
             // 
             // btnTest2
             // 
-            this.btnTest2.Location = new System.Drawing.Point(5, 29);
+            this.btnTest2.Location = new System.Drawing.Point(10, 50);
             this.btnTest2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTest2.Name = "btnTest2";
-            this.btnTest2.Size = new System.Drawing.Size(164, 30);
+            this.btnTest2.Size = new System.Drawing.Size(147, 30);
             this.btnTest2.TabIndex = 29;
             this.btnTest2.Text = "Create New Labware";
             this.btnTest2.UseVisualStyleBackColor = true;
             this.btnTest2.Click += new System.EventHandler(this.BtnTest2_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(5, 131);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(224, 63);
-            this.textBox1.TabIndex = 28;
             // 
             // grpSSHDemo
             // 
@@ -151,7 +142,7 @@
             this.grpSSHDemo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpSSHDemo.Name = "grpSSHDemo";
             this.grpSSHDemo.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpSSHDemo.Size = new System.Drawing.Size(951, 172);
+            this.grpSSHDemo.Size = new System.Drawing.Size(1092, 172);
             this.grpSSHDemo.TabIndex = 1;
             this.grpSSHDemo.TabStop = false;
             this.grpSSHDemo.Text = "SSH";
@@ -172,7 +163,7 @@
             this.txtCommand.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCommand.Multiline = true;
             this.txtCommand.Name = "txtCommand";
-            this.txtCommand.Size = new System.Drawing.Size(928, 28);
+            this.txtCommand.Size = new System.Drawing.Size(1081, 28);
             this.txtCommand.TabIndex = 1;
             this.txtCommand.TextChanged += new System.EventHandler(this.TxtCommand_TextChanged);
             this.txtCommand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCommand_KeyPress);
@@ -184,12 +175,12 @@
             this.txtSSHConsole.Multiline = true;
             this.txtSSHConsole.Name = "txtSSHConsole";
             this.txtSSHConsole.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtSSHConsole.Size = new System.Drawing.Size(928, 93);
+            this.txtSSHConsole.Size = new System.Drawing.Size(1080, 93);
             this.txtSSHConsole.TabIndex = 0;
             // 
             // btnCoat
             // 
-            this.btnCoat.Location = new System.Drawing.Point(22, 42);
+            this.btnCoat.Location = new System.Drawing.Point(173, 90);
             this.btnCoat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCoat.Name = "btnCoat";
             this.btnCoat.Size = new System.Drawing.Size(93, 30);
@@ -200,7 +191,7 @@
             // 
             // numChips
             // 
-            this.numChips.Location = new System.Drawing.Point(141, 44);
+            this.numChips.Location = new System.Drawing.Point(12, 54);
             this.numChips.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numChips.Maximum = new decimal(new int[] {
             3,
@@ -224,7 +215,7 @@
             // nChips
             // 
             this.nChips.AutoSize = true;
-            this.nChips.Location = new System.Drawing.Point(138, 18);
+            this.nChips.Location = new System.Drawing.Point(7, 31);
             this.nChips.Name = "nChips";
             this.nChips.Size = new System.Drawing.Size(113, 17);
             this.nChips.TabIndex = 9;
@@ -233,7 +224,7 @@
             // lblSpeed
             // 
             this.lblSpeed.AutoSize = true;
-            this.lblSpeed.Location = new System.Drawing.Point(281, 18);
+            this.lblSpeed.Location = new System.Drawing.Point(145, 31);
             this.lblSpeed.Name = "lblSpeed";
             this.lblSpeed.Size = new System.Drawing.Size(49, 17);
             this.lblSpeed.TabIndex = 11;
@@ -241,7 +232,7 @@
             // 
             // btnWash
             // 
-            this.btnWash.Location = new System.Drawing.Point(22, 91);
+            this.btnWash.Location = new System.Drawing.Point(301, 90);
             this.btnWash.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnWash.Name = "btnWash";
             this.btnWash.Size = new System.Drawing.Size(93, 30);
@@ -258,9 +249,6 @@
             this.grpControl.Controls.Add(this.numWash);
             this.grpControl.Controls.Add(this.lblCurrentTip);
             this.grpControl.Controls.Add(this.btnTipSet);
-            this.grpControl.Controls.Add(this.btnDrop50);
-            this.grpControl.Controls.Add(this.btnDrop300);
-            this.grpControl.Controls.Add(this.btnHome);
             this.grpControl.Controls.Add(this.btnStop);
             this.grpControl.Controls.Add(this.SideSel);
             this.grpControl.Controls.Add(this.label1);
@@ -274,14 +262,14 @@
             this.grpControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpControl.Name = "grpControl";
             this.grpControl.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpControl.Size = new System.Drawing.Size(429, 268);
+            this.grpControl.Size = new System.Drawing.Size(570, 190);
             this.grpControl.TabIndex = 2;
             this.grpControl.TabStop = false;
-            this.grpControl.Text = "Control";
+            this.grpControl.Text = "Protocols";
             // 
             // btn_Advanced
             // 
-            this.btn_Advanced.Location = new System.Drawing.Point(274, 138);
+            this.btn_Advanced.Location = new System.Drawing.Point(444, 147);
             this.btn_Advanced.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_Advanced.Name = "btn_Advanced";
             this.btn_Advanced.Size = new System.Drawing.Size(120, 30);
@@ -293,7 +281,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(141, 123);
+            this.label3.Location = new System.Drawing.Point(461, 31);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(103, 17);
             this.label3.TabIndex = 25;
@@ -301,7 +289,7 @@
             // 
             // numWash
             // 
-            this.numWash.Location = new System.Drawing.Point(141, 143);
+            this.numWash.Location = new System.Drawing.Point(464, 54);
             this.numWash.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numWash.Maximum = new decimal(new int[] {
             4,
@@ -314,7 +302,7 @@
             0,
             0});
             this.numWash.Name = "numWash";
-            this.numWash.Size = new System.Drawing.Size(107, 22);
+            this.numWash.Size = new System.Drawing.Size(75, 22);
             this.numWash.TabIndex = 24;
             this.numWash.Value = new decimal(new int[] {
             1,
@@ -325,16 +313,19 @@
             // lblCurrentTip
             // 
             this.lblCurrentTip.AutoSize = true;
-            this.lblCurrentTip.Location = new System.Drawing.Point(19, 234);
+            this.lblCurrentTip.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblCurrentTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentTip.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblCurrentTip.Location = new System.Drawing.Point(129, 147);
             this.lblCurrentTip.Name = "lblCurrentTip";
-            this.lblCurrentTip.Size = new System.Drawing.Size(99, 17);
+            this.lblCurrentTip.Size = new System.Drawing.Size(101, 18);
             this.lblCurrentTip.TabIndex = 23;
             this.lblCurrentTip.Text = "Current Tip:    ";
             this.lblCurrentTip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnTipSet
             // 
-            this.btnTipSet.Location = new System.Drawing.Point(22, 197);
+            this.btnTipSet.Location = new System.Drawing.Point(12, 147);
             this.btnTipSet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTipSet.Name = "btnTipSet";
             this.btnTipSet.Size = new System.Drawing.Size(93, 30);
@@ -345,7 +336,7 @@
             // 
             // btnDrop50
             // 
-            this.btnDrop50.Location = new System.Drawing.Point(229, 220);
+            this.btnDrop50.Location = new System.Drawing.Point(301, 28);
             this.btnDrop50.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDrop50.Name = "btnDrop50";
             this.btnDrop50.Size = new System.Drawing.Size(164, 29);
@@ -356,7 +347,7 @@
             // 
             // btnDrop300
             // 
-            this.btnDrop300.Location = new System.Drawing.Point(229, 188);
+            this.btnDrop300.Location = new System.Drawing.Point(119, 29);
             this.btnDrop300.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDrop300.Name = "btnDrop300";
             this.btnDrop300.Size = new System.Drawing.Size(164, 29);
@@ -367,7 +358,7 @@
             // 
             // btnHome
             // 
-            this.btnHome.Location = new System.Drawing.Point(157, 207);
+            this.btnHome.Location = new System.Drawing.Point(21, 29);
             this.btnHome.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(67, 29);
@@ -379,7 +370,7 @@
             // btnStop
             // 
             this.btnStop.BackColor = System.Drawing.Color.Red;
-            this.btnStop.Location = new System.Drawing.Point(37, 138);
+            this.btnStop.Location = new System.Drawing.Point(21, 90);
             this.btnStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(67, 30);
@@ -395,17 +386,17 @@
             "Apical",
             "Basal",
             "Apical and Basal"});
-            this.SideSel.Location = new System.Drawing.Point(141, 95);
+            this.SideSel.Location = new System.Drawing.Point(269, 54);
             this.SideSel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SideSel.Name = "SideSel";
-            this.SideSel.Size = new System.Drawing.Size(253, 24);
+            this.SideSel.Size = new System.Drawing.Size(179, 24);
             this.SideSel.TabIndex = 16;
             this.SideSel.SelectedIndexChanged += new System.EventHandler(this.SideSel_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(138, 74);
+            this.label1.Location = new System.Drawing.Point(266, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 17);
             this.label1.TabIndex = 15;
@@ -418,7 +409,7 @@
             "Fast",
             "Medium",
             "Slow"});
-            this.SpeedSel.Location = new System.Drawing.Point(284, 42);
+            this.SpeedSel.Location = new System.Drawing.Point(143, 54);
             this.SpeedSel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SpeedSel.Name = "SpeedSel";
             this.SpeedSel.Size = new System.Drawing.Size(108, 24);
@@ -454,11 +445,11 @@
             this.groupBox1.Controls.Add(this.btnSaveCalibration);
             this.groupBox1.Controls.Add(this.btnDown);
             this.groupBox1.Controls.Add(this.btnCalibrate);
-            this.groupBox1.Location = new System.Drawing.Point(263, 29);
+            this.groupBox1.Location = new System.Drawing.Point(200, 29);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(273, 190);
+            this.groupBox1.Size = new System.Drawing.Size(336, 190);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Calibration";
@@ -476,7 +467,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(129, 120);
+            this.label5.Location = new System.Drawing.Point(194, 63);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 17);
             this.label5.TabIndex = 42;
@@ -485,7 +476,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(197, 61);
+            this.label2.Location = new System.Drawing.Point(127, 120);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 17);
             this.label2.TabIndex = 41;
@@ -627,7 +618,7 @@
             // 
             // btnRotate
             // 
-            this.btnRotate.Location = new System.Drawing.Point(17, 29);
+            this.btnRotate.Location = new System.Drawing.Point(50, 30);
             this.btnRotate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRotate.Name = "btnRotate";
             this.btnRotate.Size = new System.Drawing.Size(92, 30);
@@ -641,18 +632,29 @@
             this.grpHolder.Controls.Add(this.chkLight);
             this.grpHolder.Controls.Add(this.numRotateSt);
             this.grpHolder.Controls.Add(this.btnRotate);
-            this.grpHolder.Location = new System.Drawing.Point(263, 221);
+            this.grpHolder.Location = new System.Drawing.Point(200, 221);
             this.grpHolder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpHolder.Name = "grpHolder";
             this.grpHolder.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpHolder.Size = new System.Drawing.Size(273, 76);
+            this.grpHolder.Size = new System.Drawing.Size(336, 84);
             this.grpHolder.TabIndex = 24;
             this.grpHolder.TabStop = false;
             this.grpHolder.Text = "Control Hardware";
             // 
+            // chkLight
+            // 
+            this.chkLight.AutoSize = true;
+            this.chkLight.Location = new System.Drawing.Point(219, 35);
+            this.chkLight.Name = "chkLight";
+            this.chkLight.Size = new System.Drawing.Size(68, 21);
+            this.chkLight.TabIndex = 34;
+            this.chkLight.Text = "Lights";
+            this.chkLight.UseVisualStyleBackColor = true;
+            this.chkLight.CheckedChanged += new System.EventHandler(this.ChkLight_CheckedChanged);
+            // 
             // numRotateSt
             // 
-            this.numRotateSt.Location = new System.Drawing.Point(115, 34);
+            this.numRotateSt.Location = new System.Drawing.Point(148, 34);
             this.numRotateSt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numRotateSt.Maximum = new decimal(new int[] {
             2,
@@ -665,7 +667,7 @@
             0,
             0});
             this.numRotateSt.Name = "numRotateSt";
-            this.numRotateSt.Size = new System.Drawing.Size(50, 22);
+            this.numRotateSt.Size = new System.Drawing.Size(48, 22);
             this.numRotateSt.TabIndex = 33;
             this.numRotateSt.Value = new decimal(new int[] {
             1,
@@ -677,21 +679,20 @@
             // 
             this.grpLabwareSet.Controls.Add(this.btnLabwareSetup);
             this.grpLabwareSet.Controls.Add(this.btnTest2);
-            this.grpLabwareSet.Controls.Add(this.textBox1);
             this.grpLabwareSet.Location = new System.Drawing.Point(20, 99);
             this.grpLabwareSet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpLabwareSet.Name = "grpLabwareSet";
             this.grpLabwareSet.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpLabwareSet.Size = new System.Drawing.Size(237, 198);
+            this.grpLabwareSet.Size = new System.Drawing.Size(174, 153);
             this.grpLabwareSet.TabIndex = 25;
             this.grpLabwareSet.TabStop = false;
             this.grpLabwareSet.Text = "Labware Setup";
             // 
             // btnLabwareSetup
             // 
-            this.btnLabwareSetup.Location = new System.Drawing.Point(5, 68);
+            this.btnLabwareSetup.Location = new System.Drawing.Point(10, 107);
             this.btnLabwareSetup.Name = "btnLabwareSetup";
-            this.btnLabwareSetup.Size = new System.Drawing.Size(164, 27);
+            this.btnLabwareSetup.Size = new System.Drawing.Size(147, 27);
             this.btnLabwareSetup.TabIndex = 30;
             this.btnLabwareSetup.Text = "Labware Setup";
             this.btnLabwareSetup.UseVisualStyleBackColor = true;
@@ -705,7 +706,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(986, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1124, 28);
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -752,22 +753,26 @@
             this.getOT2IPToolStripMenuItem.Text = "Get OT2 IP";
             this.getOT2IPToolStripMenuItem.Click += new System.EventHandler(this.GetOT2IPToolStripMenuItem_Click);
             // 
-            // chkLight
+            // groupBox2
             // 
-            this.chkLight.AutoSize = true;
-            this.chkLight.Location = new System.Drawing.Point(186, 35);
-            this.chkLight.Name = "chkLight";
-            this.chkLight.Size = new System.Drawing.Size(68, 21);
-            this.chkLight.TabIndex = 34;
-            this.chkLight.Text = "Lights";
-            this.chkLight.UseVisualStyleBackColor = true;
-            this.chkLight.CheckedChanged += new System.EventHandler(this.ChkLight_CheckedChanged);
+            this.groupBox2.Controls.Add(this.btnHome);
+            this.groupBox2.Controls.Add(this.btnDrop300);
+            this.groupBox2.Controls.Add(this.btnDrop50);
+            this.groupBox2.Location = new System.Drawing.Point(542, 223);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Size = new System.Drawing.Size(570, 82);
+            this.groupBox2.TabIndex = 35;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Robot";
             // 
-            // Form1
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(986, 481);
+            this.ClientSize = new System.Drawing.Size(1124, 482);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.grpLabwareSet);
             this.Controls.Add(this.grpHolder);
             this.Controls.Add(this.groupBox1);
@@ -778,7 +783,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Form1";
+            this.Name = "Main";
             this.Text = " OT-APP";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -795,9 +800,9 @@
             this.grpHolder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRotateSt)).EndInit();
             this.grpLabwareSet.ResumeLayout(false);
-            this.grpLabwareSet.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -837,7 +842,6 @@
         private System.Windows.Forms.CheckBox chkLarge;
         private System.Windows.Forms.CheckBox chkMed;
         private System.Windows.Forms.CheckBox chkSmall;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnTest2;
         private System.Windows.Forms.Button btnRotate;
         private System.Windows.Forms.Label label4;
@@ -861,6 +865,7 @@
         private System.Windows.Forms.ToolStripMenuItem gitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchForOT2IPToolStripMenuItem;
         private System.Windows.Forms.CheckBox chkLight;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

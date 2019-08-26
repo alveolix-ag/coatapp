@@ -134,112 +134,36 @@ with open('host_ip', 'rb') as f:
 HOST = cu_ip    # The remote host
 PORT = 50004   # The same port as used by the server
 
-### protocol
-advance_mode = args.integers[3]
-
-# Advance protocol: control over individual wells
-def aspirate_vol(vol_array, in_well = 0): #this function controls the volume and pippette used to aspirate the the input volume
-    initial_volume = 0;
-    if vol_array[in_well] < 30:
-        default_pipette = 50
-        limit_vol = 50
-    else:
-        default_pipette = 300
-        limit_vol = 300
-    for d in range(in_well,len(vol_array)):
-        if initial_volume + vol_array[d] >= limit_vol or (vol_array[d] < 30 and limit_vol == 300):
-            lst_well = d
-            return initial_volume, lst_well, default_pipette
-            break
-        else:
-            initial_volume = initial_volume + vol_array[d]
-            if d == len(vol_array)-1:
-                lst_well = len(vol_array)
-                return initial_volume, lst_well, default_pipette
-                break
-
-
-if advance_mode == 1:
-    wells_to_coat = args.well;
-    volume_list = [float(i) for i in args.volume];
-    z_list = [float(i) for i in args.z_space];
-    if all(v < 50 for v in volume_list):
-        pipette_50.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-        pipette_50.mix(5, 50, ep_rack.wells('A1').bottom(3))
-        pip_state = 0
-    elif all(v > 30 for v in volume_list):
-        pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-        pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
-        pip_state = 1
-    else:
-        pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-        pipette_50.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-        if (volume_list[0] > 30):
-            pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
-        else:
-            pipette_50.mix(5, 50, ep_rack.wells('A1').bottom(3))
-        pip_state = 2
-    print(wells_to_coat, volume_list, z_list)
-    index_well= 0;
-    index_last = 0;
-    while index_well < len(wells_to_coat):
-        [vol, index_well, pipette_de] = aspirate_vol(volume_list, index_well)
-        if pipette_de == 300:
-            print("aspirating: ", vol, "ul")
-            pipette_300.aspirate(vol, ep_rack.wells('A1').bottom(3))
-        elif pipette_de ==50:
-            print("aspirating: ", vol, "ul")
-            pipette_50.aspirate(vol, ep_rack.wells('A1').bottom(3))
-        for i in range (index_last, index_well):
-            if pipette_de == 300:
-                pipette_300.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
-                pipette_300.delay(seconds=3)
-            elif pipette_de == 50:
-                pipette_50.dispense(volume_list[i], ax_6.wells(wells_to_coat[i]).top(z_distance+z_list[i]))
-                pipette_50.delay(seconds=3)
-        index_last = index_well;   
-        print(index_last) 
-
-    print('Finishing run')
-    if pip_state == 0:
-        pipette_50.drop_tip()
-    elif pip_state == 1:
-        pipette_300.drop_tip()
-    else:
-        pipette_300.drop_tip()
-        pipette_50.drop_tip()    
-
 #Standard Protocol
-else:
-    pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-    pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
-    pipette_300.aspirate(initial_volume+4, ep_rack.wells('A1').bottom(3))
-    for i in range(0,(6*num_chips)):
+pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
+pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
+pipette_300.aspirate(initial_volume+4, ep_rack.wells('A1').bottom(3))
+for i in range(0,(6*num_chips)):
+    pipette_300.dispense(12, ax_6.wells(wells[i]).top(z_distance))
+    pipette_300.delay(seconds=3)
+
+if side_to_coat == 2:
+    pipette_300.move_to(ep_rack.wells('A1').top(20))
+    print("Flip Chip Holder, rotating around its shorter side")
+    #This connects to the OT-APP and send a command to rotate the chip holder rotator
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((HOST, PORT))
+        rotate_st = str.encode("rotate")
+        s.send(rotate_st)
+        #Data is received when the chip is correctly flipped.
+        data = s.recv(1024)
+        print('Received', repr(data))
+    #Manually continue the protocol once the chip rotator is flipped.
+    while rotate_st is None:
+        rotate_st = input('Press enter when chip is flipped...')
+    pipette_300.delay(seconds = 3)     
+    pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
+    pipette_300.aspirate(initial_volume, ep_rack.wells('A1').bottom(3))
+    for i in range(0 , (6*num_chips)):
         pipette_300.dispense(12, ax_6.wells(wells[i]).top(z_distance))
         pipette_300.delay(seconds=3)
-    
-    if side_to_coat == 2:
-        pipette_300.move_to(ep_rack.wells('A1').top(20))
-        print("Flip Chip Holder, rotating around its shorter side")
-        #This connects to the OT-APP and send a command to rotate the chip holder rotator
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect((HOST, PORT))
-            rotate_st = str.encode("rotate")
-            s.send(rotate_st)
-            #Data is received when the chip is correctly flipped.
-            data = s.recv(1024)
-            print('Received', repr(data))
-        #Manually continue the protocol once the chip rotator is flipped.
-        while rotate_st is None:
-            rotate_st = input('Press enter when chip is flipped...')
-        pipette_300.delay(seconds = 3)     
-        pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
-        pipette_300.aspirate(initial_volume, ep_rack.wells('A1').bottom(3))
-        for i in range(0 , (6*num_chips)):
-            pipette_300.dispense(12, ax_6.wells(wells[i]).top(z_distance))
-            pipette_300.delay(seconds=3)
- 
-    print('Finishing run')
-    pipette_300.drop_tip()
+
+print('Finishing run')
+pipette_300.drop_tip()
 
 robot.home()

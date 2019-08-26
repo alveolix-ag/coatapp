@@ -135,6 +135,14 @@ namespace OT_APP1
         private void Form5_Load(object sender, EventArgs e)
         {
             string sourceDir = Path.Combine(Directory.GetCurrentDirectory(), "Labware\\");
+            if (Properties.Settings.Default.Form5Appearance == true)
+            {
+                btnDeleteFromDeck.Visible = true;
+            }
+            else
+            {
+                btnDeleteFromDeck.Visible = false;
+            }
             try
             {
                 string[] picList = Directory.GetFileSystemEntries(sourceDir, "*", SearchOption.AllDirectories);
@@ -208,90 +216,118 @@ namespace OT_APP1
 
         private void BtnConfirm_Click(object sender, EventArgs e)
         {
-            try
+            if (Properties.Settings.Default.Form5Appearance == false)
             {
-                string labwaretoView = treeLabware.SelectedNode.Text;
-                string sourceDir = Path.Combine(Directory.GetCurrentDirectory(), "Labware\\");
-                string finalpath = (sourceDir + labwaretoView + "\\1.json");
-                var labware_def = File.ReadAllText(finalpath);
-                JToken token = JObject.Parse(labware_def);
+                try
+                {
+                    string labwaretoView = treeLabware.SelectedNode.Text;
+                    string sourceDir = Path.Combine(Directory.GetCurrentDirectory(), "Labware\\");
+                    string finalpath = (sourceDir + labwaretoView + "\\1.json");
+                    var labware_def = File.ReadAllText(finalpath);
+                    JToken token = JObject.Parse(labware_def);
 
-                //Brand fields
-                object brandList = (object)token.SelectToken("brand");
-                JToken brandobject = JObject.Parse(brandList.ToString());
-                string brand = (string)brandobject.SelectToken("brand");
-                object brandId = (object)brandobject.SelectToken("brandId");
+                    //Brand fields
+                    object brandList = (object)token.SelectToken("brand");
+                    JToken brandobject = JObject.Parse(brandList.ToString());
+                    string brand = (string)brandobject.SelectToken("brand");
+                    object brandId = (object)brandobject.SelectToken("brandId");
 
-                //Metadata
-                object metadata = (object)token.SelectToken("metadata");
-                JToken metadataObject = JObject.Parse(metadata.ToString());
-                string displayName = (string)metadataObject.SelectToken("displayName");
+                    //Metadata
+                    object metadata = (object)token.SelectToken("metadata");
+                    JToken metadataObject = JObject.Parse(metadata.ToString());
+                    string displayName = (string)metadataObject.SelectToken("displayName");
 
-                //Dimensions
-                object dimensions = (object)token.SelectToken("dimensions");
-                JToken dimensionObject = JObject.Parse(dimensions.ToString());
-                float xDimension = (float)dimensionObject.SelectToken("xDimension");
-                float yDimension = (float)dimensionObject.SelectToken("yDimension");
-                float zDimension = (float)dimensionObject.SelectToken("zDimension");
+                    //Dimensions
+                    object dimensions = (object)token.SelectToken("dimensions");
+                    JToken dimensionObject = JObject.Parse(dimensions.ToString());
+                    float xDimension = (float)dimensionObject.SelectToken("xDimension");
+                    float yDimension = (float)dimensionObject.SelectToken("yDimension");
+                    float zDimension = (float)dimensionObject.SelectToken("zDimension");
 
-                //Well
-                object well = (object)token.SelectToken("wells");
-                JToken wellObject = JObject.Parse(well.ToString());
-                object A1 = (object)wellObject.SelectToken("A1");
-                object B2 = (object)wellObject.SelectToken("B2");
-                JToken wellproperties = JObject.Parse(A1.ToString());
-                JToken wellpropertiesOffset = JObject.Parse(B2.ToString());
-                string shape = (string)wellproperties.SelectToken("shape");
-                float diameter = (float)wellproperties.SelectToken("diameter");
-                float totalLiquidVolume = (float)wellproperties.SelectToken("totalLiquidVolume");
-                float colOffset = (float)wellproperties.SelectToken("x");
-                float rowOffset = (float)wellproperties.SelectToken("y");
-                float depth = (float)wellproperties.SelectToken("z");
-                float xOffset = (float)wellpropertiesOffset.SelectToken("x");
-                float yOffset = (float)wellpropertiesOffset.SelectToken("y");
-                float colSpace = xOffset - colOffset;
-                float rowSpace = rowOffset - yOffset;
+                    //Well
+                    object well = (object)token.SelectToken("wells");
+                    JToken wellObject = JObject.Parse(well.ToString());
+                    object A1 = (object)wellObject.SelectToken("A1");
+                    object B2 = (object)wellObject.SelectToken("B2");
+                    JToken wellproperties = JObject.Parse(A1.ToString());
+                    JToken wellpropertiesOffset = JObject.Parse(B2.ToString());
+                    string shape = (string)wellproperties.SelectToken("shape");
+                    float diameter = (float)wellproperties.SelectToken("diameter");
+                    float totalLiquidVolume = (float)wellproperties.SelectToken("totalLiquidVolume");
+                    float colOffset = (float)wellproperties.SelectToken("x");
+                    float rowOffset = (float)wellproperties.SelectToken("y");
+                    float depth = (float)wellproperties.SelectToken("z");
+                    float xOffset = (float)wellpropertiesOffset.SelectToken("x");
+                    float yOffset = (float)wellpropertiesOffset.SelectToken("y");
+                    float colSpace = xOffset - colOffset;
+                    float rowSpace = rowOffset - yOffset;
 
 
-                //Ordering Rows and Columns
-                object ordering = (object)token.SelectToken("ordering");
-                string[] arr = ((IEnumerable)ordering).Cast<object>().Select(r => r.ToString()).ToArray();
-                string[] neworder = arr[0].Split(',');
-                int rows = neworder.Length;
-                int cols = arr.Length;
+                    //Ordering Rows and Columns
+                    object ordering = (object)token.SelectToken("ordering");
+                    string[] arr = ((IEnumerable)ordering).Cast<object>().Select(r => r.ToString()).ToArray();
+                    string[] neworder = arr[0].Split(',');
+                    int rows = neworder.Length;
+                    int cols = arr.Length;
 
-                //Parameters
-                object parameters = (object)token.SelectToken("parameters");
-                JToken parametersObject = JObject.Parse(parameters.ToString());
-                string loadName = (string)parametersObject.SelectToken("loadName");
+                    //Parameters
+                    object parameters = (object)token.SelectToken("parameters");
+                    JToken parametersObject = JObject.Parse(parameters.ToString());
+                    string loadName = (string)parametersObject.SelectToken("loadName");
 
-                import = true;
-                Delete = false;
-                Brand = brand;
-                BrandId = brandId.ToString();
-                DisplayName = displayName;
-                XDimension = xDimension;
-                YDimension = yDimension;
-                ZDimension = zDimension;
-                Depth = depth;
-                Shape = shape;
-                Diameter = diameter;
-                TotalLiquidVolume = totalLiquidVolume;
-                ColOffset = colOffset;
-                RowOffset = rowOffset;
-                ColSpace = colSpace;
-                RowSpace = rowSpace;
-                Rows = rows;
-                Cols = cols;
-                LoadName = loadName;
+                    import = true;
+                    Delete = false;
+                    Brand = brand;
+                    BrandId = brandId.ToString();
+                    DisplayName = displayName;
+                    XDimension = xDimension;
+                    YDimension = yDimension;
+                    ZDimension = zDimension;
+                    Depth = depth;
+                    Shape = shape;
+                    Diameter = diameter;
+                    TotalLiquidVolume = totalLiquidVolume;
+                    ColOffset = colOffset;
+                    RowOffset = rowOffset;
+                    ColSpace = colSpace;
+                    RowSpace = rowSpace;
+                    Rows = rows;
+                    Cols = cols;
+                    LoadName = loadName;
 
-                this.Close();
+                    this.Close();
 
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show("ERROR: " + "Please select a labware of the type well plate or tiprack");
+                }
             }
-            catch (Exception exp)
+            else if (Properties.Settings.Default.Form5Appearance == true)
             {
-                MessageBox.Show("ERROR: " + "Please select a labware of the type well plate or tiprack");
+                try
+                {
+                    string labwaretoView = treeLabware.SelectedNode.Text;
+                    string sourceDir = Path.Combine(Directory.GetCurrentDirectory(), "Labware\\");
+                    string finalpath = (sourceDir + labwaretoView + "\\1.json");
+                    var labware_def = File.ReadAllText(finalpath);
+                    JToken token = JObject.Parse(labware_def);
+
+                    object parameters = (object)token.SelectToken("parameters");
+                    JToken parametersObject = JObject.Parse(parameters.ToString());
+                    string loadName = (string)parametersObject.SelectToken("loadName");
+
+                    LoadName = loadName;
+                    import = true;
+                    Delete = false;
+
+                }
+                catch
+                {
+                    MessageBox.Show("ERROR: " + "Please select a labware of the type well plate or tiprack");
+                }
             }
+
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)

@@ -139,7 +139,6 @@ C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\ICSharpC
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Renci.SshNet.xml
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\Coat-APP.csprojAssemblyReference.cache
-C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\OT_APP1.Form1.resources
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\OT_APP1.Form2.resources
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\OT_APP1.Form3.resources
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\OT_APP1.Form4.resources
@@ -166,3 +165,4 @@ C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resource
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot10N.png
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resources\picSlot11N.png
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Labware\setup
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\OT_APP1.Main.resources

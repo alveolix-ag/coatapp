@@ -160,6 +160,7 @@ namespace OT_APP1
         {
             Form5 f5 = new Form5();
             bool ImportState = new bool();
+            Properties.Settings.Default.Form5Appearance = false;
             if (f5.ShowDialog() == DialogResult.OK)
             {
                 ImportState = f5.import;

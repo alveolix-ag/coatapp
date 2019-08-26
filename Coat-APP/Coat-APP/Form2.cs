@@ -12,7 +12,7 @@ namespace OT_APP1
 {
     public partial class Form2 : Form
     {
-        public Form1 form1;
+        public Main form1;
         public ShellStream shell1 = null;
 
         public Form2(ShellStream shellStreamSHH)

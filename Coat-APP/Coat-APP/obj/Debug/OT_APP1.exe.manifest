@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="455688">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="456200">
       <assemblyIdentity name="OT_APP1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>IivCAbI7UoXlgqBZP0jCNXYC/O4yz66tmrXvn5snGnY=</dsig:DigestValue>
+        <dsig:DigestValue>Oa30rUbcWefr0zS4vADIkMYbBF/JvwK6Xo0D7fZc4Qw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -132,13 +132,13 @@
       <dsig:DigestValue>T0xwxPNT0/YsBvf2vsKVUECeWF1oRq60RD8bx1zLd48=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="OT_APP1.exe.config" size="2742">
+  <file name="OT_APP1.exe.config" size="2851">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>WSlHFlJ9APHMFJKl8Wb0GioIMFOuBRh7jDJ1naIi9ow=</dsig:DigestValue>
+      <dsig:DigestValue>iPmh9wYX+gbvJPr+Dm+qH5/PL6BlieMrOVztzQlGCLE=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Protocols\close_host.py" size="118">

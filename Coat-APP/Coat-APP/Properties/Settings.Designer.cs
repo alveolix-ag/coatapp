@@ -76,5 +76,17 @@ namespace OT_APP1.Properties {
                 this["LabwareSetup"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Form5Appearance {
+            get {
+                return ((bool)(this["Form5Appearance"]));
+            }
+            set {
+                this["Form5Appearance"] = value;
+            }
+        }
     }
 }

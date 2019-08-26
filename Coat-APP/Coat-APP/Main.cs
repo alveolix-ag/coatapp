@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Net;
@@ -15,7 +16,7 @@ using System.Windows.Forms;
 
 namespace OT_APP1
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         private SshClient sshClient = null;
         public ShellStream shellStreamSSH = null;
@@ -27,7 +28,7 @@ namespace OT_APP1
         public string ProtcolPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\socket_host.py");
         private string oldString = string.Empty;
 
-        public Form1()
+        public Main()
         {
             InitializeComponent();
         }
@@ -55,6 +56,7 @@ namespace OT_APP1
 
                 this.shellStreamSSH = this.sshClient.CreateShellStream("vt100", 80, 60, 800, 600, 65536);
                 this.lbStatus.Text = "Status: Connected.";
+                btnConnect.BackColor = Color.Green;
                 grpControl.Visible = true;
             }
             catch (Exception exp)
@@ -178,14 +180,6 @@ namespace OT_APP1
             {
 
             }
-            try
-            {
-
-            }
-            catch
-            {
-                //throw new Exception("No network adapters with an IPv4 address in the system!");
-            }
         }
 
         private void TxtCommand_TextChanged(object sender, EventArgs e)
@@ -239,7 +233,7 @@ namespace OT_APP1
 
                     if (this.ServerOutput != null)
                     {
-                        textBox1.Text = this.ServerOutput;
+                        Console.WriteLine(this.ServerOutput);
                     }
 
                     txtCommand.Text = "";
@@ -256,8 +250,6 @@ namespace OT_APP1
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
                 WaitforHost();
-                //String new_cu_tip = this.ServerOutput.ToString();
-                //lblCurrentTip.Text = ("Current Tip: " + new_cu_tip);
 
             }
             catch (Exception exp)
@@ -591,12 +583,13 @@ namespace OT_APP1
                     myport.Open();
                 }
 
-                myport.WriteLine(numRotateSt.Value.ToString());
+                myport.WriteLine("1");
+                myport.WriteLine("2");
                 myport.Close();
             }
             catch
             {
-                throw new Exception("Not working!");
+                MessageBox.Show("ERROR: " + "Please Ensure that the Rotator is connected to the right port (COM3)");
             }
 
         }
@@ -761,7 +754,7 @@ namespace OT_APP1
             }
             catch
             {
-                MessageBox.Show("ERROR: " + "Could not find OT2 robot, please reconnect or input IP address manually 3");
+                MessageBox.Show("ERROR: " + "Could not find OT2 robot, please reconnect or input IP address manually");
             }
             Thread.Sleep(8000);
 
@@ -976,7 +969,7 @@ namespace OT_APP1
                 try
                 {
                     this.shellStreamSSH.Write("cd /data/coatapp/protocols \n");
-                    this.shellStreamSSH.Write("python3 switch_lights.py -o True \n");
+                    this.shellStreamSSH.Write("python3 switch_lights.py -o ON \n");
                     this.shellStreamSSH.Flush();
 
                     txtCommand.Text = "";
@@ -993,7 +986,7 @@ namespace OT_APP1
                 try
                 {
                     this.shellStreamSSH.Write("cd /data/coatapp/protocols \n");
-                    this.shellStreamSSH.Write("python3 switch_lights.py -o False \n");
+                    this.shellStreamSSH.Write("python3 switch_lights.py -o OFF \n");
                     this.shellStreamSSH.Flush();
 
                     txtCommand.Text = "";

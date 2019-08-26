@@ -47,7 +47,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(326, 196);
+            this.btnDelete.Location = new System.Drawing.Point(326, 229);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(86, 35);
             this.btnDelete.TabIndex = 1;
@@ -66,7 +66,7 @@
             // 
             // btnView
             // 
-            this.btnView.Location = new System.Drawing.Point(326, 145);
+            this.btnView.Location = new System.Drawing.Point(326, 164);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(86, 33);
             this.btnView.TabIndex = 3;
@@ -77,7 +77,7 @@
             // btnConfirm
             // 
             this.btnConfirm.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnConfirm.Location = new System.Drawing.Point(324, 432);
+            this.btnConfirm.Location = new System.Drawing.Point(440, 432);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(86, 35);
             this.btnConfirm.TabIndex = 4;
@@ -88,7 +88,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnCancel.Location = new System.Drawing.Point(219, 432);
+            this.btnCancel.Location = new System.Drawing.Point(216, 432);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(86, 35);
             this.btnCancel.TabIndex = 5;
@@ -99,11 +99,11 @@
             // btnDeleteFromDeck
             // 
             this.btnDeleteFromDeck.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnDeleteFromDeck.Location = new System.Drawing.Point(429, 432);
+            this.btnDeleteFromDeck.Location = new System.Drawing.Point(326, 432);
             this.btnDeleteFromDeck.Name = "btnDeleteFromDeck";
             this.btnDeleteFromDeck.Size = new System.Drawing.Size(86, 35);
             this.btnDeleteFromDeck.TabIndex = 6;
-            this.btnDeleteFromDeck.Text = "Delete";
+            this.btnDeleteFromDeck.Text = "Remove";
             this.btnDeleteFromDeck.UseVisualStyleBackColor = true;
             this.btnDeleteFromDeck.Click += new System.EventHandler(this.BtnDeleteFromDeck_Click);
             // 
