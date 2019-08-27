@@ -21,12 +21,16 @@ namespace OT_APP1
         private SshClient sshClient = null;
         public ShellStream shellStreamSSH = null;
         private Process myProcess = null;
+        private Process ProcessSocketProtocols = null;
         private string ServerOutput = null;
+        private string ServerOutputRotate = null;
+        private string ServerOutputProtocols = null;
         private String result = null;
         public Form2 f2 = null;
         public string OT2IP = null;
         public string ProtocolPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\socket_host.py");
-        public string ProtocolPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\socket_host_rotate.py");
+        public string ProtocolPathRotate = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\socket_host_rotate.py");
+        public string ProtocolPathProtocols = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\socket_host_protocols.py");
         private string oldString = string.Empty;
 
         public Main()
@@ -650,10 +654,10 @@ namespace OT_APP1
 
         private void HostServerRotate(string timeout)
         {
-            this.ServerOutput = null;
+            this.ServerOutputRotate = null;
             //full path of python interpreter  
             // python app to call  
-            string myPythonApp = (this.ProtocolPath + " " + timeout);
+            string myPythonApp = (this.ProtocolPathRotate + " " + timeout);
 
             // dummy parameters to send Python script  
             // Create new process start info 
@@ -671,7 +675,39 @@ namespace OT_APP1
                 {
                     using (StreamReader reader = this.myProcess.StandardOutput)
                     {
-                        this.ServerOutput = this.myProcess.StandardOutput.ReadToEnd();
+                        this.ServerOutputRotate = this.myProcess.StandardOutput.ReadToEnd();
+                    }
+                }
+                //this.myProcess.PriorityClass = ProcessPriorityClass.Idle;
+            })
+            { IsBackground = true };
+            thread.Start();
+        }
+
+        private void HostServerProtocols(string timeout)
+        {
+            this.ServerOutputProtocols = null;
+            //full path of python interpreter  
+            // python app to call  
+            string myPythonApp = (this.ProtocolPathProtocols + " " + timeout);
+
+            // dummy parameters to send Python script  
+            // Create new process start info 
+            ProcessStartInfo myProcessStartInfo = new ProcessStartInfo();
+
+            // make sure we can read the output from stdout 
+            myProcessStartInfo.UseShellExecute = false;
+            myProcessStartInfo.RedirectStandardOutput = true;
+            myProcessStartInfo.CreateNoWindow = true;
+            myProcessStartInfo.FileName = "C:\\ProgramData\\Anaconda3\\python.exe";
+            myProcessStartInfo.Arguments = myPythonApp;
+            var thread = new Thread(() =>
+            {
+                using (this.ProcessSocketProtocols = Process.Start(myProcessStartInfo))
+                {
+                    using (StreamReader reader = this.myProcess.StandardOutput)
+                    {
+                        this.ServerOutputProtocols = this.ProcessSocketProtocols.StandardOutput.ReadToEnd();
                     }
                 }
                 //this.myProcess.PriorityClass = ProcessPriorityClass.Idle;
@@ -682,14 +718,14 @@ namespace OT_APP1
 
         private void RotateCon(String RotateSt)
         {
+            HostServerRotate("400");
             var thread1 = new Thread(() =>
-            {
-                HostServerRotate("400");
-                while (this.ServerOutput == null)
+            { 
+                while (this.ServerOutputRotate == null)
                 {
 
                 }
-                if (this.ServerOutput.ToLower().Contains("rotate"))
+                if (this.ServerOutputRotate.ToLower().Contains("rotate"))
                 {
                     SerialPort myport = new SerialPort();
                     myport.BaudRate = 9600;
@@ -702,7 +738,7 @@ namespace OT_APP1
                     myport.Close();
                 }
 
-
+                this.ServerOutputRotate = null;
             })
             { IsBackground = true };
             thread1.Start();

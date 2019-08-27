@@ -13,7 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Alveolix\Desktop\final\</PublishUrl>
+    <PublishUrl>C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Installation\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -377,6 +377,8 @@
     <None Include="Resources\picSlot11N.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Protocols\socket_host_protocols.py" />
+    <Content Include="Protocols\socket_host_rotate.py" />
     <Content Include="Resources\UI_Glyph_08-15-512.png" />
   </ItemGroup>
   <ItemGroup />

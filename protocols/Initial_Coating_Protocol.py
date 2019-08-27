@@ -138,6 +138,9 @@ with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
 HOST = cu_ip    # The remote host
+
+
+
 PORT = 50006   # The same port as used by the server
 
 #Standard Protocol
@@ -170,3 +173,13 @@ print('Finishing run')
 pipette_300.drop_tip()
 
 robot.home()
+
+#This code is used to update the coatapp about the end of the protocol
+PORT1=5007
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s_protocol:
+        s_protocol.connect((HOST, PORT1))
+        protcol_st = str.encode("finished")
+        s.send(protocol_st)
+        #Data is received when the chip is correctly flipped.
+        data1 = s.recv(1024)
+        print('Received', repr(data1))
