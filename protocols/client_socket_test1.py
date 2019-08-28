@@ -14,6 +14,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         data = s.recv(1024)
         print('Received', repr(data))
 
+      	hello = input("hello")
+
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
@@ -22,9 +24,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         data = s.recv(1024)
         print('Received', repr(data))
 
+        hello = input("hello")	
+
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
         state1 = str.encode("finished")
         s.send(state1)
         data = s.recv(1024)
         print('Received', repr(data))
+
+        hello = input("hello")
