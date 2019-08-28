@@ -1099,7 +1099,7 @@ namespace OT_APP1
             }
             catch (Exception exp)
             {
-                Console.WriteLine("An exception has been caught " + exp.ToString());
+                MessageBox.Show("ERROR: " + exp.ToString());
             }
             try
             {
@@ -1113,6 +1113,11 @@ namespace OT_APP1
             {
                 Console.WriteLine("An exception has been caught " + exp.ToString());
             }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
