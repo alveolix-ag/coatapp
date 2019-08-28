@@ -4,7 +4,7 @@ import socket
 with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
-HOST = cu_ip    # The remote host
+HOST = "169.254.11.184"    # The remote host
 PORT = 50005   # The same port as used by the server
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))

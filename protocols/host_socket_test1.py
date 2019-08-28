@@ -7,11 +7,11 @@ import argparse
 
 
 HOST = ''                 # Symbolic name meaning all available interfaces
-PORT = 50007             # Arbitrary non-privileged port
+PORT = 50005             # Arbitrary non-privileged port
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen(1)
-    #s.settimeout(timeout)
+    s.settimeout(20)
     conn, addr = s.accept()
     with conn:
         #print('Connected by', addr)
