@@ -42,7 +42,7 @@ with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
 HOST = cu_ip    # The remote host
-PORT = 5010   # The same port as used by the server
+PORT = 5013   # The same port as used by the server
 
 
 # Create a TCP/IP socket

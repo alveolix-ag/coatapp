@@ -79,21 +79,21 @@ namespace OT_APP1
             {
                 throw new Exception("ERROR");
             }
-            //try
-            //{
-            //    Properties.Settings.Default.PropertyChanged += SettingChanged;
-            //    HostServer();
-            //    this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
-            //    this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
-            //    this.shellStreamSSH.Flush();
-            //    //String new_cu_tip = this.ServerOutput.ToString();
-            //    //lblCurrentTip.Text = ("Current Tip: " + new_cu_tip);
+            try
+            {
+                Properties.Settings.Default.PropertyChanged += SettingChanged;
+                HostServer();
+                this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
+                this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
+                this.shellStreamSSH.Flush();
+                //String new_cu_tip = this.ServerOutput.ToString();
+                //lblCurrentTip.Text = ("Current Tip: " + new_cu_tip);
 
-            //}
-            //catch (Exception exp)
-            //{
-            //    throw new Exception("ERROR");
-            //}
+            }
+            catch (Exception exp)
+            {
+                throw new Exception("ERROR");
+            }
 
         }
 
@@ -614,51 +614,49 @@ namespace OT_APP1
             myProcessStartInfo.Arguments = myPythonApp;
             var thread = new Thread(() =>
             {
-                using (Process pythonProcess = Process.Start(myProcessStartInfo))
-                {
-                    while (true)
-                    {
-                        using (StreamReader reader = pythonProcess.StandardOutput)
-                        {
-                            string rotate = pythonProcess.StandardOutput.ReadToEnd();
-                            if (rotate.ToLower().Contains("rotate"))
-                            {
-                                SerialPort myport = new SerialPort();
-                                myport.BaudRate = 9600;
-                                myport.PortName = "COM3";
-                                if (!myport.IsOpen == true)
-                                {
-                                    myport.Open();
-                                }
-                                if (rotate.ToLower().Contains("1"))
-                                {
-                                    myport.WriteLine("1");
-                                }
-                                else
-                                {
-                                    myport.WriteLine("2");
-                                }
-                                myport.Close();
-                                break;
-                            }
 
-                        }
-                    }
-                    pythonProcess.WaitForExit();
-                    if (File.Exists(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
+                Process pythonProcess = new Process();
+                pythonProcess.StartInfo = myProcessStartInfo;
+                pythonProcess.Start();
+
+                StreamReader reader = pythonProcess.StandardOutput;
+                string rotate = pythonProcess.StandardOutput.ReadToEnd();
+
+                if (rotate.ToLower().Contains("rotate"))
+                {
+                    SerialPort myport = new SerialPort();
+                    myport.BaudRate = 9600;
+                    myport.PortName = "COM3";
+                    if (!myport.IsOpen == true)
                     {
-                        using (StreamReader file = File.OpenText(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
-                        using (JsonTextReader reader = new JsonTextReader(file))
-                        {
-                            JObject currenttip_file = (JObject)JToken.ReadFrom(reader);
-                            string newString = JsonConvert.SerializeObject(currenttip_file.SelectToken("Current"));
-                            Properties.Settings.Default.CurrentTip = newString.Replace("\"", "");
-                            Properties.Settings.Default.Save();
-                        }
-                        Console.WriteLine(Properties.Settings.Default.CurrentTip);
-                        File.Delete(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json"));
+                        myport.Open();
                     }
+                    if (rotate.ToLower().Contains("1"))
+                    {
+                        myport.WriteLine("1");
+                    }
+                    else
+                    {
+                        myport.WriteLine("2");
+                    }
+                    myport.Close();
                 }
+                pythonProcess.WaitForExit();
+                pythonProcess.Close();
+                if (File.Exists(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
+                {
+                    using (StreamReader file = File.OpenText(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
+                    using (JsonTextReader readerJson = new JsonTextReader(file))
+                    {
+                        JObject currenttip_file = (JObject)JToken.ReadFrom(readerJson);
+                        string newString = JsonConvert.SerializeObject(currenttip_file.SelectToken("Current"));
+                        Properties.Settings.Default.CurrentTip = newString.Replace("\"", "");
+                        Properties.Settings.Default.Save();
+                    }
+                    Console.WriteLine(Properties.Settings.Default.CurrentTip);
+                    File.Delete(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json"));
+                }
+
             })
             { IsBackground = true };
             thread.Start();
@@ -754,8 +752,8 @@ namespace OT_APP1
                 using (Process opentronsIN = Process.Start(myProcessStartInfo))
                 {
                     Thread.Sleep(15000);
-                    //opentronsIN.CloseMainWindow();
-                    opentronsIN.Close();
+            //opentronsIN.CloseMainWindow();
+            opentronsIN.Close();
                 }
             })
             { IsBackground = true };
