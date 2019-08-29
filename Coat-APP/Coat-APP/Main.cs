@@ -642,16 +642,19 @@ namespace OT_APP1
                         }
                     }
                     myProcess.WaitForExit();
-                    using (StreamReader file = File.OpenText(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
-                    using (JsonTextReader reader = new JsonTextReader(file))
+                    if (File.Exists(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
                     {
-                        JObject currenttip_file = (JObject)JToken.ReadFrom(reader);
-                        string newString = JsonConvert.SerializeObject(currenttip_file.SelectToken("Current"));
-                        Properties.Settings.Default.CurrentTip = newString.Replace("\"", "");
-                        Properties.Settings.Default.Save();
+                        using (StreamReader file = File.OpenText(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
+                        using (JsonTextReader reader = new JsonTextReader(file))
+                        {
+                            JObject currenttip_file = (JObject)JToken.ReadFrom(reader);
+                            string newString = JsonConvert.SerializeObject(currenttip_file.SelectToken("Current"));
+                            Properties.Settings.Default.CurrentTip = newString.Replace("\"", "");
+                            Properties.Settings.Default.Save();
+                        }
+                        Console.WriteLine(Properties.Settings.Default.CurrentTip);
+                        File.Delete(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json"));
                     }
-                    Console.WriteLine(Properties.Settings.Default.CurrentTip);
-                    File.Delete(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json"));
                 }
             })
             { IsBackground = true };

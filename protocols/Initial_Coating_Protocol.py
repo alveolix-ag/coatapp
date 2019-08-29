@@ -40,12 +40,11 @@ with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
 HOST = cu_ip    # The remote host
-PORT = 5006   # The same port as used by the server
-import socket
+PORT = 5007   # The same port as used by the server
+
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
 # Connect the socket to the port where the server is listening
 server_address = (HOST, PORT)
 print('connecting to {} port {}'.format(*server_address))
