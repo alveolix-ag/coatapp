@@ -25,7 +25,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             data = conn.recv(1024)
             data1 = conn.send(b'confirm')
             print(data.decode("utf-8"))
-            if not data: 
+            if data == "finished": 
                break
             conn.sendall(data)
 

@@ -662,8 +662,6 @@ namespace OT_APP1
         }
 
 
-
-
         private void RotateCon(String RotateSt)
         {
             HostServer();
