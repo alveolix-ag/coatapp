@@ -24,7 +24,7 @@ from opentrons.util import calibration_functions
 metadata = {
     'protocolName': 'Calibrate',
     'author': 'Daniel Nakhaee-Zadeh Gutierrez',
-    'description': 'Protocol calibrates the Z',
+    'description': 'Protocol calibrates the offset of the robot',
 }
 
 parser = argparse.ArgumentParser(description='Process some integers.')

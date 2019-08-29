@@ -157,6 +157,7 @@ namespace OT_APP1
             Properties.Settings.Default.WashSettings.Clear();
             Properties.Settings.Default.CoatSettings.Clear();
             Properties.Settings.Default.Save();
+            Environment.Exit(Environment.ExitCode);
             try
             {
                 this.shellStreamSSH.Close();
@@ -615,27 +616,32 @@ namespace OT_APP1
             {
                 using (Process pythonProcess = Process.Start(myProcessStartInfo))
                 {
-                    using (StreamReader reader = pythonProcess.StandardOutput)
+                    while (true)
                     {
-                        string rotate = pythonProcess.StandardOutput.ReadToEnd();
-                        if (rotate.ToLower().Contains("rotate"))
+                        using (StreamReader reader = pythonProcess.StandardOutput)
                         {
-                            SerialPort myport = new SerialPort();
-                            myport.BaudRate = 9600;
-                            myport.PortName = "COM3";
-                            if (!myport.IsOpen == true)
+                            string rotate = pythonProcess.StandardOutput.ReadToEnd();
+                            if (rotate.ToLower().Contains("rotate"))
                             {
-                                myport.Open();
+                                SerialPort myport = new SerialPort();
+                                myport.BaudRate = 9600;
+                                myport.PortName = "COM3";
+                                if (!myport.IsOpen == true)
+                                {
+                                    myport.Open();
+                                }
+                                if (rotate.ToLower().Contains("1"))
+                                {
+                                    myport.WriteLine("1");
+                                }
+                                else
+                                {
+                                    myport.WriteLine("2");
+                                }
+                                myport.Close();
+                                break;
                             }
-                            if (rotate.ToLower().Contains("1"))
-                            {
-                                myport.WriteLine("1");
-                            }
-                            else
-                            {
-                                myport.WriteLine("2");
-                            }
-                            myport.Close();
+
                         }
                     }
                     pythonProcess.WaitForExit();
@@ -1071,6 +1077,10 @@ namespace OT_APP1
             }
         }
 
+        private void MenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }
 
