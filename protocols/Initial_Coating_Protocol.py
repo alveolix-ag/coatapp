@@ -40,7 +40,7 @@ with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
 HOST = cu_ip    # The remote host
-PORT = 5010   # The same port as used by the server
+PORT = 5011   # The same port as used by the server
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -154,7 +154,6 @@ if side_to_coat == 2:
     try:
     # Send data
         message = "rotate: 2"
-        print('sending {!r}'.format(mesage))
         sock.sendall(message.encode())
         data = sock.recv(1024)
         print('received {!r}'.format(data.decode("utf-8")))
