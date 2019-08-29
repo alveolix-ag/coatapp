@@ -15,7 +15,7 @@ cwd = "C:/Users/Alveolix/Documents/GitHub/coat_app/Coat-APP/Coat-APP/Protocols"
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('', 5002)
+server_address = ('', 5003)
 print('Starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
@@ -44,7 +44,7 @@ while True:
                 connection.sendall(string.encode())
                 current_tip = data_loaded["tip"]
                 print(current_tip)
-                parameters = {"Current Tip":current_tip}
+                parameters = {"Current":current_tip}
                 with open(cwd +'/currenttip.json', 'w') as json_file:
                     json.dump(parameters, json_file, indent=4)
                     json_file.close()

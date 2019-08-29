@@ -150,13 +150,13 @@
       <dsig:DigestValue>1D17SbVNt48sbP1Xg9fFP4mQrPf96gNYnJvMoHeZqCw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Protocols\host_socket_test1.py" size="2181">
+  <file name="Protocols\host_socket_test1.py" size="2177">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>QtgodMSAuoZ75lqAyFNSA/DM9Em4wWijFIFbJ9Td4xk=</dsig:DigestValue>
+      <dsig:DigestValue>bhkyd2UebPUWML46vAXwI+cv6K4HYtvFgFI+S6mXlRs=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Protocols\socket_host.py" size="930">
