@@ -40,7 +40,7 @@ with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
 HOST = cu_ip    # The remote host
-PORT = 5015   # The same port as used by the server
+PORT = 5016   # The same port as used by the server
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -126,13 +126,9 @@ def usetip(val = 3,rst = 1):
 #print("If not reset pipette count using usetip(val,rst) function")
 
 
-while True:
+
     #side_to_coat = int(input("Coating Apical only (Enter 1), or Coating Apical and Basal side (Enter 2)"))
-    side_to_coat = int(args.integers[2])
-    if side_to_coat != 0 and side_to_coat != 1 and side_to_coat != 2:
-        print('Error - Please enter a correct value (1 or 2)')
-    else:
-        break
+side_to_coat = int(args.integers[2])
 
 #Define intial volume
 initial_volume = 13*6*num_chips
