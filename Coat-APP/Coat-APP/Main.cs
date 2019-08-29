@@ -1,4 +1,6 @@
-﻿using Renci.SshNet;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,9 +12,6 @@ using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-
-
-
 
 namespace OT_APP1
 {
@@ -81,7 +80,7 @@ namespace OT_APP1
             }
             try
             {
-                WaitforHost();
+                HostServer();
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
@@ -634,16 +633,28 @@ namespace OT_APP1
             myProcessStartInfo.Arguments = myPythonApp;
             var thread = new Thread(() =>
             {
-                using (this.myProcess = Process.Start(myProcessStartInfo))
+                using (myProcess = Process.Start(myProcessStartInfo))
                 {
                     using (StreamReader reader = this.myProcess.StandardOutput)
                     {
                         this.ServerOutput = this.myProcess.StandardOutput.ReadToEnd();
                     }
+                    myProcess.WaitForExit();
+                    using (StreamReader file = File.OpenText(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
+                    using (JsonTextReader reader = new JsonTextReader(file))
+                    {
+                        JObject currenttip_file = (JObject)JToken.ReadFrom(reader);
+                        string newString = JsonConvert.SerializeObject(currenttip_file.SelectToken("Current"));
+                        lblCurrentTip.Text = ("Current Tip: " + newString);
+                    }
                 }
+
+
             })
             { IsBackground = true };
             thread.Start();
+
+
         }
 
 
@@ -653,7 +664,7 @@ namespace OT_APP1
         {
             HostServer();
             var thread1 = new Thread(() =>
-            { 
+            {
                 while (this.ServerOutputRotate == null)
                 {
 

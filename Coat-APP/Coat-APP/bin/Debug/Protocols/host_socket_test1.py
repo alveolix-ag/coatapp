@@ -10,12 +10,12 @@ def is_json(myjson):
     return False
   return True
 
-cwd = os.getcwd()
+cwd = "C:/Users/Alveolix/Documents/GitHub/coat_app/Coat-APP/Coat-APP/Protocols"
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('', 5001)
+server_address = ('', 5002)
 print('Starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
@@ -45,7 +45,7 @@ while True:
                 current_tip = data_loaded["tip"]
                 print(current_tip)
                 parameters = {"Current Tip":current_tip}
-                with open(cwd +'/Protocols/currenttip.json', 'w') as json_file:
+                with open(cwd +'/currenttip.json', 'w') as json_file:
                     json.dump(parameters, json_file, indent=4)
                     json_file.close()
             elif data.decode("utf-8") == "Rotate":
