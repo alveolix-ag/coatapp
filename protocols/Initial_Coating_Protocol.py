@@ -161,6 +161,7 @@ if side_to_coat == 2:
     
     finally:
         print("OK")
+        sock.close()
 
     pipette_300.delay(seconds = 3)     
     pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
