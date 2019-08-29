@@ -171,27 +171,28 @@ pipette_300.drop_tip()
 robot.home()
 
 #This code is used to update the coatapp about the end of the protocol
-sock.connect(server_address)
-try:
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect(server_address)
+    try:
     # Send data
-    message = {"tip": cu_tip}
-    data_string = json.dumps(message)
-    print('sending {!r}'.format(data_string))
-    sock.sendall(data_string.encode())
-    data = sock.recv(1024)
-    print('received {!r}'.format(data.decode("utf-8")))
-    
-finally:
-    print("OK")
+        message = {"tip": cu_tip}
+        data_string = json.dumps(message)
+        print('sending {!r}'.format(data_string))
+        s.sendall(data_string.encode())
+        data = s.recv(1024)
+        print('received {!r}'.format(data.decode("utf-8")))
+        
+    finally:
+        print("OK")
 
-try:
-    # Send data
-    message = "finish"
-    print('sending {!r}'.format(message))
-    sock.sendall(message.encode())
-    data = sock.recv(1024)
-    print('received {!r}'.format(data.decode("utf-8")))
-    
-finally:
-    print('closing socket')
-    sock.close()
+    try:
+        # Send data
+        message = "finish"
+        print('sending {!r}'.format(message))
+        s.sendall(message.encode())
+        data = s.recv(1024)
+        print('received {!r}'.format(data.decode("utf-8")))
+        
+    finally:
+        print('closing socket')
+        s.close()
