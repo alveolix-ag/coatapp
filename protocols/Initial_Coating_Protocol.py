@@ -47,7 +47,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Connect the socket to the port where the server is listening
 server_address = (HOST, PORT)
 print('connecting to {} port {}'.format(*server_address))
-sock.connect(server_address)
+
 
 
 #Connect to Robot
@@ -151,6 +151,7 @@ if side_to_coat == 2:
     pipette_300.move_to(ep_rack.wells('A1').top(20))
     print("Flip Chip Holder, rotating around its shorter side")
     #This connects to the OT-APP and send a command to rotate the chip holder rotator
+    sock.connect(server_address)
     try:
     # Send data
         message = "rotate: 2"
@@ -174,6 +175,7 @@ pipette_300.drop_tip()
 robot.home()
 
 #This code is used to update the coatapp about the end of the protocol
+sock.connect(server_address)
 try:
     # Send data
     message = {"tip": cu_tip}
