@@ -9,6 +9,7 @@ import pickle #This is used for storing the variable of the curent tiprack well
 import subprocess #Allows to run subprocess, video recording
 import argparse
 import socket
+import json
 
 
 # metadata
