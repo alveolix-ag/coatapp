@@ -15,7 +15,7 @@ cwd = "C:/Users/Alveolix/Documents/GitHub/coat_app/Coat-APP/Coat-APP/Protocols"
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('', 5004)
+server_address = ('', 5005)
 #print('Starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
