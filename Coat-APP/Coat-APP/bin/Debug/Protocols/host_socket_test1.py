@@ -1,5 +1,6 @@
 import socket
 import json
+import os
 
 
 def is_json(myjson):
@@ -9,6 +10,7 @@ def is_json(myjson):
     return False
   return True
 
+cwd = os.getcwd()
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -42,6 +44,10 @@ while True:
                 connection.sendall(string.encode())
                 current_tip = data_loaded["tip"]
                 print(current_tip)
+                parameters = {"Current Tip":current_tip}
+                with open(cwd +'/Protocols/currenttip.json', 'w') as json_file:
+                    json.dump(parameters, json_file, indent=4)
+                    json_file.close()
             elif data.decode("utf-8") == "Rotate":
                 print('sending data back to the client')
                 string = "Rotating the chip holder"
@@ -56,8 +62,4 @@ while True:
     finally:
         # Clean up the connection
         print("Closing current connection")
-        parameters = {"Current Tip": current_tip}
-        with open("currenttip.json", 'w') as json_file:
-            json.dump(parameters, json_file, indent=4)
-            json_file.close()
         connection.close()

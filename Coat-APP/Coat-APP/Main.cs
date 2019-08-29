@@ -641,11 +641,9 @@ namespace OT_APP1
                         this.ServerOutput = this.myProcess.StandardOutput.ReadToEnd();
                     }
                 }
-            Console.WriteLine(this.ServerOutput);
             })
             { IsBackground = true };
             thread.Start();
-            Console.WriteLine(this.ServerOutput);
         }
 
 
