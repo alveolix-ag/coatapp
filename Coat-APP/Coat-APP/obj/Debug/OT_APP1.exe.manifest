@@ -156,7 +156,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>UzAy+8dTyFu8pLTYvRx0iGNs/T+NMImPVivXp1F08HE=</dsig:DigestValue>
+      <dsig:DigestValue>YG2Xw66uS2DARh7jgC5Ut7iG2pWJeejyB7BqBRpiZKE=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Protocols\socket_host.py" size="930">
@@ -168,13 +168,13 @@
       <dsig:DigestValue>9HYR7m6k0V50D3xHcQpwFO5NqqhRrtjvCJl4S4QpLZI=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Protocols\socket_host_protocols.py" size="930">
+  <file name="Protocols\socket_host_protocols.py" size="940">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Z83NBDI0lEbyDK8KPbVpQ7yFiS4sjFAfRPL2pcC6i1I=</dsig:DigestValue>
+      <dsig:DigestValue>LKG9696i9LR6eeOuwDUeocJ1jIJx2TCgHOAHoTs9fbU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Protocols\socket_host_rotate.py" size="935">

@@ -81,21 +81,21 @@ namespace OT_APP1
             {
                 throw new Exception("ERROR");
             }
-            try
-            {
-                Properties.Settings.Default.PropertyChanged += SettingChanged;
-                HostServer();
-                this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
-                this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
-                this.shellStreamSSH.Flush();
-                //String new_cu_tip = this.ServerOutput.ToString();
-                //lblCurrentTip.Text = ("Current Tip: " + new_cu_tip);
+            //try
+            //{
+            //    Properties.Settings.Default.PropertyChanged += SettingChanged;
+            //    HostServer();
+            //    this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
+            //    this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
+            //    this.shellStreamSSH.Flush();
+            //    //String new_cu_tip = this.ServerOutput.ToString();
+            //    //lblCurrentTip.Text = ("Current Tip: " + new_cu_tip);
 
-            }
-            catch (Exception exp)
-            {
-                throw new Exception("ERROR");
-            }
+            //}
+            //catch (Exception exp)
+            //{
+            //    throw new Exception("ERROR");
+            //}
 
         }
 
