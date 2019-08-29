@@ -43,11 +43,9 @@ HOST = cu_ip    # The remote host
 PORT = 5017   # The same port as used by the server
 
 # Create a TCP/IP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
 # Connect the socket to the port where the server is listening
 server_address = (HOST, PORT)
-print('connecting to {} port {}'.format(*server_address))
-
 
 
 #Connect to Robot
@@ -146,18 +144,19 @@ for i in range(0,(6*num_chips)):
 if side_to_coat == 2:
     pipette_300.move_to(ep_rack.wells('A1').top(20))
     print("Flip Chip Holder, rotating around its shorter side")
-    #This connects to the OT-APP and send a command to rotate the chip holder rotator
-    sock.connect(server_address)
-    try:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect(server_address)
+    #This connects to the OT-APP and send a command to rotate the chip holder rotator  
+        try:
     # Send data
-        message = "rotate: 2"
-        sock.sendall(message.encode())
-        data = sock.recv(1024)
-        print('received {!r}'.format(data.decode("utf-8")))
+            message = "rotate: 2"
+            s.sendall(message.encode())
+            data = s.recv(1024)
+            print('received {!r}'.format(data.decode("utf-8")))
     
-    finally:
-        print("OK")
-        sock.close()
+        finally:
+            print("OK")
+            s.close()
 
     pipette_300.delay(seconds = 3)     
     pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
