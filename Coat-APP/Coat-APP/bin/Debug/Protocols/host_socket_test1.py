@@ -13,7 +13,7 @@ def is_json(myjson):
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('', 5001)
+server_address = ('', 5000)
 print('Starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 

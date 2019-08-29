@@ -166,3 +166,4 @@ C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Resource
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Labware\setup
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\OT_APP1.Main.resources
 C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\obj\Debug\Coat-APP.csprojAssemblyReference.cache
+C:\Users\Alveolix\Documents\GitHub\coat_app\Coat-APP\Coat-APP\bin\Debug\Protocols\host_socket_test1.py

@@ -340,6 +340,9 @@
     <Content Include="Protocols\close_host.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Protocols\host_socket_test1.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Protocols\socket_host.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
