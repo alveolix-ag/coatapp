@@ -39,8 +39,8 @@ print(args.integers)
 with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
-HOST = cu_ip    # The remote host
-PORT = 5017   # The same port as used by the server
+HOST = "169.254.11.184"   # The remote host
+PORT = 5018   # The same port as used by the server
 
 # Create a TCP/IP socket
 
