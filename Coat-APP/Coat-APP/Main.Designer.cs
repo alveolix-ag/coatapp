@@ -86,6 +86,7 @@
             this.UpdateGit = new System.Windows.Forms.ToolStripMenuItem();
             this.getOT2IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btntest = new System.Windows.Forms.Button();
             this.grpHeader.SuspendLayout();
             this.grpSSHDemo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numChips)).BeginInit();
@@ -780,11 +781,22 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Robot";
             // 
+            // btntest
+            // 
+            this.btntest.Location = new System.Drawing.Point(30, 258);
+            this.btntest.Name = "btntest";
+            this.btntest.Size = new System.Drawing.Size(75, 23);
+            this.btntest.TabIndex = 36;
+            this.btntest.Text = "button1";
+            this.btntest.UseVisualStyleBackColor = true;
+            this.btntest.Click += new System.EventHandler(this.Btntest_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1124, 482);
+            this.Controls.Add(this.btntest);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.grpLabwareSet);
             this.Controls.Add(this.grpHolder);
@@ -880,6 +892,7 @@
         private System.Windows.Forms.CheckBox chkLight;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnCoat1;
+        private System.Windows.Forms.Button btntest;
     }
 }
 

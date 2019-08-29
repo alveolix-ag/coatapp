@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="458248">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="459272">
       <assemblyIdentity name="OT_APP1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>+kUjgPXiWYFOWwDvhSekCxE2adNoAwbI6lwNZoTOF/Q=</dsig:DigestValue>
+        <dsig:DigestValue>6RZsryjLtEEHcrmQ7jd1ubeliI13B9C4VtpDcuvY5RI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -132,13 +132,13 @@
       <dsig:DigestValue>T0xwxPNT0/YsBvf2vsKVUECeWF1oRq60RD8bx1zLd48=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="OT_APP1.exe.config" size="2851">
+  <file name="OT_APP1.exe.config" size="2955">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>iPmh9wYX+gbvJPr+Dm+qH5/PL6BlieMrOVztzQlGCLE=</dsig:DigestValue>
+      <dsig:DigestValue>t5c+9mbppIPR+/nKaGgkz+v7ByS4vS1vkWLBzeyJHcY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Protocols\close_host.py" size="118">
@@ -150,13 +150,13 @@
       <dsig:DigestValue>1D17SbVNt48sbP1Xg9fFP4mQrPf96gNYnJvMoHeZqCw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Protocols\host_socket_test1.py" size="2177">
+  <file name="Protocols\host_socket_test1.py" size="2215">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>bhkyd2UebPUWML46vAXwI+cv6K4HYtvFgFI+S6mXlRs=</dsig:DigestValue>
+      <dsig:DigestValue>iLq5TPghfzIjL3qA7apeDPmnPfkqBjQ0oFwJxssxwP8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Protocols\socket_host.py" size="930">

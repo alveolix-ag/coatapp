@@ -55,6 +55,7 @@ namespace OT_APP1
                     this.shell1.Write("python3 reset_tip.py -w " + txtCuWell.Text + " \n");
                     this.shell1.Flush();
                     Properties.Settings.Default.ResetState = true;
+                    Properties.Settings.Default.CurrentTip = txtCuWell.Text;
                 }
                 else
                 {

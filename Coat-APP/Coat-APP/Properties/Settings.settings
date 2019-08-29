@@ -26,5 +26,8 @@
     <Setting Name="Form5Appearance" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="CurrentTip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Empty</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

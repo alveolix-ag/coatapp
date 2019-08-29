@@ -70,15 +70,6 @@ namespace OT_APP1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to null.
-        /// </summary>
-        internal static string CurrentTip {
-            get {
-                return ResourceManager.GetString("CurrentTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Panel {

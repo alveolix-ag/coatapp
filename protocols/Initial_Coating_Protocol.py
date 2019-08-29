@@ -36,6 +36,21 @@ print(args.integers)
 # args.integers[2] = side to coat
 # args.integers[3] = advance well mode
 
+with open('host_ip', 'rb') as f:
+    cu_ip = pickle.load(f);
+
+HOST = cu_ip    # The remote host
+PORT = 5004   # The same port as used by the server
+import socket
+
+# Create a TCP/IP socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Connect the socket to the port where the server is listening
+server_address = (HOST, PORT)
+print('connecting to {} port {}'.format(*server_address))
+sock.connect(server_address)
+
 
 
 #Connect to Robot
@@ -127,22 +142,6 @@ initial_volume = 13*6*num_chips
 wells = ["A1","B1","C1","D1","E1","F1","A2","B2","C2","D2","E2","F2","A3","B3","C3","D3","E3","F3"]
 
 print("Coating")
-
-#if side_to_coat == 0 or side_to_coat == 2: #Side to coat = 1 is coating apical, side to coat = 1 will coat basal and side to coat = 2 is apical and basal
-#    z_coat = -1.2
-#elif side_to_coat ==1:
-#    z_coat =-1
-
-#Socket server settings
-with open('host_ip', 'rb') as f:
-    cu_ip = pickle.load(f);
-
-HOST = cu_ip    # The remote host
-
-
-
-PORT = 50006   # The same port as used by the server
-
 #Standard Protocol
 pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
 pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
@@ -155,13 +154,17 @@ if side_to_coat == 2:
     pipette_300.move_to(ep_rack.wells('A1').top(20))
     print("Flip Chip Holder, rotating around its shorter side")
     #This connects to the OT-APP and send a command to rotate the chip holder rotator
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((HOST, PORT))
-        rotate_st = str.encode("rotate")
-        s.send(rotate_st)
-        #Data is received when the chip is correctly flipped.
-        data = s.recv(1024)
-        print('Received', repr(data))
+    try:
+    # Send data
+        message = "rotate: 2"
+        print('sending {!r}'.format(mesage))
+        sock.sendall(message.encode())
+        data = sock.recv(1024)
+        print('received {!r}'.format(data.decode("utf-8")))
+    
+    finally:
+        print("OK")
+
     pipette_300.delay(seconds = 3)     
     pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
     pipette_300.aspirate(initial_volume, ep_rack.wells('A1').bottom(3))
@@ -175,11 +178,26 @@ pipette_300.drop_tip()
 robot.home()
 
 #This code is used to update the coatapp about the end of the protocol
-PORT1=5007
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s_protocol:
-        s_protocol.connect((HOST, PORT1))
-        protcol_st = str.encode("finished")
-        s.send(protocol_st)
-        #Data is received when the chip is correctly flipped.
-        data1 = s.recv(1024)
-        print('Received', repr(data1))
+try:
+    # Send data
+    message = {"tip": cu_tip}
+    data_string = json.dumps(message)
+    print('sending {!r}'.format(data_string))
+    sock.sendall(data_string.encode())
+    data = sock.recv(1024)
+    print('received {!r}'.format(data.decode("utf-8")))
+    
+finally:
+    print("OK")
+
+try:
+    # Send data
+    message = "finish"
+    print('sending {!r}'.format(message))
+    sock.sendall(message.encode())
+    data = sock.recv(1024)
+    print('received {!r}'.format(data.decode("utf-8")))
+    
+finally:
+    print('closing socket')
+    sock.close()

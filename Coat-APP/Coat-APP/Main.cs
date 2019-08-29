@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Renci.SshNet;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -28,6 +29,8 @@ namespace OT_APP1
         public string OT2IP = null;
         public string ProtocolPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\host_socket_test1.py");
         private string oldString = string.Empty;
+        public event PropertyChangedEventHandler PropertyChanged;
+
 
         public Main()
         {
@@ -80,6 +83,7 @@ namespace OT_APP1
             }
             try
             {
+                Properties.Settings.Default.PropertyChanged += SettingChanged;
                 HostServer();
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
@@ -409,7 +413,6 @@ namespace OT_APP1
         private void BtnTipSet_Click(object sender, EventArgs e)
         {
             this.f2 = new Form2(this.shellStreamSSH);
-            this.f2.FormClosed += F2_FormClosed;
             this.f2.ShowDialog();
         }
 
@@ -593,27 +596,7 @@ namespace OT_APP1
             }
 
         }
-        private void F2_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            try
-            {
-                if (Properties.Settings.Default.ResetState == true)
-                {
-                    this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
-                    this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
-                    this.shellStreamSSH.Flush();
-                    WaitforHost();
-                    //String new_cu_tip = this.ServerOutput.ToString();
-                    //lblCurrentTip.Text = ("Current Tip: " + new_cu_tip);
-                }
 
-
-            }
-            catch (Exception exp)
-            {
-                throw new Exception("Not working!");
-            }
-        }
         private void HostServer()
         {
             this.ServerOutput = null;
@@ -638,6 +621,25 @@ namespace OT_APP1
                     using (StreamReader reader = this.myProcess.StandardOutput)
                     {
                         this.ServerOutput = this.myProcess.StandardOutput.ReadToEnd();
+                        if (this.ServerOutput.ToLower().Contains("rotate"))
+                        {
+                            SerialPort myport = new SerialPort();
+                            myport.BaudRate = 9600;
+                            myport.PortName = "COM3";
+                            if (!myport.IsOpen == true)
+                            {
+                                myport.Open();
+                            }
+                            if (this.ServerOutput.ToLower().Contains("1"))
+                            {
+                                myport.WriteLine("1");
+                            }
+                            else
+                            {
+                                myport.WriteLine("2");
+                            }
+                            myport.Close();
+                        }
                     }
                     myProcess.WaitForExit();
                     using (StreamReader file = File.OpenText(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
@@ -645,16 +647,15 @@ namespace OT_APP1
                     {
                         JObject currenttip_file = (JObject)JToken.ReadFrom(reader);
                         string newString = JsonConvert.SerializeObject(currenttip_file.SelectToken("Current"));
-                        lblCurrentTip.Text = ("Current Tip: " + newString);
+                        Properties.Settings.Default.CurrentTip = newString.Replace("\"", "");
+                        Properties.Settings.Default.Save();
                     }
+                    Console.WriteLine(Properties.Settings.Default.CurrentTip);
+                    File.Delete(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json"));
                 }
-
-
             })
             { IsBackground = true };
             thread.Start();
-
-
         }
 
 
@@ -1018,14 +1019,11 @@ namespace OT_APP1
         {
             try
             {
+                HostServer();
                 Rotate("1");
                 if (SideSel.SelectedIndex == 1)
                 {
                     Rotate("2");
-                }
-                if (SideSel.SelectedIndex == 2)
-                {
-                    RotateCon("2");
                 }
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
                 this.shellStreamSSH.Write("python3 Initial_Coating_Protocol.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " 0 " + "\n");
@@ -1057,6 +1055,36 @@ namespace OT_APP1
                 Console.WriteLine("An exception has been caught " + exp.ToString());
             }
         }
+
+        private void Btntest_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.PropertyChanged += SettingChanged;
+        }
+
+
+        void SettingChanged(object sender, PropertyChangedEventArgs e)
+        {
+            SetText("Current Tip: " + Properties.Settings.Default.CurrentTip);
+        }
+
+        delegate void SetTextCallback(string text);
+
+        private void SetText(string text)
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.lblCurrentTip.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.lblCurrentTip.Text = text;
+            }
+        }
+
     }
 }
 

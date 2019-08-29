@@ -88,5 +88,17 @@ namespace OT_APP1.Properties {
                 this["Form5Appearance"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Empty")]
+        public string CurrentTip {
+            get {
+                return ((string)(this["CurrentTip"]));
+            }
+            set {
+                this["CurrentTip"] = value;
+            }
+        }
     }
 }
