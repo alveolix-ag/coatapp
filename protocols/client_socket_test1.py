@@ -32,7 +32,6 @@ try:
 
 finally:
     print("OK")
-    hello = input("hello")
 try:
     
     # Send data
