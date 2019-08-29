@@ -41,7 +41,7 @@ with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
 HOST = "169.254.11.184"   # The remote host
-PORT = 5018   # The same port as used by the server
+PORT = 11000   # The same port as used by the server
 
 # Create a TCP/IP socket
 
@@ -145,19 +145,19 @@ for i in range(0,(6*num_chips)):
 if side_to_coat == 2:
     pipette_300.move_to(ep_rack.wells('A1').top(20))
     print("Flip Chip Holder, rotating around its shorter side")
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect(server_address)
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(server_address)
     #This connects to the OT-APP and send a command to rotate the chip holder rotator  
-        try:
+    try:
     # Send data
-            message = "rotate: 2"
-            s.sendall(message.encode())
-            data = s.recv(1024)
-            print('received {!r}'.format(data.decode("utf-8")))
-    
-        finally:
-            print("OK")
-            s.close()
+        message = "rotate: 2"
+        s.sendall(message.encode())
+        data = s.recv(1024)
+        print('received {!r}'.format(data.decode("utf-8")))
+
+    finally:
+        print("OK")
+        s.close()
 
     pipette_300.delay(seconds = 3)     
     pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
@@ -174,28 +174,28 @@ robot.home()
 cu_tip = usetip(1)
 
 #This code is used to update the coatapp about the end of the protocol
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect(server_address)
-    try:
-    # Send data
-        message = {"tip": cu_tip}
-        data_string = json.dumps(message)
-        print('sending {!r}'.format(data_string))
-        s.sendall(data_string.encode())
-        data = s.recv(1024)
-        print('received {!r}'.format(data.decode("utf-8")))
-        
-    finally:
-        print("OK")
 
-    try:
-        # Send data
-        message = "finish"
-        print('sending {!r}'.format(message))
-        s.sendall(message.encode())
-        data = s.recv(1024)
-        print('received {!r}'.format(data.decode("utf-8")))
-        
-    finally:
-        print('closing socket')
-        s.close()
+s.connect(server_address)
+try:
+# Send data
+    message = {"tip": cu_tip}
+    data_string = json.dumps(message)
+    print('sending {!r}'.format(data_string))
+    s.sendall(data_string.encode())
+    data = s.recv(1024)
+    print('received {!r}'.format(data.decode("utf-8")))
+    
+finally:
+    print("OK")
+
+try:
+    # Send data
+    message = "finish"
+    print('sending {!r}'.format(message))
+    s.sendall(message.encode())
+    data = s.recv(1024)
+    print('received {!r}'.format(data.decode("utf-8")))
+    
+finally:
+    print('closing socket')
+    s.close()

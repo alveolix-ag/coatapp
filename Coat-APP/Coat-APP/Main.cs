@@ -10,10 +10,10 @@ using System.IO;
 using System.IO.Ports;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using System.Text;
 
 namespace OT_APP1
 {
@@ -83,7 +83,7 @@ namespace OT_APP1
             try
             {
                 Properties.Settings.Default.PropertyChanged += SettingChanged;
-                HostServer();
+                StartServer();
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
@@ -663,35 +663,6 @@ namespace OT_APP1
             thread.Start();
         }
 
-
-        //private void RotateCon(String RotateSt)
-        //{
-        //    HostServer();
-        //    var thread1 = new Thread(() =>
-        //    {
-        //        while (this.ServerOutputRotate == null)
-        //        {
-
-        //        }
-        //        if (this.ServerOutputRotate.ToLower().Contains("rotate"))
-        //        {
-        //            SerialPort myport = new SerialPort();
-        //            myport.BaudRate = 9600;
-        //            myport.PortName = "COM3";
-        //            if (!myport.IsOpen == true)
-        //            {
-        //                myport.Open();
-        //            }
-        //            myport.WriteLine(RotateSt);
-        //            myport.Close();
-        //        }
-
-        //        this.ServerOutputRotate = null;
-        //    })
-        //    { IsBackground = true };
-        //    thread1.Start();
-        //}
-
         public void Rotate(String RotateSt)
         {
 
@@ -753,8 +724,8 @@ namespace OT_APP1
                 using (Process opentronsIN = Process.Start(myProcessStartInfo))
                 {
                     Thread.Sleep(15000);
-            //opentronsIN.CloseMainWindow();
-            opentronsIN.Close();
+                    //opentronsIN.CloseMainWindow();
+                    opentronsIN.Close();
                 }
             })
             { IsBackground = true };
@@ -1084,71 +1055,80 @@ namespace OT_APP1
         }
         public void StartServer()
         {
-            // Get Host IP Address that is used to establish a connection  
-            // In this case, we get one IP address of localhost that is IP : 127.0.0.1  
-            // If a host has multiple addresses, you will get a list of addresses  
-            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAddress = host.AddressList[2];
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
+            var thread = new Thread(() =>
+            {  // Get Host IP Address that is used to establish a connection  
+               // In this case, we get one IP address of localhost that is IP : 127.0.0.1  
+               // If a host has multiple addresses, you will get a list of addresses  
+                IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+                IPAddress ipAddress = host.AddressList[2];
+                IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
 
 
-            try
-            {
-
-                // Create a Socket that will use Tcp protocol      
-                Socket listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                // A Socket must be associated with an endpoint using the Bind method  
-                listener.Bind(localEndPoint);
-                // Specify how many requests a Socket can listen before it gives Server busy response.  
-                // We will listen 10 requests at a time  
-                listener.Listen(10);
-
-                Console.WriteLine("Waiting for a connection...");
-                Socket handler = listener.Accept();
-
-                // Incoming data from the client.
-                string data = null;
-                byte[] bytes = null;
-
-                while (true)
+                try
                 {
-                    bytes = new byte[1024];
-                    int bytesRec = handler.Receive(bytes);
-                    data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                    byte[] message = Encoding.ASCII.GetBytes("Test Server");
-                    if (data.Contains("tip"))
+
+                    // Create a Socket that will use Tcp protocol      
+                    Socket listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                    // A Socket must be associated with an endpoint using the Bind method  
+                    listener.Bind(localEndPoint);
+                    // Specify how many requests a Socket can listen before it gives Server busy response.  
+                    // We will listen 10 requests at a time  
+                    listener.Listen(10);
+
+                    Console.WriteLine("Waiting for a connection...");
+                    Socket handler = listener.Accept();
+
+                    // Incoming data from the client.
+                    string data = null;
+                    byte[] bytes = null;
+
+                    while (true)
                     {
-                        if (IsValidJson(data) == true)
+                        bytes = new byte[1024];
+                        int bytesRec = handler.Receive(bytes);
+                        data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                        byte[] message = Encoding.ASCII.GetBytes("Test Server");
+                        if (data.Contains("tip"))
                         {
-                            var obj = JsonConvert.DeserializeObject<dynamic>(data);
-                            Properties.Settings.Default.CurrentTip = obj.tip;
-                            Properties.Settings.Default.Save();
-                           
+                            if (IsValidJson(data) == true)
+                            {
+                                var obj = JsonConvert.DeserializeObject<dynamic>(data);
+                                Properties.Settings.Default.CurrentTip = obj.tip;
+                                Properties.Settings.Default.Save();
+
+                            }
+                            message = Encoding.ASCII.GetBytes("tip changed received");
+                            handler.Send(message);
+
                         }
-                        message = Encoding.ASCII.GetBytes("tip changed received");
-                        handler.Send(message);
+                        else if (data.Contains("rotate"))
+                        {
+                            Rotate("2");
+                        }
+                        else if (data.Contains("finish"))
+                        {
+                            break;
+                        }
 
                     }
-                    else if (data.Contains("finish"))
-                    {
-                        break;
-                    }
+                    Console.WriteLine("Text received : {0}", data);
 
+                    // Send a message to Client  
+                    // using Send() method 
+
+                    byte[] msg = Encoding.ASCII.GetBytes("closing");
+                    handler.Send(msg);
+                    handler.Shutdown(SocketShutdown.Both);
+                    handler.Close();
                 }
-                Console.WriteLine("Text received : {0}", data);
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
 
-                // Send a message to Client  
-                // using Send() method 
-
-                byte[] msg = Encoding.ASCII.GetBytes("closing");
-                handler.Send(msg);
-                handler.Shutdown(SocketShutdown.Both);
-                handler.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            })
+            { IsBackground = true };
+            thread.Start();
         }
         private static bool IsValidJson(string strInput)
         {
