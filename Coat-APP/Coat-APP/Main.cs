@@ -13,6 +13,7 @@ using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+using System.Text;
 
 namespace OT_APP1
 {
@@ -691,7 +692,7 @@ namespace OT_APP1
         //    thread1.Start();
         //}
 
-        private void Rotate(String RotateSt)
+        public void Rotate(String RotateSt)
         {
 
             SerialPort myport = new SerialPort();
@@ -1049,6 +1050,8 @@ namespace OT_APP1
         private void Btntest_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.PropertyChanged += SettingChanged;
+            StartServer();
+
         }
 
 
@@ -1078,6 +1081,102 @@ namespace OT_APP1
         private void MenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+        public void StartServer()
+        {
+            // Get Host IP Address that is used to establish a connection  
+            // In this case, we get one IP address of localhost that is IP : 127.0.0.1  
+            // If a host has multiple addresses, you will get a list of addresses  
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+            IPAddress ipAddress = host.AddressList[2];
+            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
+
+
+            try
+            {
+
+                // Create a Socket that will use Tcp protocol      
+                Socket listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                // A Socket must be associated with an endpoint using the Bind method  
+                listener.Bind(localEndPoint);
+                // Specify how many requests a Socket can listen before it gives Server busy response.  
+                // We will listen 10 requests at a time  
+                listener.Listen(10);
+
+                Console.WriteLine("Waiting for a connection...");
+                Socket handler = listener.Accept();
+
+                // Incoming data from the client.
+                string data = null;
+                byte[] bytes = null;
+
+                while (true)
+                {
+                    bytes = new byte[1024];
+                    int bytesRec = handler.Receive(bytes);
+                    data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    byte[] message = Encoding.ASCII.GetBytes("Test Server");
+                    if (data.Contains("tip"))
+                    {
+                        if (IsValidJson(data) == true)
+                        {
+                            var obj = JsonConvert.DeserializeObject<dynamic>(data);
+                            Properties.Settings.Default.CurrentTip = obj.tip;
+                            Properties.Settings.Default.Save();
+                           
+                        }
+                        message = Encoding.ASCII.GetBytes("tip changed received");
+                        handler.Send(message);
+
+                    }
+                    else if (data.Contains("finish"))
+                    {
+                        break;
+                    }
+
+                }
+                Console.WriteLine("Text received : {0}", data);
+
+                // Send a message to Client  
+                // using Send() method 
+
+                byte[] msg = Encoding.ASCII.GetBytes("closing");
+                handler.Send(msg);
+                handler.Shutdown(SocketShutdown.Both);
+                handler.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+        private static bool IsValidJson(string strInput)
+        {
+            strInput = strInput.Trim();
+            if ((strInput.StartsWith("{") && strInput.EndsWith("}")) || //For object
+                (strInput.StartsWith("[") && strInput.EndsWith("]"))) //For array
+            {
+                try
+                {
+                    var obj = JToken.Parse(strInput);
+                    return true;
+                }
+                catch (JsonReaderException jex)
+                {
+                    //Exception in parsing json
+                    Console.WriteLine(jex.Message);
+                    return false;
+                }
+                catch (Exception ex) //some other exception
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
