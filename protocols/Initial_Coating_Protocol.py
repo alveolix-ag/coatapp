@@ -170,6 +170,8 @@ pipette_300.drop_tip()
 
 robot.home()
 
+cu_tip = usetip(1)
+
 #This code is used to update the coatapp about the end of the protocol
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect(server_address)
