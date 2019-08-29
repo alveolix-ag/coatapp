@@ -74,7 +74,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>8KwCQpX4OMLYPcLuHmo9RxaBRiu/UHol1hF6/hHnzh4=</dsig:DigestValue>
+        <dsig:DigestValue>2YnNej/N7pp3n+jBnoeCZ7lwlSGEFY8tIfr1sMoPwkU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -156,7 +156,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>6FXUQlzawU283ofKYAYCpEUlt54/+XhCI6uho01N+QQ=</dsig:DigestValue>
+      <dsig:DigestValue>UGskkxatW+xAW64NvdL4V/662fmbdbU8WyYQNxSUuL0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Protocols\socket_host.py" size="930">

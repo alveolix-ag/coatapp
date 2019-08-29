@@ -41,6 +41,10 @@ while True:
                 string = "tip is checked"
                 connection.sendall(string.encode())
                 current_tip = data_loaded["tip"]
+                parameters = {"Current Tip": current_tip}
+        		with open("currenttip.json", 'w') as json_file:
+            		json.dump(parameters, json_file, indent=4)
+            		json_file.close()
                 print(current_tip)
             elif data.decode("utf-8") == "Rotate":
                 print('sending data back to the client')
@@ -56,8 +60,4 @@ while True:
     finally:
         # Clean up the connection
         print("Closing current connection")
-        parameters = {"Current Tip": current_tip}
-        with open("currenttip.json", 'w') as json_file:
-            json.dump(parameters, json_file, indent=4)
-            json_file.close()
         connection.close()
