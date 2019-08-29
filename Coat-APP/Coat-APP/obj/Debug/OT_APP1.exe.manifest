@@ -156,7 +156,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>ymaW7pQwccZ6+5dU4L7+xcBr0ROcfkwIMQarVuk3IRk=</dsig:DigestValue>
+      <dsig:DigestValue>Wp5CPy9LdFW2mrTZBxqcXJWjfrqprUtJJ894eOATsrs=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Protocols\socket_host.py" size="930">
