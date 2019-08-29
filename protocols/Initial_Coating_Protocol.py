@@ -40,7 +40,7 @@ with open('host_ip', 'rb') as f:
     cu_ip = pickle.load(f);
 
 HOST = cu_ip    # The remote host
-PORT = 5008   # The same port as used by the server
+PORT = 5009   # The same port as used by the server
 
 
 # Create a TCP/IP socket
@@ -49,7 +49,6 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = (HOST, PORT)
 print('connecting to {} port {}'.format(*server_address))
 sock.connect(server_address)
-
 
 
 #Connect to Robot

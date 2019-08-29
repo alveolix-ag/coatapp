@@ -23,8 +23,6 @@ namespace OT_APP1
         private Process myProcess = null;
         private Process ProcessSocketProtocols = null;
         private string ServerOutput = null;
-        private string ServerOutputRotate = null;
-        private string ServerOutputProtocols = null;
         public Form2 f2 = null;
         public string OT2IP = null;
         public string ProtocolPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\host_socket_test1.py");
@@ -230,7 +228,7 @@ namespace OT_APP1
                     if (SideSel.SelectedIndex == 2)
                     {
                         HostServer();
-                        RotateCon("2");
+                        //RotateCon("2");
                     }
                     this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
                     this.shellStreamSSH.Write("python3 chip_coating_rotator_arg.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " 0 " + "\n");
@@ -599,7 +597,6 @@ namespace OT_APP1
 
         private void HostServer()
         {
-            this.ServerOutput = null;
             //full path of python interpreter  
             // python app to call  
             string myPythonApp = (this.ProtocolPath);
@@ -616,12 +613,12 @@ namespace OT_APP1
             myProcessStartInfo.Arguments = myPythonApp;
             var thread = new Thread(() =>
             {
-                using (myProcess = Process.Start(myProcessStartInfo))
+                using (Process pythonProcess = Process.Start(myProcessStartInfo))
                 {
-                    using (StreamReader reader = this.myProcess.StandardOutput)
+                    using (StreamReader reader = pythonProcess.StandardOutput)
                     {
-                        this.ServerOutput = this.myProcess.StandardOutput.ReadToEnd();
-                        if (this.ServerOutput.ToLower().Contains("rotate"))
+                        string rotate = pythonProcess.StandardOutput.ReadToEnd();
+                        if (rotate.ToLower().Contains("rotate"))
                         {
                             SerialPort myport = new SerialPort();
                             myport.BaudRate = 9600;
@@ -630,7 +627,7 @@ namespace OT_APP1
                             {
                                 myport.Open();
                             }
-                            if (this.ServerOutput.ToLower().Contains("1"))
+                            if (rotate.ToLower().Contains("1"))
                             {
                                 myport.WriteLine("1");
                             }
@@ -641,7 +638,7 @@ namespace OT_APP1
                             myport.Close();
                         }
                     }
-                    myProcess.WaitForExit();
+                    pythonProcess.WaitForExit();
                     if (File.Exists(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
                     {
                         using (StreamReader file = File.OpenText(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
@@ -662,33 +659,33 @@ namespace OT_APP1
         }
 
 
-        private void RotateCon(String RotateSt)
-        {
-            HostServer();
-            var thread1 = new Thread(() =>
-            {
-                while (this.ServerOutputRotate == null)
-                {
+        //private void RotateCon(String RotateSt)
+        //{
+        //    HostServer();
+        //    var thread1 = new Thread(() =>
+        //    {
+        //        while (this.ServerOutputRotate == null)
+        //        {
 
-                }
-                if (this.ServerOutputRotate.ToLower().Contains("rotate"))
-                {
-                    SerialPort myport = new SerialPort();
-                    myport.BaudRate = 9600;
-                    myport.PortName = "COM3";
-                    if (!myport.IsOpen == true)
-                    {
-                        myport.Open();
-                    }
-                    myport.WriteLine(RotateSt);
-                    myport.Close();
-                }
+        //        }
+        //        if (this.ServerOutputRotate.ToLower().Contains("rotate"))
+        //        {
+        //            SerialPort myport = new SerialPort();
+        //            myport.BaudRate = 9600;
+        //            myport.PortName = "COM3";
+        //            if (!myport.IsOpen == true)
+        //            {
+        //                myport.Open();
+        //            }
+        //            myport.WriteLine(RotateSt);
+        //            myport.Close();
+        //        }
 
-                this.ServerOutputRotate = null;
-            })
-            { IsBackground = true };
-            thread1.Start();
-        }
+        //        this.ServerOutputRotate = null;
+        //    })
+        //    { IsBackground = true };
+        //    thread1.Start();
+        //}
 
         private void Rotate(String RotateSt)
         {
@@ -1020,12 +1017,12 @@ namespace OT_APP1
         {
             try
             {
-                HostServer();
                 Rotate("1");
                 if (SideSel.SelectedIndex == 1)
                 {
                     Rotate("2");
                 }
+                HostServer();
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
                 this.shellStreamSSH.Write("python3 Initial_Coating_Protocol.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " 0 " + "\n");
                 this.shellStreamSSH.Flush();
@@ -1042,18 +1039,6 @@ namespace OT_APP1
             catch (Exception exp)
             {
                 MessageBox.Show("ERROR: " + exp.ToString());
-            }
-            try
-            {
-                this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
-                this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
-                this.shellStreamSSH.Flush();
-                WaitforHost();
-
-            }
-            catch (Exception exp)
-            {
-                Console.WriteLine("An exception has been caught " + exp.ToString());
             }
         }
 
