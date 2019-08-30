@@ -87,6 +87,9 @@
             this.getOT2IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btntest = new System.Windows.Forms.Button();
+            this.functionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateGitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fIndRobotsIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpHeader.SuspendLayout();
             this.grpSSHDemo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numChips)).BeginInit();
@@ -715,6 +718,8 @@
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.functionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -789,6 +794,28 @@
             this.btntest.Text = "button1";
             this.btntest.UseVisualStyleBackColor = true;
             this.btntest.Click += new System.EventHandler(this.Btntest_Click);
+            // 
+            // functionsToolStripMenuItem
+            // 
+            this.functionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateGitToolStripMenuItem,
+            this.fIndRobotsIPToolStripMenuItem});
+            this.functionsToolStripMenuItem.Name = "functionsToolStripMenuItem";
+            this.functionsToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
+            this.functionsToolStripMenuItem.Text = "Functions";
+            // 
+            // updateGitToolStripMenuItem
+            // 
+            this.updateGitToolStripMenuItem.Name = "updateGitToolStripMenuItem";
+            this.updateGitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.updateGitToolStripMenuItem.Text = "Update Git";
+            this.updateGitToolStripMenuItem.Click += new System.EventHandler(this.UpdateGitToolStripMenuItem_Click);
+            // 
+            // fIndRobotsIPToolStripMenuItem
+            // 
+            this.fIndRobotsIPToolStripMenuItem.Name = "fIndRobotsIPToolStripMenuItem";
+            this.fIndRobotsIPToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.fIndRobotsIPToolStripMenuItem.Text = "FInd Robots IP";
             // 
             // Main
             // 
@@ -892,6 +919,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnCoat1;
         private System.Windows.Forms.Button btntest;
+        private System.Windows.Forms.ToolStripMenuItem functionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateGitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fIndRobotsIPToolStripMenuItem;
     }
 }
 

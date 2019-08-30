@@ -998,7 +998,7 @@ namespace OT_APP1
                 {
                     Rotate("2");
                 }
-                HostServer();
+                StartServer();
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
                 this.shellStreamSSH.Write("python3 Initial_Coating_Protocol.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " 0 " + "\n");
                 this.shellStreamSSH.Flush();
@@ -1157,6 +1157,11 @@ namespace OT_APP1
             {
                 return false;
             }
+        }
+
+        private void UpdateGitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

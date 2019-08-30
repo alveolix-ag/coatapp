@@ -150,7 +150,7 @@ if side_to_coat == 2:
     #This connects to the OT-APP and send a command to rotate the chip holder rotator  
     try:
     # Send data
-        message = "rotate: 2"
+        message = "rotate"
         s.sendall(message.encode())
         data = s.recv(1024)
         print('received {!r}'.format(data.decode("utf-8")))
