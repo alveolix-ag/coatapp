@@ -45,11 +45,11 @@ print(current_ip)
 PORT = 11000   # The same port as used by the server
 
 # Create a TCP/IP socket
-
-# Connect the socket to the port where the server is listening
 server_address = (HOST, PORT)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect(server_address)
+# Connect the socket to the port where the server is listening
+
 
 
 #Connect to Robot
@@ -173,8 +173,6 @@ robot.home()
 cu_tip = usetip(1)
 
 #This code is used to update the coatapp about the end of the protocol
-
-s.connect(server_address)
 try:
 # Send data
     message = {"tip": cu_tip}
