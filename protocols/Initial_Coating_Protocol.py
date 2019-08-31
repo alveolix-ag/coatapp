@@ -41,6 +41,7 @@ with open('host_ip', 'rb') as f:
     current_ip = pickle.load(f);
 
 HOST = current_ip   # The remote host
+print(current_ip)
 PORT = 11000   # The same port as used by the server
 
 # Create a TCP/IP socket
@@ -136,7 +137,7 @@ wells = ["A1","B1","C1","D1","E1","F1","A2","B2","C2","D2","E2","F2","A3","B3","
 print("Coating")
 #Standard Protocol
 pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
-pipette_300.mix(5, 300, ep_rack.wells('A1').bottom(3))
+pipette_300.mix(3, 300, ep_rack.wells('A1').bottom(3))
 pipette_300.aspirate(initial_volume+4, ep_rack.wells('A1').bottom(3))
 for i in range(0,(6*num_chips)):
     pipette_300.dispense(12, ax_6.wells(wells[i]).top())
@@ -158,7 +159,7 @@ if side_to_coat == 2:
         exit()
 
     pipette_300.delay(seconds = 3)     
-    pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
+    pipette_300.mix(3, initial_volume, ep_rack.wells('A1').bottom(3))
     pipette_300.aspirate(initial_volume, ep_rack.wells('A1').bottom(3))
     for i in range(0 , (6*num_chips)):
         pipette_300.dispense(12, ax_6.wells(wells[i]).top())
