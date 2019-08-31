@@ -79,6 +79,9 @@
             this.grpLabwareSet = new System.Windows.Forms.GroupBox();
             this.btnLabwareSetup = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.functionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateGitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fIndRobotsIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchForOT2IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,9 +90,7 @@
             this.getOT2IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btntest = new System.Windows.Forms.Button();
-            this.functionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateGitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fIndRobotsIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button12 = new System.Windows.Forms.Button();
             this.grpHeader.SuspendLayout();
             this.grpSSHDemo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numChips)).BeginInit();
@@ -728,6 +729,29 @@
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MenuStrip1_ItemClicked);
             // 
+            // functionsToolStripMenuItem
+            // 
+            this.functionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateGitToolStripMenuItem,
+            this.fIndRobotsIPToolStripMenuItem});
+            this.functionsToolStripMenuItem.Name = "functionsToolStripMenuItem";
+            this.functionsToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
+            this.functionsToolStripMenuItem.Text = "Functions";
+            // 
+            // updateGitToolStripMenuItem
+            // 
+            this.updateGitToolStripMenuItem.Name = "updateGitToolStripMenuItem";
+            this.updateGitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.updateGitToolStripMenuItem.Text = "Update Git";
+            this.updateGitToolStripMenuItem.Click += new System.EventHandler(this.UpdateGit_Click);
+            // 
+            // fIndRobotsIPToolStripMenuItem
+            // 
+            this.fIndRobotsIPToolStripMenuItem.Name = "fIndRobotsIPToolStripMenuItem";
+            this.fIndRobotsIPToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.fIndRobotsIPToolStripMenuItem.Text = "Find Robots IP";
+            this.fIndRobotsIPToolStripMenuItem.Click += new System.EventHandler(this.GetOT2IPToolStripMenuItem_Click);
+            // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -795,33 +819,22 @@
             this.btntest.UseVisualStyleBackColor = true;
             this.btntest.Click += new System.EventHandler(this.Btntest_Click);
             // 
-            // functionsToolStripMenuItem
+            // button12
             // 
-            this.functionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.updateGitToolStripMenuItem,
-            this.fIndRobotsIPToolStripMenuItem});
-            this.functionsToolStripMenuItem.Name = "functionsToolStripMenuItem";
-            this.functionsToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
-            this.functionsToolStripMenuItem.Text = "Functions";
-            // 
-            // updateGitToolStripMenuItem
-            // 
-            this.updateGitToolStripMenuItem.Name = "updateGitToolStripMenuItem";
-            this.updateGitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.updateGitToolStripMenuItem.Text = "Update Git";
-            this.updateGitToolStripMenuItem.Click += new System.EventHandler(this.UpdateGitToolStripMenuItem_Click);
-            // 
-            // fIndRobotsIPToolStripMenuItem
-            // 
-            this.fIndRobotsIPToolStripMenuItem.Name = "fIndRobotsIPToolStripMenuItem";
-            this.fIndRobotsIPToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.fIndRobotsIPToolStripMenuItem.Text = "FInd Robots IP";
+            this.button12.Location = new System.Drawing.Point(27, 281);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(75, 23);
+            this.button12.TabIndex = 37;
+            this.button12.Text = "button12";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.Button12_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1124, 482);
+            this.Controls.Add(this.button12);
             this.Controls.Add(this.btntest);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.grpLabwareSet);
@@ -922,6 +935,7 @@
         private System.Windows.Forms.ToolStripMenuItem functionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateGitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fIndRobotsIPToolStripMenuItem;
+        private System.Windows.Forms.Button button12;
     }
 }
 

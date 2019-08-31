@@ -47,6 +47,8 @@ PORT = 11000   # The same port as used by the server
 
 # Connect the socket to the port where the server is listening
 server_address = (HOST, PORT)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(server_address)
 
 
 #Connect to Robot
@@ -124,9 +126,7 @@ def usetip(val = 3,rst = 1):
 #print("Ensure that there is pipette tips from well", piwells[int(usetip(1))])
 #print("If not reset pipette count using usetip(val,rst) function")
 
-
-
-    #side_to_coat = int(input("Coating Apical only (Enter 1), or Coating Apical and Basal side (Enter 2)"))
+#side_to_coat = int(input("Coating Apical only (Enter 1), or Coating Apical and Basal side (Enter 2)"))
 side_to_coat = int(args.integers[2])
 
 #Define intial volume
@@ -145,8 +145,6 @@ for i in range(0,(6*num_chips)):
 if side_to_coat == 2:
     pipette_300.move_to(ep_rack.wells('A1').top(20))
     print("Flip Chip Holder, rotating around its shorter side")
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(server_address)
     #This connects to the OT-APP and send a command to rotate the chip holder rotator  
     try:
     # Send data
@@ -155,9 +153,9 @@ if side_to_coat == 2:
         data = s.recv(1024)
         print('received {!r}'.format(data.decode("utf-8")))
 
-    finally:
-        print("OK")
+    except:
         s.close()
+        exit()
 
     pipette_300.delay(seconds = 3)     
     pipette_300.mix(5, initial_volume, ep_rack.wells('A1').bottom(3))
@@ -185,9 +183,9 @@ try:
     data = s.recv(1024)
     print('received {!r}'.format(data.decode("utf-8")))
     
-finally:
-    print("OK")
-
+except:
+    s.close()
+    exit()
 try:
     # Send data
     message = "finish"

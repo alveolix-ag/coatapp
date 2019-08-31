@@ -29,6 +29,8 @@ namespace OT_APP1
         public string ProtocolPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\host_socket_test1.py");
         private string oldString = string.Empty;
         public event PropertyChangedEventHandler PropertyChanged;
+        private bool socketserverstop = false;
+        public string SSHmessage = null;
 
 
         public Main()
@@ -110,6 +112,7 @@ namespace OT_APP1
                         strData = strData.Replace("1;34m", "");
                         strData = strData.Replace("0m", "");
                         appendTextBoxInThread(txtSSHConsole, strData);
+                        this.SSHmessage = strData;
                     }
                 }
                 catch
@@ -684,27 +687,16 @@ namespace OT_APP1
 
         private void UpdateGit_Click(object sender, EventArgs e)
         {
-            string gitRootDir = "C:\\Users\\DanielNZG85\\Documents\\AlveoliX\\coatapp\\coatapp";
-            ProcessStartInfo myProcessStartInfo = new ProcessStartInfo();
-            myProcessStartInfo.UseShellExecute = false;
-            myProcessStartInfo.RedirectStandardOutput = true;
-            myProcessStartInfo.RedirectStandardInput = true;
-            myProcessStartInfo.CreateNoWindow = true;
-            myProcessStartInfo.FileName = "cmd.exe";
-            var thread = new Thread(() =>
+            try
             {
-                using (Process git = Process.Start(myProcessStartInfo))
-                {
-                    git.StandardInput.WriteLine("cd " + gitRootDir);
-                    git.StandardInput.WriteLine("git format-patch -n HEAD~1 -o " + gitRootDir + "\\patches");
-                    git.StandardInput.Flush();
-                    git.StandardInput.Close();
-                    Console.WriteLine(git.StandardOutput.ReadToEnd());
-                    Console.Read();
-                }
-            })
-            { IsBackground = true };
-            thread.Start();
+                this.shellStreamSSH.Write("cd /data/coatapp/bin" + ";\n");
+                this.shellStreamSSH.Write("./update_protocols" + " \r");
+                this.shellStreamSSH.Flush();
+            }
+            catch
+            {
+
+            }
         }
 
         private void findOT2IP()
@@ -998,7 +990,7 @@ namespace OT_APP1
                 {
                     Rotate("2");
                 }
-                StartServer();
+                //StartServer();
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
                 this.shellStreamSSH.Write("python3 Initial_Coating_Protocol.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " 0 " + "\n");
                 this.shellStreamSSH.Flush();
@@ -1053,6 +1045,8 @@ namespace OT_APP1
         {
 
         }
+
+ 
         public void StartServer()
         {
             var thread = new Thread(() =>
@@ -1069,15 +1063,16 @@ namespace OT_APP1
 
                     // Create a Socket that will use Tcp protocol      
                     Socket listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                    // A Socket must be associated with an endpoint using the Bind method  
+                    // A Socket must be associated with an endpoint using the Bind method 
+                    listener.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
                     listener.Bind(localEndPoint);
                     // Specify how many requests a Socket can listen before it gives Server busy response.  
                     // We will listen 10 requests at a time  
-                    listener.Listen(10);
+                    listener.Listen(10000);
 
                     Console.WriteLine("Waiting for a connection...");
                     Socket handler = listener.Accept();
-
+                    Console.WriteLine("Listening");
                     // Incoming data from the client.
                     string data = null;
                     byte[] bytes = null;
@@ -1099,25 +1094,27 @@ namespace OT_APP1
                             }
                             message = Encoding.ASCII.GetBytes("tip changed received");
                             handler.Send(message);
+                            Console.WriteLine("Text received : {0}", data);
 
                         }
                         else if (data.Contains("rotate"))
                         {
                             Rotate("2");
+                            message = Encoding.ASCII.GetBytes("Chip Rotated");
+                            handler.Send(message);
+                            Console.WriteLine("Text received : {0}", data);
                         }
                         else if (data.Contains("finish"))
                         {
+                            byte[] msg = Encoding.ASCII.GetBytes("closing");
+                            handler.Send(msg);
                             break;
                         }
 
                     }
                     Console.WriteLine("Text received : {0}", data);
-
                     // Send a message to Client  
                     // using Send() method 
-
-                    byte[] msg = Encoding.ASCII.GetBytes("closing");
-                    handler.Send(msg);
                     handler.Shutdown(SocketShutdown.Both);
                     handler.Close();
                 }
@@ -1130,6 +1127,7 @@ namespace OT_APP1
             { IsBackground = true };
             thread.Start();
         }
+
         private static bool IsValidJson(string strInput)
         {
             strInput = strInput.Trim();
@@ -1159,10 +1157,11 @@ namespace OT_APP1
             }
         }
 
-        private void UpdateGitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Button12_Click(object sender, EventArgs e)
         {
 
         }
+
     }
 }
 
