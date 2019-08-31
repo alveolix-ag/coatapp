@@ -45,9 +45,13 @@ print(current_ip)
 PORT = 11000   # The same port as used by the server
 
 # Create a TCP/IP socket
-server_address = (HOST, PORT)
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(server_address)
+try:
+    server_address = (HOST, PORT)
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(server_address)
+except:
+    print("could not create the socket")
+    exit()
 # Connect the socket to the port where the server is listening
 
 
