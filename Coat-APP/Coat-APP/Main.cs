@@ -694,8 +694,22 @@ namespace OT_APP1
                 this.shellStreamSSH.Write("cd /data/coatapp/bin" + ";\n");
                 this.shellStreamSSH.Write("./update_protocols" + " \r");
                 this.shellStreamSSH.Flush();
+                Console.WriteLine(this.SSHmessage);
+                if (this.SSHmessage.Contains("-ash"))
+                {
+                    Console.WriteLine("Nothing");
+                }
+                else if ((this.SSHmessage.Contains("remote")))
+                {
+                    Console.WriteLine("remote");
+                }
+                else
+                {
+                    Console.WriteLine("Nothing to update");
+                }
+        
             }
-            catch
+            catch 
             {
 
             }
