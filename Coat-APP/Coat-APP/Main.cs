@@ -31,6 +31,7 @@ namespace OT_APP1
         public event PropertyChangedEventHandler PropertyChanged;
         private bool socketserverstop = false;
         public string SSHmessage = null;
+        public Socket listener = null;
 
 
         public Main()
@@ -85,7 +86,8 @@ namespace OT_APP1
             try
             {
                 Properties.Settings.Default.PropertyChanged += SettingChanged;
-                StartServer();
+                StartServerShort();
+                ListenServer();
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
@@ -990,7 +992,7 @@ namespace OT_APP1
                 {
                     Rotate("2");
                 }
-                StartServer();
+                ListenServer();
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
                 this.shellStreamSSH.Write("python3 Initial_Coating_Protocol.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " 0 " + "\n");
                 this.shellStreamSSH.Flush();
@@ -1013,7 +1015,7 @@ namespace OT_APP1
         private void Btntest_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.PropertyChanged += SettingChanged;
-            StartServer();
+            ListenServer();
 
         }
 
@@ -1046,7 +1048,7 @@ namespace OT_APP1
 
         }
 
- 
+
         public void StartServer()
         {
             var thread = new Thread(() =>
@@ -1056,8 +1058,6 @@ namespace OT_APP1
                 IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
                 IPAddress ipAddress = host.AddressList[2];
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
-
-
                 try
                 {
 
@@ -1120,12 +1120,111 @@ namespace OT_APP1
                 }
                 catch (Exception e)
                 {
+                    MessageBox.Show("Host couldn't be started");
                     Console.WriteLine(e.ToString());
                 }
 
             })
             { IsBackground = true };
             thread.Start();
+        }
+
+        public void StartServerShort()
+        {
+            var thread = new Thread(() =>
+            {  // Get Host IP Address that is used to establish a connection  
+               // In this case, we get one IP address of localhost that is IP : 127.0.0.1  
+               // If a host has multiple addresses, you will get a list of addresses  
+                IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+                IPAddress ipAddress = host.AddressList[2];
+                IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
+                try
+                {
+
+                    // Create a Socket that will use Tcp protocol      
+                    this.listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                    // A Socket must be associated with an endpoint using the Bind method 
+                    this.listener.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
+                    this.listener.Bind(localEndPoint);
+                    // Specify how many requests a Socket can listen before it gives Server busy response.  
+                    // We will listen 10 requests at a time  
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Host couldn't be started");
+                    Console.WriteLine(e.ToString());
+                }
+
+            })
+            { IsBackground = true };
+            thread.Start();
+        }
+
+        public void ListenServer()
+        {
+            var thread = new Thread(() =>
+            {
+                try
+                {
+
+                    this.listener.Listen(10000);
+                    Console.WriteLine("Waiting for a connection...");
+                    Socket handler = listener.Accept();
+                    Console.WriteLine("Listening");
+                    // Incoming data from the client.
+                    string data = null;
+                    byte[] bytes = null;
+
+                    while (true)
+                    {
+                        bytes = new byte[1024];
+                        int bytesRec = handler.Receive(bytes);
+                        data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                        byte[] message = Encoding.ASCII.GetBytes("Test Server");
+                        if (data.Contains("tip"))
+                        {
+                            if (IsValidJson(data) == true)
+                            {
+                                var obj = JsonConvert.DeserializeObject<dynamic>(data);
+                                Properties.Settings.Default.CurrentTip = obj.tip;
+                                Properties.Settings.Default.Save();
+
+                            }
+                            message = Encoding.ASCII.GetBytes("tip changed received");
+                            handler.Send(message);
+                            Console.WriteLine("Text received : {0}", data);
+
+                        }
+                        else if (data.Contains("rotate"))
+                        {
+                            Rotate("2");
+                            message = Encoding.ASCII.GetBytes("Chip Rotated");
+                            handler.Send(message);
+                            Console.WriteLine("Text received : {0}", data);
+                        }
+                        else if (data.Contains("finish"))
+                        {
+                            byte[] msg = Encoding.ASCII.GetBytes("closing");
+                            handler.Send(msg);
+                            break;
+                        }
+
+                    }
+                    Console.WriteLine("Text received : {0}", data);
+                    // Send a message to Client  
+                    // using Send() method 
+                    handler.Shutdown(SocketShutdown.Both);
+                    handler.Close();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Host couldn't be started");
+                    Console.WriteLine(e.ToString());
+                }
+            })
+            { IsBackground = true };
+            thread.Start();
+
         }
 
         private static bool IsValidJson(string strInput)
