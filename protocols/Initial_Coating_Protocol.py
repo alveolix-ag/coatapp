@@ -38,9 +38,9 @@ print(args.integers)
 # args.integers[3] = advance well mode
 
 with open('host_ip', 'rb') as f:
-    cu_ip = pickle.load(f);
+    current_ip = pickle.load(f);
 
-HOST = "169.254.11.184"   # The remote host
+HOST = current_ip   # The remote host
 PORT = 11000   # The same port as used by the server
 
 # Create a TCP/IP socket

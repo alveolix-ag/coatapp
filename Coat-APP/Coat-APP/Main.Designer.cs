@@ -273,6 +273,7 @@
             this.grpControl.TabIndex = 2;
             this.grpControl.TabStop = false;
             this.grpControl.Text = "Protocols";
+            this.grpControl.Enter += new System.EventHandler(this.GrpControl_Enter);
             // 
             // btn_Advanced
             // 
