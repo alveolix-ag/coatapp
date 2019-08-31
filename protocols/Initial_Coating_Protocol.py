@@ -40,7 +40,7 @@ print(args.integers)
 with open('host_ip', 'rb') as f:
     current_ip = pickle.load(f);
 
-HOST = current_ip   # The remote host
+HOST = "169.254.187.205"   # The remote host
 print(current_ip)
 PORT = 11000   # The same port as used by the server
 
