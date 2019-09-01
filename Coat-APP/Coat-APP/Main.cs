@@ -114,7 +114,7 @@ namespace OT_APP1
                         strData = strData.Replace("1;34m", "");
                         strData = strData.Replace("0m", "");
                         appendTextBoxInThread(txtSSHConsole, strData);
-                        this.SSHmessage = strData;
+                        this.SSHmessage += String.Join("/n", strData) ;
                     }
                 }
                 catch
@@ -691,21 +691,22 @@ namespace OT_APP1
         {
             try
             {
+                this.SSHmessage = null;
                 this.shellStreamSSH.Write("cd /data/coatapp/bin" + ";\n");
                 this.shellStreamSSH.Write("./update_protocols" + " \r");
                 this.shellStreamSSH.Flush();
-                Console.WriteLine(this.SSHmessage);
+                Console.Write(this.SSHmessage);
                 if (this.SSHmessage.Contains("-ash"))
                 {
                     Console.WriteLine("Nothing");
                 }
                 else if ((this.SSHmessage.Contains("remote")))
                 {
-                    Console.WriteLine("remote");
+                    Console.Write("remote");
                 }
                 else
                 {
-                    Console.WriteLine("Nothing to update");
+                    Console.Write("Nothing to update");
                 }
         
             }
