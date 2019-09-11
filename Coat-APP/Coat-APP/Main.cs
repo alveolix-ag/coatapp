@@ -254,7 +254,6 @@ namespace OT_APP1
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
-                WaitforHost();
 
             }
             catch (Exception exp)
@@ -910,20 +909,6 @@ namespace OT_APP1
             {
 
             }
-        }
-
-        private async void WaitforHost()
-        {
-            HostServer();
-            string newString = this.ServerOutput;
-            string oldString = this.ServerOutput;
-            while (oldString == newString)
-            {
-                newString = this.ServerOutput;
-            }
-            // Do work
-            Console.WriteLine("YAY");
-            lblCurrentTip.Text = ("Current Tip: " + newString);
         }
 
         private void Button2_Click(object sender, EventArgs e)
