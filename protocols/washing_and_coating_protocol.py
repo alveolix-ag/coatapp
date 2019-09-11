@@ -14,9 +14,9 @@ import json
 # metadata
 #Information about the protocol 
 metadata = {
-    'protocolName': 'Initial_coating_Protcol',
+    'protocolName': 'Washing_and_coating_Protcol',
     'author': 'Daniel Nakhaee-Zadeh Gutierrez',
-    'description': 'Protocol used to coat the PDMS membrane of the AX6 LOC chip with the AX Treat',
+    'description': 'Protocol used to wash the membrane from the AX Treat and coat the PDMS membrane of the AX6 LOC chip with the AX Sense',
 }
 
 #Parser to store the input values from the UI OT-APP

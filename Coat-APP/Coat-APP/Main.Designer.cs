@@ -74,8 +74,8 @@
             this.btnDown = new System.Windows.Forms.Button();
             this.btnRotate = new System.Windows.Forms.Button();
             this.grpHolder = new System.Windows.Forms.GroupBox();
+            this.boxRotateOptions = new System.Windows.Forms.ComboBox();
             this.chkLight = new System.Windows.Forms.CheckBox();
-            this.numRotateSt = new System.Windows.Forms.NumericUpDown();
             this.grpLabwareSet = new System.Windows.Forms.GroupBox();
             this.btnLabwareSetup = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -98,7 +98,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numWash)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.grpHolder.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRotateSt)).BeginInit();
             this.grpLabwareSet.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -171,7 +170,6 @@
             this.txtCommand.Name = "txtCommand";
             this.txtCommand.Size = new System.Drawing.Size(1081, 28);
             this.txtCommand.TabIndex = 1;
-            this.txtCommand.TextChanged += new System.EventHandler(this.TxtCommand_TextChanged);
             this.txtCommand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCommand_KeyPress);
             // 
             // txtSSHConsole
@@ -273,7 +271,6 @@
             this.grpControl.TabIndex = 2;
             this.grpControl.TabStop = false;
             this.grpControl.Text = "Protocols";
-            this.grpControl.Enter += new System.EventHandler(this.GrpControl_Enter);
             // 
             // btn_Advanced
             // 
@@ -637,10 +634,10 @@
             // 
             // btnRotate
             // 
-            this.btnRotate.Location = new System.Drawing.Point(50, 30);
+            this.btnRotate.Location = new System.Drawing.Point(17, 33);
             this.btnRotate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRotate.Name = "btnRotate";
-            this.btnRotate.Size = new System.Drawing.Size(92, 30);
+            this.btnRotate.Size = new System.Drawing.Size(78, 30);
             this.btnRotate.TabIndex = 32;
             this.btnRotate.Text = "Rotate";
             this.btnRotate.UseVisualStyleBackColor = true;
@@ -648,8 +645,8 @@
             // 
             // grpHolder
             // 
+            this.grpHolder.Controls.Add(this.boxRotateOptions);
             this.grpHolder.Controls.Add(this.chkLight);
-            this.grpHolder.Controls.Add(this.numRotateSt);
             this.grpHolder.Controls.Add(this.btnRotate);
             this.grpHolder.Location = new System.Drawing.Point(200, 221);
             this.grpHolder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -660,39 +657,29 @@
             this.grpHolder.TabStop = false;
             this.grpHolder.Text = "Control Hardware";
             // 
+            // boxRotateOptions
+            // 
+            this.boxRotateOptions.FormattingEnabled = true;
+            this.boxRotateOptions.Items.AddRange(new object[] {
+            "Apical",
+            "Basal"});
+            this.boxRotateOptions.Location = new System.Drawing.Point(104, 36);
+            this.boxRotateOptions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.boxRotateOptions.Name = "boxRotateOptions";
+            this.boxRotateOptions.Size = new System.Drawing.Size(98, 24);
+            this.boxRotateOptions.TabIndex = 27;
+            this.boxRotateOptions.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            // 
             // chkLight
             // 
             this.chkLight.AutoSize = true;
-            this.chkLight.Location = new System.Drawing.Point(219, 35);
+            this.chkLight.Location = new System.Drawing.Point(262, 36);
             this.chkLight.Name = "chkLight";
             this.chkLight.Size = new System.Drawing.Size(68, 21);
             this.chkLight.TabIndex = 34;
             this.chkLight.Text = "Lights";
             this.chkLight.UseVisualStyleBackColor = true;
             this.chkLight.CheckedChanged += new System.EventHandler(this.ChkLight_CheckedChanged);
-            // 
-            // numRotateSt
-            // 
-            this.numRotateSt.Location = new System.Drawing.Point(148, 34);
-            this.numRotateSt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.numRotateSt.Maximum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numRotateSt.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numRotateSt.Name = "numRotateSt";
-            this.numRotateSt.Size = new System.Drawing.Size(48, 22);
-            this.numRotateSt.TabIndex = 33;
-            this.numRotateSt.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // grpLabwareSet
             // 
@@ -728,7 +715,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(1124, 28);
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MenuStrip1_ItemClicked);
             // 
             // functionsToolStripMenuItem
             // 
@@ -742,14 +728,14 @@
             // updateGitToolStripMenuItem
             // 
             this.updateGitToolStripMenuItem.Name = "updateGitToolStripMenuItem";
-            this.updateGitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.updateGitToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
             this.updateGitToolStripMenuItem.Text = "Update Git";
             this.updateGitToolStripMenuItem.Click += new System.EventHandler(this.UpdateGit_Click);
             // 
             // fIndRobotsIPToolStripMenuItem
             // 
             this.fIndRobotsIPToolStripMenuItem.Name = "fIndRobotsIPToolStripMenuItem";
-            this.fIndRobotsIPToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.fIndRobotsIPToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
             this.fIndRobotsIPToolStripMenuItem.Text = "Find Robots IP";
             this.fIndRobotsIPToolStripMenuItem.Click += new System.EventHandler(this.GetOT2IPToolStripMenuItem_Click);
             // 
@@ -822,7 +808,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(27, 281);
+            this.button12.Location = new System.Drawing.Point(111, 258);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(75, 23);
             this.button12.TabIndex = 37;
@@ -851,7 +837,7 @@
             this.Name = "Main";
             this.Text = " Coat APP";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.Main_Load);
             this.grpHeader.ResumeLayout(false);
             this.grpSSHDemo.ResumeLayout(false);
             this.grpSSHDemo.PerformLayout();
@@ -863,7 +849,6 @@
             this.groupBox1.PerformLayout();
             this.grpHolder.ResumeLayout(false);
             this.grpHolder.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRotateSt)).EndInit();
             this.grpLabwareSet.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -915,7 +900,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem UpdateGit;
-        private System.Windows.Forms.NumericUpDown numRotateSt;
         private System.Windows.Forms.ToolStripMenuItem getOT2IPToolStripMenuItem;
         private System.Windows.Forms.Button btnXUp;
         private System.Windows.Forms.Button btnYDown;
@@ -937,6 +921,7 @@
         private System.Windows.Forms.ToolStripMenuItem updateGitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fIndRobotsIPToolStripMenuItem;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.ComboBox boxRotateOptions;
     }
 }
 
