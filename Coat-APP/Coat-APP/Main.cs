@@ -40,15 +40,16 @@ namespace OT_APP1
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Main_Load(object sender, EventArgs e)
         {
             System.Threading.ThreadStart threadStart = new System.Threading.ThreadStart(recvSSHData);
             System.Threading.Thread thread = new System.Threading.Thread(threadStart);
-
             findOT2IP();
-
             thread.IsBackground = true;
             thread.Start();
+
+            btnRotate.Enabled = false;
+            menuStrip1.Enabled = true;
 
         }
 
@@ -91,9 +92,6 @@ namespace OT_APP1
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
-                //String new_cu_tip = this.ServerOutput.ToString();
-                //lblCurrentTip.Text = ("Current Tip: " + new_cu_tip);
-
             }
             catch (Exception exp)
             {
@@ -166,25 +164,11 @@ namespace OT_APP1
             Environment.Exit(Environment.ExitCode);
             try
             {
-                this.shellStreamSSH.Close();
-
-            }
-            catch
-            {
-
-            }
-            try
-            {
-                this.sshClient.Disconnect();
-            }
-            catch
-            {
-
-            }
-            try
-            {
                 Properties.Settings.Default.CoatSettings.Clear();
                 Properties.Settings.Default.WashSettings.Clear();
+                this.shellStreamSSH.Close();
+                this.sshClient.Disconnect();
+
             }
             catch
             {
@@ -192,10 +176,6 @@ namespace OT_APP1
             }
         }
 
-        private void TxtCommand_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void BtnCoat_Click(object sender, EventArgs e)
         {
@@ -234,8 +214,7 @@ namespace OT_APP1
                     }
                     if (SideSel.SelectedIndex == 2)
                     {
-                        HostServer();
-                        //RotateCon("2");
+                        ListenServer();
                     }
                     this.shellStreamSSH.Write("cd /data/coatapp/protocols" + "\n");
                     this.shellStreamSSH.Write("python3 chip_coating_rotator_arg.py " + SpeedSel.SelectedIndex + " " + numChips.Value + " " + SideSel.SelectedIndex + " 0 " + "\n");
@@ -249,18 +228,6 @@ namespace OT_APP1
                     txtCommand.Text = "";
                     txtCommand.Focus();
                 }
-            }
-            catch (Exception exp)
-            {
-
-            }
-            try
-            {
-                this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
-                this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
-                this.shellStreamSSH.Flush();
-                WaitforHost();
-
             }
             catch (Exception exp)
             {
@@ -344,9 +311,7 @@ namespace OT_APP1
                 this.shellStreamSSH.Write("cd /data/coatapp/protocols" + ";\n");
                 this.shellStreamSSH.Write("python3 current_tip.py" + " \r");
                 this.shellStreamSSH.Flush();
-                HostServer();
-                String new_cu_tip = this.ServerOutput.ToString();
-                lblCurrentTip.Text = ("Current Tip: " + new_cu_tip);
+                ListenServer();
 
             }
             catch (Exception exp)
@@ -445,10 +410,6 @@ namespace OT_APP1
             }
         }
 
-        private void BtnSocket_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Btn_Advanced_Click(object sender, EventArgs e)
         {
@@ -553,10 +514,6 @@ namespace OT_APP1
             }
         }
 
-        private void BtnRun_Click(object sender, EventArgs e)
-        {
-
-        }
         public static string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
@@ -591,8 +548,14 @@ namespace OT_APP1
                 {
                     myport.Open();
                 }
-
-                myport.WriteLine("1");
+                if (boxRotateOptions.SelectedIndex == 1)
+                {
+                    myport.WriteLine("1");
+                }
+                else if (boxRotateOptions.SelectedIndex == 2)
+                {
+                    myport.WriteLine("2");
+                }
                 myport.Close();
             }
             catch
@@ -602,71 +565,6 @@ namespace OT_APP1
 
         }
 
-        private void HostServer()
-        {
-            //full path of python interpreter  
-            // python app to call  
-            string myPythonApp = (this.ProtocolPath);
-
-            // dummy parameters to send Python script  
-            // Create new process start info 
-            ProcessStartInfo myProcessStartInfo = new ProcessStartInfo();
-
-            // make sure we can read the output from stdout 
-            myProcessStartInfo.UseShellExecute = false;
-            myProcessStartInfo.RedirectStandardOutput = true;
-            myProcessStartInfo.CreateNoWindow = true;
-            myProcessStartInfo.FileName = "C:\\ProgramData\\Anaconda3\\python.exe";
-            myProcessStartInfo.Arguments = myPythonApp;
-            var thread = new Thread(() =>
-            {
-
-                Process pythonProcess = new Process();
-                pythonProcess.StartInfo = myProcessStartInfo;
-                pythonProcess.Start();
-
-                StreamReader reader = pythonProcess.StandardOutput;
-                string rotate = pythonProcess.StandardOutput.ReadToEnd();
-
-                if (rotate.ToLower().Contains("rotate"))
-                {
-                    SerialPort myport = new SerialPort();
-                    myport.BaudRate = 9600;
-                    myport.PortName = "COM3";
-                    if (!myport.IsOpen == true)
-                    {
-                        myport.Open();
-                    }
-                    if (rotate.ToLower().Contains("1"))
-                    {
-                        myport.WriteLine("1");
-                    }
-                    else
-                    {
-                        myport.WriteLine("2");
-                    }
-                    myport.Close();
-                }
-                pythonProcess.WaitForExit();
-                pythonProcess.Close();
-                if (File.Exists(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
-                {
-                    using (StreamReader file = File.OpenText(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json")))
-                    using (JsonTextReader readerJson = new JsonTextReader(file))
-                    {
-                        JObject currenttip_file = (JObject)JToken.ReadFrom(readerJson);
-                        string newString = JsonConvert.SerializeObject(currenttip_file.SelectToken("Current"));
-                        Properties.Settings.Default.CurrentTip = newString.Replace("\"", "");
-                        Properties.Settings.Default.Save();
-                    }
-                    Console.WriteLine(Properties.Settings.Default.CurrentTip);
-                    File.Delete(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Protocols\\currenttip.json"));
-                }
-
-            })
-            { IsBackground = true };
-            thread.Start();
-        }
 
         public void Rotate(String RotateSt)
         {
@@ -921,19 +819,6 @@ namespace OT_APP1
             }
         }
 
-        private async void WaitforHost()
-        {
-            HostServer();
-            string newString = this.ServerOutput;
-            string oldString = this.ServerOutput;
-            while (oldString == newString)
-            {
-                newString = this.ServerOutput;
-            }
-            // Do work
-            Console.WriteLine("YAY");
-            lblCurrentTip.Text = ("Current Tip: " + newString);
-        }
 
         private void Button2_Click(object sender, EventArgs e)
         {
@@ -1058,10 +943,6 @@ namespace OT_APP1
             }
         }
 
-        private void MenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
 
 
         public void StartServer()
@@ -1276,7 +1157,17 @@ namespace OT_APP1
 
         }
 
-        private void GrpControl_Enter(object sender, EventArgs e)
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnRotate.Enabled = true;
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            
+        }
+
+        private void numWash_ValueChanged(object sender, EventArgs e)
         {
 
         }

@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="462856">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OT_APP1.exe" size="460808">
       <assemblyIdentity name="OT_APP1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>LGaOvR49vZOW8UEbmKsZs2aWICvkEmdgv71PEOzOFSY=</dsig:DigestValue>
+        <dsig:DigestValue>XQBv/qLTHAcCY1sWqJuHsjPv4SmQ7KsO7Pe6b6/hkJM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -159,31 +159,31 @@
       <dsig:DigestValue>B5l2DajMlfCpYbm6LnzCuefEcTLaH5IjWVvfiLgRWms=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Protocols\socket_host.py" size="930">
+  <file name="Protocols\socket_host.py" size="968">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>9HYR7m6k0V50D3xHcQpwFO5NqqhRrtjvCJl4S4QpLZI=</dsig:DigestValue>
+      <dsig:DigestValue>HKAGXSmjG+ucK17zQQFbhfjQkNlNIAO0LByK6Q6D4nU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Protocols\socket_host_protocols.py" size="940">
+  <file name="Protocols\socket_host_protocols.py" size="978">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>LKG9696i9LR6eeOuwDUeocJ1jIJx2TCgHOAHoTs9fbU=</dsig:DigestValue>
+      <dsig:DigestValue>VoPQ103NQPka09HoZ/87pEGZbuKPwP2L6PEmMfSFe5I=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Protocols\socket_host_rotate.py" size="935">
+  <file name="Protocols\socket_host_rotate.py" size="973">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Sys162VGNqNoHz749dsycHoS12vHN+DhXNm/Cj6L1qk=</dsig:DigestValue>
+      <dsig:DigestValue>ltRIHIRFTMwc5KcGLlucvjNcbUImoQReEzUVjHFrspI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\UI_Glyph_08-15-512.png" size="18584">
