@@ -123,8 +123,153 @@ side_to_coat = int(args.integers[2])
 
 #Define intial volume
 initial_volume = 13*6*num_chips
+aspirating_volume = 20; 
+volume_on = 0;
+
+
 wells = ["A1","B1","C1","D1","E1","F1","A2","B2","C2","D2","E2","F2","A3","B3","C3","D3","E3","F3"]
 
+
+print("washing")
+#Standard Protocol
+#aspirating
+pipette_300.set_flow_rate(aspirate=400)
+pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
+for u in range(3):
+    for i in range(6*num_chips):
+        pipette_300.aspirate(aspirating_volume, ax_6.wells(wells[i]).top(-0.8))
+        volume_on = volume_on + aspirating_volume;
+        if volume_on >= 300 or (volume_on + aspirating_volume)>=300:
+            pipette_300.dispense(ep_rack.wells('A3').top(-1)) 
+            pipette_300.blow_out()
+            pipette_300.touch_tip(-2)     
+    pipette_300.dispense(ep_rack.wells('A3').top(-1))
+    pipette_300.blow_out()
+    pipette_300.touch_tip(v_offset=-2)      
+
+pipette_300.drop_tip()
+
+#washing
+washing_volume = 25
+initial_volume = washing_volume*6*num_chips
+wells_cover = int(300/(initial_volume/(6*num_chips)))
+pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
+
+for h in range(num_wash):
+    d = 0;
+    p = 0;
+    r = (int(wells_cover));
+
+    if initial_volume > 300:
+        while d < math.ceil(6*num_chips/wells_cover):
+            pipette_300.aspirate(300, ep_rack.wells('A2').bottom(3))
+            for i in range(p,r):
+                pipette_300.dispense(25, ax_6.wells(wells[i]).top())
+                pipette_300.mix(5, 20, ax_6.wells(wells[i]).top(-1))
+            pipette_300.dispense(ep_rack.wells('A3').top(-1))
+            pipette_300.blow_out()
+            pipette_300.touch_tip(-2)     
+            p=i+1;
+            d=d+1
+            if wells_cover*(d+1) >= 6*num_chips:
+                r= num_chips*6
+            else:
+                r=int(wells_cover)*d
+   
+    else: 
+        pipette_300.aspirate(initial_volume, ep_rack.wells('A2').bottom(3))
+        for i in range(num_chips*6):
+            pipette_300.dispense(25, ax_6.wells(wells[i]).top(-0.5))
+            pipette_300.mix(5, 20, ax_6.wells(wells[i]).top(-1))
+
+#Remove washing liquid and dry
+    for t in range(3):
+        for i in range(num_chips*6):
+            if (washing_volume*i) == 300:
+                pipette_300.dispense(ep_rack.wells('A3').top(-1))
+                pipette_300.blow_out()
+                pipette_300.touch_tip(v_offset=-2) 
+            pipette_300.aspirate(washing_volume, ax_6.wells(wells[i]).top(-1.6))
+        pipette_300.dispense(ep_rack.wells('A3').top(-1))
+        pipette_300.blow_out()
+        pipette_300.touch_tip(v_offset=-2)      
+    
+pipette_300.drop_tip()
+
+if side_to_coat == 2:
+    print("Flip Chip Holder")
+    while rotate_st is None:
+        rotate_st = input('Press enter when chip is flipped...')
+    #aspirating
+    pipette_300.set_flow_rate(aspirate=400)
+    pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
+    for u in range(3):
+        for i in range(6*num_chips):
+            pipette_300.aspirate(20, ax_6.wells(wells[i]).top(-1.1))
+            if i == 11:
+                pipette_300.dispense(ep_rack.wells('A3').top(-1))
+                pipette_300.blow_out()
+                pipette_300.touch_tip(-2)     
+        pipette_300.dispense(ep_rack.wells('A3').top(-1))
+        pipette_300.blow_out()
+        pipette_300.touch_tip(v_offset=-2)     
+
+    pipette_300.drop_tip()
+
+    #washing
+    washing_volume = 25
+    initial_volume = washing_volume*6*num_chips
+    wells_cover = int(300/(initial_volume/(6*num_chips)))
+    pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))
+
+    for h in range(num_wash):
+        d = 0;
+        p = 0;
+        r = (int(wells_cover));
+
+        if initial_volume > 300:
+            while d < math.ceil(6*num_chips/wells_cover):
+                pipette_300.aspirate(300, ep_rack.wells('A2').bottom(3))
+                for i in range(p,r):
+                    pipette_300.dispense(25, ax_6.wells(wells[i]).top())
+                    pipette_300.mix(5, 20, ax_6.wells(wells[i]).top(-1))
+                pipette_300.dispense(ep_rack.wells('A3').top(-1))
+                pipette_300.blow_out()
+                pipette_300.touch_tip(v_offset=-2)      
+                p=i+1;
+                d=d+1
+                if wells_cover*(d+1) >= 6*num_chips:
+                    r= num_chips*6
+                else:
+                    r=int(wells_cover)*d
+   
+        else: 
+            pipette_300.aspirate(initial_volume, ep_rack.wells('A2').bottom(3))
+            for i in range(num_chips*6):
+                pipette_300.dispense(25, ax_6.wells(wells[i]).top())
+                pipette_300.mix(5, 20, ax_6.wells(wells[i]).top(-0.5))
+
+    #Remove washing liquid and dry
+        for t in range(3):
+            for i in range(num_chips*6):
+                if (washing_volume*i) == 300:
+                    pipette_300.dispense(ep_rack.wells('A3').top(-1))
+                    pipette_300.blow_out()
+                    pipette_300.touch_tip(v_offset=-2)      
+                pipette_300.aspirate(washing_volume, ax_6.wells(wells[i]).top(-1.1))
+            pipette_300.dispense(ep_rack.wells('A3').top(-1))
+            pipette_300.blow_out()
+            pipette_300.touch_tip(v_offset=-2)      
+    
+    pipette_300.drop_tip()
+
+
+print('finishing run')
+robot.home()
+
+
+
+#Coating
 print("Coating")
 #Standard Protocol
 pipette_300.pick_up_tip(tiprack.wells(piwells[int(usetip())]))

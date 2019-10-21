@@ -49,6 +49,7 @@ namespace OT_APP1
             thread.Start();
 
             btnRotate.Enabled = false;
+            menuStrip1.Enabled = true;
 
         }
 
@@ -1159,6 +1160,16 @@ namespace OT_APP1
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnRotate.Enabled = true;
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            
+        }
+
+        private void numWash_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

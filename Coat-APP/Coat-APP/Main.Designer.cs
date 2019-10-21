@@ -314,6 +314,7 @@
             0,
             0,
             0});
+            this.numWash.ValueChanged += new System.EventHandler(this.numWash_ValueChanged);
             // 
             // lblCurrentTip
             // 
@@ -706,6 +707,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.AllowDrop = true;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.functionsToolStripMenuItem});
@@ -715,6 +717,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1124, 28);
             this.menuStrip1.TabIndex = 26;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // functionsToolStripMenuItem
             // 

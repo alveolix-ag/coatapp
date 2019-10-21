@@ -251,7 +251,6 @@ C:\Users\Danielnzg85\Documents\GitHub\coatapp\Coat-APP\Coat-APP\obj\Debug\OT_APP
 C:\Users\Danielnzg85\Documents\GitHub\coatapp\Coat-APP\Coat-APP\obj\Debug\OT_APP1.Properties.Resources.resources
 C:\Users\Danielnzg85\Documents\GitHub\coatapp\Coat-APP\Coat-APP\obj\Debug\OT_APP1.Resource1.resources
 C:\Users\Danielnzg85\Documents\GitHub\coatapp\Coat-APP\Coat-APP\obj\Debug\Coat-APP.csproj.GenerateResource.cache
-C:\Users\Danielnzg85\Documents\GitHub\coatapp\Coat-APP\Coat-APP\obj\Debug\Coat-APP.csproj.CoreCompileInputs.cache
 C:\Users\Danielnzg85\Documents\GitHub\coatapp\Coat-APP\Coat-APP\obj\Debug\OT_APP1.exe.manifest
 C:\Users\Danielnzg85\Documents\GitHub\coatapp\Coat-APP\Coat-APP\obj\Debug\OT_APP1.application
 C:\Users\Danielnzg85\Documents\GitHub\coatapp\Coat-APP\Coat-APP\obj\Debug\Coat-APP.csproj.CopyComplete
